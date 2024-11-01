@@ -1,5 +1,4 @@
 import localFont from "next/font/local";
-import "./globals.css";
 import Script from 'next/script'; 
 
 const geistSans = localFont({
@@ -22,7 +21,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/fontawesome/css/all.min.css" />
         {/* Google tag (gtag.js) */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-R3XLXYPZZM" strategy="afterInteractive" />
@@ -34,7 +32,6 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-R3XLXYPZZM');
           `}
         </Script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
