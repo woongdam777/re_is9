@@ -1,0 +1,86 @@
+/* styles/Header.module.css */
+.header {
+  background-color: rgb(245, 118, 176);
+  padding: 1.5rem;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto; /* 중앙 정렬 */
+}
+
+.mainTitle {
+  background-color: #fff;
+  text-decoration: none;
+  outline: none;
+  padding: 0.3rem 1.7rem;
+  border-radius: 20px;
+}
+
+.gradientText {
+  font-size: 24px;
+  font-weight: bold;
+  background-image: linear-gradient(
+    to right,
+    #FF69B4,
+    #FF1493,
+    #C71585,
+    #DB7093,
+    #FF69B4
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  
+   animation: shine 2s linear infinite; /* 애니메이션 추가 */
+}
+
+@keyframes shine {
+   to {
+      background-position: 200% center; /* 애니메이션 효과 */
+   }
+}
+
+/* ul 선택자 수정 */
+.headerContent ul {
+   list-style-type: none; /* 리스트 스타일 제거 */
+   display: flex; /* 수평 정렬 */
+   gap: 0.5rem; /* 간격 추가 */
+}
+
+.headerContent ul li {
+   background-color: rgba(255,255,255,0.2);
+   border-radius: 20px;
+   cursor: pointer;
+   padding: 0.8rem 1.7rem;
+   transition: background-color 0.3s, color 0.3s;
+   font-size: 1.4rem;
+   font-weight: bold;
+}
+
+.headerContent ul li:hover {
+   background-color:white; /* 호버 시 배경색 변경 */
+   color: #DB7093;
+}
+
+@media (max-width: 1024px) {
+   .headerContent { 
+     flex-direction: column;
+     align-items: flex-start;
+   }
+ 
+   .navList{ 
+     margin-top: 1rem; 
+     width: 100%; 
+   }
+   
+   .headerContent ul li{
+      font-size: 1.2rem;
+   }
+}
