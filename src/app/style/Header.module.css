@@ -65,7 +65,7 @@
 }
 
 .headerContent ul li:hover {
-   background-color:white; /* 호버 시 배경색 변경 */
+   background-color:white;
    color: #DB7093;
 }
 
@@ -78,6 +78,9 @@
    .navList{ 
      margin-top: 1rem; 
      width: 100%; 
+   }
+   .navList i{
+     display: none;
    }
    
    .headerContent ul li{

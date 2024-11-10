@@ -104,7 +104,7 @@ export default function Home() {
                   {searchResult.result['FN'] && (
                     <>
                       <tr>
-                        <th>보유량 / 총합</th>
+                        <th>포스보유량 / 총합</th>
                         <td>{fnTotal} / {totalSum}</td>
                       </tr>
                       <tr>

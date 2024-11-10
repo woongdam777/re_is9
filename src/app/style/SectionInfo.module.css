@@ -1,0 +1,124 @@
+
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.categoryButton {
+  width: 6rem;
+  border: solid 1px #DB7093;
+  padding: 8px 1px;
+  border: none;
+  border-radius: 5px;
+  background-color:  rgb(245, 118, 176);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.categoryButton:hover:not(.active) {
+  background-color:white;
+  border: solid 1px #DB7093;
+  color: #DB7093;
+}
+
+.active {
+  border: solid 1px #DB7093;
+  background-color:white;
+  color: #DB7093;
+}
+
+.content {
+  display: flex;
+  height: 500px;
+}
+
+.itemList {
+  flex: 1;
+  margin-right: 16px;
+  height: inherit;
+  overflow: auto;
+  border: solid 1px #DB7093;
+  border-radius: 2px;
+}
+
+/* WebKit 기반 브라우저 (Chrome, Safari 등) */
+.itemList::-webkit-scrollbar {
+  width: 12px; /* 스크롤바의 너비 */
+}
+
+.itemList::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 스크롤바 트랙 색상 */
+}
+
+.itemList::-webkit-scrollbar-thumb {
+  background: #DB7093; /* 스크롤바 핸들 색상 */
+  border-radius: 10px; /* 핸들의 둥근 모서리 */
+}
+
+.itemList::-webkit-scrollbar-thumb:hover {
+  background: #FFB6C1; /* 핸들에 마우스를 올렸을 때 색상 */
+}
+
+/* Firefox 전용 스크롤바 색상 설정 */
+.itemList {
+  scrollbar-color: #DB7093 #f1f1f1; /* 첫 번째 색은 핸들, 두 번째 색은 트랙 */
+}
+
+.itemListItem {
+  cursor: pointer;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.itemListItem:hover {
+  background-color: #FFB6C1; 
+}
+
+.itemInfo {
+  flex: 2;
+}
+
+.ingredientItem {
+  cursor: pointer;
+  color: #0070f3; 
+}
+
+.ingredientItem:hover {
+  text-decoration: underline; 
+}
+
+@media (max-width: 1024px) {
+   .content {
+     flex-direction: column; 
+     margin-right: 0; 
+     align-items: center; 
+   }
+
+   .itemList {
+     margin-right: 0; 
+     width: 100%; 
+     margin-bottom: 20px; 
+     height: auto; 
+     overflow-y: auto; 
+     max-height: calc(50vh - 40px); 
+     border-radius: 5px; 
+     box-shadow: rgba(0,0,0,0.1) 0px 2px 8px; 
+     background-color: white; 
+     padding:10px; 
+     box-sizing:border-box; 
+   }
+
+   .itemInfo {
+     width:100%; 
+     padding-top :10px; 
+   }
+
+   .categoryButton {
+     margin-bottom :10px; 
+   }
+}
