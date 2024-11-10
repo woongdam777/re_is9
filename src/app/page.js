@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import Header from '../app/components/Header';
-import SectionOne from '../app/components/SectionOne';
-import SectionTwo from '../app/components/SectionTwo';
-import SectionThree from '../app/components/SectionThree';
-import SectionFour from '../app/components/SectionFour';
+import SectionLink from '../app/components/SectionLink';
+import SectionHome from '../app/components/SectionHome';
+import SectionInfo from '../app/components/SectionInfo';
+import SectionCalc from './components/SectionCalc';
+import SectionSearch from './components/SectionSearch';
 import '../app/globals.css';
 
 export default function Home() {
@@ -19,10 +20,11 @@ export default function Home() {
     <div className="body">
       <Header onNavClick={handleNavClick} />
       <main>
-        {activeSection === 'section-one' && <SectionOne />}
-        {activeSection === 'section-two' && <SectionTwo />}
-        {activeSection === 'section-three' && <SectionThree />}
-        {activeSection === 'section-four' && <SectionFour />}
+        {activeSection === 'section-home' && <SectionHome />}
+        {activeSection === 'section-link' && <SectionLink />}
+        {activeSection === 'section-calc' && <SectionCalc />}
+        {activeSection === 'section-info' && <SectionInfo />}
+        {activeSection === 'section-search' && <SectionSearch />}
       </main>
       <footer>
         [ 건의&문의&커피 : <a href="https://open.kakao.com/o/gCsNT4Wg"><i className="fa-solid fa-carrot"></i></a> ] &nbsp;&nbsp;&nbsp;  [ 제작: 사탕주면따라가요 ]

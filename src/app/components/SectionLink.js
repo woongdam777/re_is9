@@ -1,9 +1,10 @@
-// components/SectionOne.js
+'use client';
+
 import IconLink from './IconLink';
 
 export default function SectionOne() {
   return (
-    <section id="section-one" className="section-one">
+    <section id="section-link" className="section-link">
       <div className="input-container">
         <h1>링크 모음</h1>
         <ul className="icon-frame">

@@ -209,7 +209,8 @@ pre {
   display: flex;
   margin: 0 0 4rem;
   padding: 2rem;
-  background-color: #ecf0f1;
+  background-color: #121a25;
+  color: #ffff8f;
   border-radius: 8px;
   font-family: monospace;
   font-size: 1.2rem;

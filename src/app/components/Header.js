@@ -12,17 +12,20 @@ export default function Header({ onNavClick }) {
         </Link>
         <nav>
           <ul className={styles.navList}>
-            <li onClick={() => onNavClick('section-one')}>
-              <i className="fa-solid fa-link"></i> 링크
+            <li onClick={() => onNavClick('section-home')}>
+              <i className="fa-solid fa-house"></i> <span>홈</span>
             </li>
-            <li onClick={() => onNavClick('section-two')}>
-              <i className="fa-solid fa-bolt"></i> 포스
+            <li onClick={() => onNavClick('section-link')}>
+              <i className="fa-solid fa-link"></i> <span>링크</span>
             </li>
-            <li onClick={() => onNavClick('section-three')}>
-            <i className="fa-solid fa-circle-info"></i> 정보
+            <li onClick={() => onNavClick('section-calc')}>
+            <i className="fa-solid fa-calculator"></i> <span>계산기</span>
             </li>
-            <li onClick={() => onNavClick('section-four')}>
-            <i className="fa-solid fa-magnifying-glass"></i> 검색
+            <li onClick={() => onNavClick('section-info')}>
+            <i className="fa-solid fa-circle-info"></i> <span>정보</span>
+            </li>
+            <li onClick={() => onNavClick('section-search')}>
+            <i className="fa-solid fa-magnifying-glass"></i> <span>검색</span>
             </li>
             {/* 추가 항목 */}
           </ul>
