@@ -10,7 +10,7 @@ import SectionSearch from './components/SectionSearch';
 import '../app/globals.css';
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('section-one');
+  const [activeSection, setActiveSection] = useState('section-home');
 
   const handleNavClick = (section) => {
     setActiveSection(section);

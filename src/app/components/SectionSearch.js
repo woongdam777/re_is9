@@ -76,7 +76,7 @@ export default function Home() {
                 <tbody>
                   <tr>
                     <td colSpan="2">
-                      {searchResult.result.Name} | {searchResult.result.Nickname}
+                      {searchResult.result.Name} {searchResult.result.Nickname && <span>| {searchResult.result.Nickname}</span>}
                     </td>
                   </tr>
                   <tr>
@@ -84,9 +84,11 @@ export default function Home() {
                       {searchResult.result.Job}
                     </td>
                     <td>
-                      【 Lv.{searchResult.result.Level} 】<br />
-                      {searchResult.result['Force Level']}<br />
-                      {searchResult.result['Hell Level']}
+                      <div className={styles.textLeft}>
+                        Lv.{searchResult.result.Level}<br />
+                        {searchResult.result['Force Level']}<br />
+                        {searchResult.result['Hell Level']}
+                      </div>
                     </td>
                   </tr>
                   <tr>

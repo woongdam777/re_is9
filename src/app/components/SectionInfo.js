@@ -5,8 +5,8 @@ import itemsData from '../data/items.json';  // JSON 데이터 가져오기
 import styles from '../style/SectionInfo.module.css'; // CSS 모듈 가져오기
 
 export default function SectionInfo() {
-  const categories = ['무기', '갑옷', '악세', '신발', '유물', '각인', '보석', "기타"];
-  const [selectedCategory, setSelectedCategory] = useState('유물');
+  const categories = ['무기', '갑옷', '악세', '신발', '유물', '각인', '보석', '아바타', '기타'];
+  const [selectedCategory, setSelectedCategory] = useState('무기');
   const [selectedItem, setSelectedItem] = useState(null);
   const selectedItems = itemsData[selectedCategory] || [];
 
@@ -61,7 +61,10 @@ export default function SectionInfo() {
             {selectedItem ? (
               <div>
                 <h2>{selectedItem.name}</h2>
-                <p><strong>효과:</strong> {selectedItem.effect}</p>
+                <p><strong>효과:</strong></p>
+                {selectedItem.effect.split('\\n').map((line, index) => (
+                  <p key={index}>{line}</p>
+                ))}
                 <p><strong>재료:</strong></p>
                 <ul>
                   {selectedItem.combination.map((ingredient) => (
@@ -70,7 +73,7 @@ export default function SectionInfo() {
                       onClick={() => handleIngredientClick(ingredient.item)}
                       className={styles.ingredientItem}
                     >
-                      {ingredient.item} ({ingredient.quantity}개)
+                      {ingredient.item}{ingredient.quantity &&` (${ingredient.quantity}개)`}
                     </li>
                   ))}
                 </ul>
