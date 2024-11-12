@@ -27,7 +27,7 @@ export default function Header({ onNavClick }) {
             <h1 className={styles.gradientText}>War3 IS9</h1>
           </div>
           <div className={styles.darkBtn} onClick={toggleDarkMode}>
-            {darkMode === 'dark' ? (<i className="fa-solid fa-moon"></i>) : (<i className="fa-solid fa-sun"></i>)}
+            {darkMode === 'dark' ? (<i className="fa-solid fa-sun"></i>) : (<i className="fa-solid fa-moon"></i>)}
           </div>
         </div>
         <nav>

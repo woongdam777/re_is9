@@ -109,7 +109,7 @@
      max-height: calc(50vh - 40px); 
      border-radius: 5px; 
      box-shadow: rgba(0,0,0,0.1) 0px 2px 8px; 
-     background-color: white; 
+     background-color: var(--content-color); 
      padding:10px; 
      box-sizing:border-box; 
    }
