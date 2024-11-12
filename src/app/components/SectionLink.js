@@ -2,7 +2,7 @@
 
 import IconLink from './IconLink';
 
-export default function SectionOne() {
+export default function SectionLink() {
   return (
     <section id="section-link" className="section-link">
       <div className="input-container">

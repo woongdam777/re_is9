@@ -68,33 +68,30 @@ export default function AwakenSection() {
       </div>
       <div className="component-hell">
         <div className="component-input">
-          <span>지옥파티 클리어 단계</span>
-        </div>
-        <div className="component-input">
-          <div className="hell-select">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="hell-option">
-                  <input 
-                    type="radio" 
-                    name="hell" 
-                    id={`hell${i}`} 
-                    value={i}
-                    checked={hellValue === i}
-                    onChange={() => setHellValue(i)}
-                  />
-                  <label htmlFor={`hell${i}`}>{i}</label>
-                </div>
-            ))}
+          <div className="component-hell-left">
+            <span>지옥파티 클리어 단계</span>
+            <div className="hell-select">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                  <div key={i} className="hell-option">
+                    <input 
+                      type="radio" 
+                      name="hell" 
+                      id={`hell${i}`} 
+                      value={i}
+                      checked={hellValue === i}
+                      onChange={() => setHellValue(i)}
+                    />
+                    <label htmlFor={`hell${i}`}>{i}</label>
+                  </div>
+              ))}
+            </div>
           </div>
-          <div>
-            <span>필요 클리어 보너스 : </span>
-            <span>{clearNeeded} 개</span>
+          <div className="component-hell-right">
+            <span>다음 각성 단계까지</span>
+            <span>필요 클리어 보너스 : {clearNeeded} 개</span>
+            <span>필요 출석일수 : {Math.ceil(clearNeeded/5)} 개</span>
           </div>
-          <div>
-            <span>필요 출석일수 : </span>
-            <span>{Math.ceil(clearNeeded/5)} 개</span>
-          </div>
-        </div>
+        </div>      
       </div>
     </div>
   );

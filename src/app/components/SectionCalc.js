@@ -2,23 +2,24 @@
 
 import { useState } from 'react';
 import ForceCalculator from '../utils/ForceCalculator';
-import { PreBlock1, PreBlock2, PreBlock3, PreBlock4, PreBlock5, PreBlock6, PreBlock7, PreBlock8, PreBlock9 } from './PreBlocks';
+import { PreBlock1, PreBlock2, PreBlock3, PreBlock4_1, PreBlock4_2, PreBlock5, PreBlock6, PreBlock7, PreBlock8, PreBlock9, PreBlock10_1, PreBlock10_2 } from './PreBlocks';
 import AwakenSection from '../utils/AwakenSection';
 import AbilityResetSection from '../utils/AbilityResetSection';
 
 export default function SectionCalc() {
-  const [selectedInfo, setSelectedInfo] = useState('infoSectionZero');
+  const [selectedInfo, setSelectedInfo] = useState('infoSectionAwaken');
   const [selectedForce, setSelectedForce] = useState('forceSectionOne');
 
   return (
     <section className="section-calc">
       <div className="section-nav">
         <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionForce')}>포스</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionZero')}>각성</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionOne')}>지옥파티</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionTwo')}>성장</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionThree')}>어빌</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionFore')}>펫스킬</div>
+        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionAwaken')}>각성</div>
+        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionAbility')}>어빌</div>
+        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionHell')}>지옥파티</div>
+        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionGrow')}>성장</div>
+        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionPet')}>펫스킬</div>
+        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionGear')}>전용템</div>
       </div>
 
       {/* 포스 섹션 */}
@@ -52,31 +53,32 @@ export default function SectionCalc() {
       )}
 
       {/* 각성 섹션 */}
-      {selectedInfo === 'infoSectionZero' && (
+      {selectedInfo === 'infoSectionAwaken' && (
         <>
           <AwakenSection />
           <div className="formula">
-            <PreBlock4 />
+            <PreBlock4_1 />
+            <PreBlock4_2 />
           </div>
         </>
       )}
 
       {/* 지옥파티 섹션 */}
-      {selectedInfo === 'infoSectionOne' && (
+      {selectedInfo === 'infoSectionHell' && (
         <div className="formula">
           <PreBlock5 />
         </div>
       )}
 
       {/* 성장 섹션 */}
-      {selectedInfo === 'infoSectionTwo' && (
+      {selectedInfo === 'infoSectionGrow' && (
         <div className="formula">
           <PreBlock6 />
         </div>
       )}
 
       {/* 어빌 섹션 */}
-      {selectedInfo === 'infoSectionThree' && (
+      {selectedInfo === 'infoSectionAbility' && (
         <>
           <AbilityResetSection />
           <div className="formula">
@@ -87,11 +89,20 @@ export default function SectionCalc() {
       )}
 
       {/* 펫스킬 섹션 */}
-      {selectedInfo === 'infoSectionFore' && (
+      {selectedInfo === 'infoSectionPet' && (
         <div className="formula">
           <PreBlock9 />
         </div>
       )}
+
+      {/* 전용템 섹션 */}
+      {selectedInfo === 'infoSectionGear' && (
+        <div className="formula">
+          <PreBlock10_1 />
+          <PreBlock10_2 />
+        </div>
+      )}
+
     </section>
   );
 }

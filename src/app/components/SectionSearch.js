@@ -21,7 +21,7 @@ const extractForceLevel = (forceLevelString) => {
   return match ? parseInt(match[1], 10) : 0;
 };
 
-export default function Home() {
+export default function SectionSearch() {
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState(null);
   const captureRef = useRef(null);
