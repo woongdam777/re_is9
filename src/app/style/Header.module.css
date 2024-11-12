@@ -1,6 +1,6 @@
 /* styles/Header.module.css */
 .header {
-  background-color: rgb(245, 118, 176);
+  background-color: var(--header-color);
   padding: 1.5rem;
   color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -12,6 +12,14 @@
   align-items: center;
   max-width: 1200px;
   margin: auto; /* 중앙 정렬 */
+}
+
+.titleContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 20rem;
 }
 
 .mainTitle {
@@ -27,11 +35,11 @@
   font-weight: bold;
   background-image: linear-gradient(
     to right,
-    #FF69B4,
-    #FF1493,
-    #C71585,
-    #DB7093,
-    #FF69B4
+    var(--grad1-color),
+    var(--grad2-color),
+    var(--grad3-color),
+    var(--grad4-color),
+    var(--grad5-color)
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -45,6 +53,19 @@
    to {
       background-position: 200% center; /* 애니메이션 효과 */
    }
+}
+
+.darkBtn{
+  font-size: 1.8rem;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: dotted 3px white;
+  /* background-color: black; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ul 선택자 수정 */
@@ -66,13 +87,17 @@
 
 .headerContent ul li:hover {
    background-color:white;
-   color: #DB7093;
+   color: var(--c-color);
 }
 
 @media (max-width: 1024px) {
    .headerContent { 
      flex-direction: column;
      align-items: flex-start;
+   }
+
+   .titleContainer{
+      width: 100%;
    }
  
    .navList{ 

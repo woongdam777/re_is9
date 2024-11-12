@@ -7,19 +7,35 @@ import AwakenSection from '../utils/AwakenSection';
 import AbilityResetSection from '../utils/AbilityResetSection';
 
 export default function SectionCalc() {
-  const [selectedInfo, setSelectedInfo] = useState('infoSectionAwaken');
+  const [selectedInfo, setSelectedInfo] = useState('infoSectionForce');
   const [selectedForce, setSelectedForce] = useState('forceSectionOne');
 
+  const sections = [
+      { id: 'infoSectionForce', label: '포스' },
+      { id: 'infoSectionAwaken', label: '각성' },
+      { id: 'infoSectionAbility', label: '어빌' },
+      { id: 'infoSectionHell', label: '지옥파티' },
+      { id: 'infoSectionGrow', label: '성장' },
+      { id: 'infoSectionPet', label: '펫스킬' },
+      { id: 'infoSectionGear', label: '전용템' }
+  ];
+  const forceSections = [
+      { id: 'forceSectionOne', label: '포스스톤' },
+      { id: 'forceSectionTwo', label: '포스레벨' }
+  ];
+    
   return (
     <section className="section-calc">
       <div className="section-nav">
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionForce')}>포스</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionAwaken')}>각성</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionAbility')}>어빌</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionHell')}>지옥파티</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionGrow')}>성장</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionPet')}>펫스킬</div>
-        <div id="lowerSection" onClick={() => setSelectedInfo('infoSectionGear')}>전용템</div>
+          {sections.map(section => (
+              <div
+                  key={section.id}
+                  className={`lowerSection ${selectedInfo === section.id ? 'active' : ''}`}
+                  onClick={() => setSelectedInfo(section.id)}
+              >
+                  {section.label}
+              </div>
+          ))}
       </div>
 
       {/* 포스 섹션 */}
@@ -27,8 +43,15 @@ export default function SectionCalc() {
         <>
           <div>
             <div className="section-nav">
-              <div id="lowerSection" onClick={() => setSelectedForce('forceSectionOne')}>포스스톤</div>
-              <div id="lowerSection" onClick={() => setSelectedForce('forceSectionTwo')}>포스레벨</div>
+                {forceSections.map(section => (
+                    <div
+                        key={section.id}
+                        className={`lowerSection ${selectedForce === section.id ? 'active' : ''}`}
+                        onClick={() => setSelectedForce(section.id)}
+                    >
+                        {section.label}
+                    </div>
+                ))}
             </div>
               {selectedForce === 'forceSectionOne' && (
                   <>

@@ -1,4 +1,82 @@
 /* Global Styles */
+:root {
+  --header-color: rgb(245, 118, 176);
+  --bb-color: #FFB6C1; 
+  --c-color: #DB7093;
+  --hover-color: rgba(253,46,139,.5);
+  --footer-color: #3498db;
+
+  --grad1-color : #FF69B4;
+  --grad2-color : #FF1493;
+  --grad3-color : #C71585;
+  --grad4-color : #DB7093;
+  --grad5-color : #FF69B4;
+
+  --font-color : #333;
+  --refont-color : #fff;
+  --content-color : #ffffff;
+}
+
+[data-theme='dark'] {
+  --header-color: rgb(60, 60, 60); 
+  --bb-color: #1E1E1E; 
+  --c-color: #da6a98;
+  --hover-color: rgba(255, 105, 180, .5); 
+  --footer-color: #a7a7a7; 
+
+  --grad1-color: #FF69B4; 
+  --grad2-color: #FF1493;
+  --grad3-color: #C71585;
+  --grad4-color: #DB7093;
+  --grad5-color: #FF69B4;
+
+  --font-color : #fff;
+  --refont-color : #333;
+  --content-color : #666;
+}
+
+/* :root {
+  --header-color: rgb(204, 85, 0); 
+  --bb-color: #FFB84D; 
+  --c-color: #967c67; 
+  --hover-color: rgba(255, 81, 0, 0.5); 
+  --footer-color: #6A4E4C; 
+
+  --grad1-color : #CC5500;
+  --grad2-color : #FFB84D;
+  --grad3-color : #BFAF9D;
+  --grad4-color : #6A4E4C;
+  --grad5-color : #FF8C00;
+} */
+
+/* :root {
+  --header-color: #80AF81; 
+  --bb-color: #D6EFD8; 
+  --c-color: #508D4E; 
+  --hover-color: rgba(105, 143, 106, 0.5); 
+  --footer-color: #1A5319; 
+
+  --grad1-color: #D6EFD8; 
+  --grad2-color: #80AF81; 
+  --grad3-color: #508D4E; 
+  --grad4-color: #1A5319; 
+  --grad5-color: #32462e; 
+} */
+
+/* :root {
+  --header-color: #5356FF;
+  --bb-color: #a2dcf7;
+  --c-color: #67C6E3;
+  --hover-color: rgba(55, 140, 231, 0.5);
+  --footer-color: #378CE7;
+
+  --grad1-color: #5356FF;
+  --grad2-color: #378CE7;
+  --grad3-color: #67C6E3;
+  --grad4-color: #A0D8E8;
+  --grad5-color: #89b9cf;
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,8 +90,9 @@ html {
 body {
   font-family: 'Roboto', Arial, sans-serif;
   line-height: 1.6;
-  background-color: #FFB6C1;
-  color: #333;
+  background-color: var(--bb-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--font-color);
   font-size: 1.4rem;
 }
 
@@ -41,13 +120,13 @@ input {
 }
 
 input:focus {
-  border-color: rgb(245,118,176);
+  border-color: var(--bb-color);
   outline: none;
 }
 
 /* Container Styles */
 .input-container {
-  background-color: white;
+  background-color: var(--content-color);
   width: 100%;
   padding: 2rem;
   border-radius: 8px;
@@ -77,7 +156,7 @@ input:focus {
   padding: 10px;
   text-decoration-line: none;
   font-weight: bold;
-  color: black;
+  color: var(--font-color);
 }
 
 .icon-frame span:nth-child(2) {
@@ -140,7 +219,7 @@ input:focus {
   border: 1px solid #333;
   border-radius: 5px;
   cursor: pointer;
-  background-color: white;
+  background-color: var(--content-color);
 }
 
 .lock-select input[type="radio"]:checked + label {
@@ -159,6 +238,14 @@ input:focus {
   margin: 2px;
   text-align: center;
 }
+
+/* forcelist */
+.component-result{
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 
 /* hell */
 .component-hell{
@@ -201,7 +288,7 @@ input:focus {
   border: 1px solid #333;
   border-radius: 5px;
   cursor: pointer;
-  background-color: white;
+  background-color: var(--content-color);
 }
 
 .hell-select input[type="radio"]:checked + label {
@@ -224,26 +311,35 @@ input:focus {
 /* Button Styles */
 #searchBtn {
   display: inline-block; 
-  width: fit-content; 
+  width: 4.5rem; 
+  height: 3.5rem;
+  margin: 0 0.4rem;
   padding: .4rem; 
   border-radius: .5rem; 
-  background-color: #3498db; 
+  background-color: var(--footer-color); 
+  font-weight: bold;
   color: white; 
+  border: none;
 }
 
-#lowerSection {
-  background-color: white;
+.lowerSection {
+  background-color: var(--content-color);
   border-radius: 1rem;
   cursor: pointer;
   padding: 0.8rem 1.7rem;
   margin: 0 0.8rem 0.8rem 0;
-  transition: background-color 0.3s, color 0.3s;
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-#lowerSection:hover {
-  background-color: rgba(253,46,139,.5); 
+.lowerSection:hover:not(.active) {
+  background-color: var(--hover-color); 
+  color: var(--font-color);
+}
+
+.active {
+  background-color: var(--hover-color); 
+  color: white;
 }
 
 /* Radio Button Styles */
@@ -263,8 +359,6 @@ input[type="radio"]:checked + div {
 section {
   padding: 2.5rem;
 }
-
-
 
 /* Formula Styles */
 pre {
@@ -297,7 +391,7 @@ footer {
   width: 100%;
   text-align: right;
   padding: 1rem;
-  background-color: #3498db;
+  background-color: var(--footer-color);
   color: white;
   font-size: 1.4rem;
 }

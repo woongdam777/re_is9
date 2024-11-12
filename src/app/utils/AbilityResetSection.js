@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
 
 export default function AbilityResetSection() {
-  const [lockValue, setLockValue] = useState(1); // Default lock value
+  const [lockValue, setLockValue] = useState(1);
   const [inputSilverValue, setInputSilverValue] = useState(0);
   const [inputPageValue, setInputPageValue] = useState(0);
   const [maxReAbilltyCount, setMaxReAbilltyCount] = useState(0);
 
-  useEffect(() => {
-    calculateMaxAbility();
-  }, [lockValue, inputSilverValue, inputPageValue]);
-
-  function calculateMaxAbility() {
+  const calculateMaxAbility = useCallback(() => {
     let bs = 2000 * lockValue; // Silver cost based on lock value
     let bp = 10 * lockValue;   // Page cost based on lock value
 
@@ -18,7 +14,12 @@ export default function AbilityResetSection() {
     let pageCount = Math.floor(inputPageValue / bp);
 
     setMaxReAbilltyCount(Math.min(silverCount, pageCount));
-  }
+  }, [lockValue, inputSilverValue, inputPageValue]);
+
+  // 의존성 배열에 calculateMaxAbility 추가
+  useEffect(() => {
+    calculateMaxAbility();
+  }, [calculateMaxAbility]);
 
   return (
     <div className="input-container">

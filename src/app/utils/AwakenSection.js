@@ -1,5 +1,4 @@
-// AwakenSection.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const awakenLevels = [1, 5000, 20000, 100000, 500000, 2500000, 10000000, 50000000, 300000000, 1000000000];
 const hellReward = [1000, 2000, 4000, 8000, 12000, 25000, 60000, 120000];
@@ -11,14 +10,8 @@ export default function AwakenSection() {
   const [hellValue, setHellValue] = useState(5);
   const [clearNeeded, setClearNeeded] = useState(0);
 
-  useEffect(() => {
-    if (awakenValue) {
-      calculateAwaken(awakenValue);
-    }
-    calculateClear();
-  }, [awakenValue,hellValue]);
-
-  function calculateAwaken(value) {
+  // calculateAwaken 메모이제이션
+  const calculateAwaken = useCallback((value) => {
     const awakenValueInt = parseInt(value, 10);
     let now = 0;
     let result = 0;
@@ -33,9 +26,10 @@ export default function AwakenSection() {
 
     setNowAwaken(`Lv ${now} / ${240 - (10 * (now - 1))}쿨 / 피해량 ${(now - 1) * 10}${(now >= 5) ? ' + 25% 증가' : '% 증가'}`);
     setNeedAwaken(`${result} 경험치`);
-  }
+  }, []);
 
-  function calculateClear() {
+  // calculateClear 메모이제이션
+  const calculateClear = useCallback(() => {
     const needAwakenInt = parseInt(needAwaken.replace(/\D/g,'', ''), 10);
     const reward = hellReward[hellValue - 1]; 
     if (needAwakenInt && reward) {
@@ -44,7 +38,15 @@ export default function AwakenSection() {
     } else {
       setClearNeeded(0);
     }
-  }
+  }, [needAwaken, hellValue]);
+
+  // 의존성 배열 업데이트
+  useEffect(() => {
+    if (awakenValue) {
+      calculateAwaken(awakenValue);
+    }
+    calculateClear();
+  }, [awakenValue, hellValue, calculateAwaken, calculateClear]);
 
   return (
     <div className="input-container">
@@ -89,7 +91,7 @@ export default function AwakenSection() {
           <div className="component-hell-right">
             <span>다음 각성 단계까지</span>
             <span>필요 클리어 보너스 : {clearNeeded} 개</span>
-            <span>필요 출석일수 : {Math.ceil(clearNeeded/5)} 개</span>
+            <span>필요 출석일수 : {Math.ceil(clearNeeded / 5)} 일</span>
           </div>
         </div>      
       </div>

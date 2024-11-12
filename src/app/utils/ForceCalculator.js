@@ -1,6 +1,6 @@
 // utils/ForceCalculator.js
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 const denominations = [
     { value: 1500000, name: "신화" },
@@ -17,7 +17,7 @@ const forceLevels = [1, 100, 250, 625, 1600, 6400, 16000, 38000, 83600, 334400, 
 
 const ForceCalculator = ({ selectedForce }) => {
     
-    const calculateAndDisplay = () => {
+    const calculateAndDisplay = useCallback(() => {
         const inputValue = document.getElementById('inputValue');
         const ticketValue = document.getElementById('ticketValue');
         const resultList = document.getElementById('resultList');
@@ -48,7 +48,7 @@ const ForceCalculator = ({ selectedForce }) => {
         }
 
         displayResults(results);
-    };
+    }, []);
 
     const displayResults = (results) => {
         const resultList = document.getElementById('resultList');
@@ -66,7 +66,7 @@ const ForceCalculator = ({ selectedForce }) => {
         });
     };
 
-    const calculateAndDisplay2 = () => {
+    const calculateAndDisplay2 = useCallback(() => {
         const inputForce = document.getElementById('inputForce');
         const nowForceDisplay = document.getElementById('nowForce');
         const needForceDisplay = document.getElementById('needForce');
@@ -86,7 +86,7 @@ const ForceCalculator = ({ selectedForce }) => {
 
         nowForceDisplay.innerHTML = 'Lv ' + nowLevel;
         needForceDisplay.innerHTML = requiredForce + ' 포스';
-    };
+    }, []);
 
     useEffect(() => {
         if (selectedForce === 'forceSectionOne') {
@@ -109,67 +109,65 @@ const ForceCalculator = ({ selectedForce }) => {
                 inputForceField.removeEventListener('input', calculateAndDisplay2);
             };
         }
-    }, [selectedForce]);
+    }, [selectedForce, calculateAndDisplay, calculateAndDisplay2]);
 
     return (
         <>
             {selectedForce === 'forceSectionOne' && (
-                <>
-                    <div className="input-container">
-                        <div className="component-input">
-                            <label htmlFor="inputValue">수련장 점수:</label>
-                            <input
-                                type="number"
-                                id="inputValue"
-                                placeholder="값 입력"
-                            />
-                        </div>
-                        <div className="component-input">
-                            <label htmlFor="ticketValue">보유한 티켓:</label>
-                            <input
-                                type="number"
-                                id="ticketValue"
-                                defaultValue={10}
-                            />
-                        </div>
-                        <div className="component-input">
-                            <span>토벌 점수:</span>
-                            <span id="tenScore"></span>
-                        </div>
-                        <div className="component-input">
-                            <span>소모된 티켓 / 남은 티켓:</span>
-                            <span id="ticketUse"></span>
-                        </div>
-                        <div className="component-input">
-                            <span>펫 경험치:</span>
-                            <span id="petScore"></span>
-                        </div>
-                        <ul id="resultList"></ul>
+                <div className="input-container">
+                    <div className="component-input">
+                        <label htmlFor="inputValue">수련장 점수:</label>
+                        <input
+                            type="number"
+                            id="inputValue"
+                            placeholder="값 입력"
+                        />
                     </div>
-                </>
+                    <div className="component-input">
+                        <label htmlFor="ticketValue">보유한 티켓:</label>
+                        <input
+                            type="number"
+                            id="ticketValue"
+                            defaultValue={10}
+                        />
+                    </div>
+                    <div className="component-input">
+                        <span>토벌 점수:</span>
+                        <span id="tenScore"></span>
+                    </div>
+                    <div className="component-input">
+                        <span>소모된 티켓 / 남은 티켓:</span>
+                        <span id="ticketUse"></span>
+                    </div>
+                    <div className="component-input">
+                        <span>펫 경험치:</span>
+                        <span id="petScore"></span>
+                    </div>
+                    <div className='component-result'>
+                        <ul id="resultList">수련장점수를 입력해주세요.</ul>
+                    </div>
+                </div>
             )}
 
             {selectedForce === 'forceSectionTwo' && (
-                <>
-                    <div className="input-container">
-                      <div className="component-input">
-                          <label htmlFor="inputForce">현재 포스:</label>
-                          <input
-                              type="number"
-                              id="inputForce"
-                              placeholder="값 입력"
-                          />
-                      </div>
-                      <div className="component-input">
-                          <span>현재 포스 레벨:</span>
-                          <span id="nowForce"></span>
-                      </div>
-                      <div className="component-input">
-                          <span>다음 포스 필요량:</span>
-                          <span id="needForce"></span>
-                      </div>
+                <div className="input-container">
+                    <div className="component-input">
+                        <label htmlFor="inputForce">현재 포스:</label>
+                        <input
+                            type="number"
+                            id="inputForce"
+                            placeholder="값 입력"
+                        />
                     </div>
-                </>
+                    <div className="component-input">
+                        <span>현재 포스 레벨:</span>
+                        <span id="nowForce"></span>
+                    </div>
+                    <div className="component-input">
+                        <span>다음 포스 필요량:</span>
+                        <span id="needForce"></span>
+                    </div>
+                </div>
             )}
         </>
     );
