@@ -2,6 +2,7 @@
 
 import { useRef, useState, useMemo } from 'react';
 import Search from '../utils/Search';
+import ChartComponent from '../components/Chart';
 import { captureAndCopy, captureAndDownload } from '../utils/ImageCapture';
 import styles from '../style/SearchResult.module.css';
 
@@ -106,16 +107,25 @@ export default function Home() {
                   {searchResult.result['FN'] && (
                     <>
                       <tr>
-                        <th>포스보유량 / 총합</th>
+                        <th>인벤포스 / 총합</th>
                         <td>{fnTotal} / {totalSum}</td>
                       </tr>
                       <tr>
                         <td colSpan="2">
+                          <span>인벤토리 포스보유량</span>
                           <ForceTable fnString={searchResult.result['FN']} />
                         </td>
                       </tr>
                     </>
                   )}
+                  <tr>
+                    <td colSpan="2">
+                      <span>티켓 보유량 변동</span>
+                      <div className={styles.chartContainer}>
+                        <ChartComponent fnChart={searchResult.flowValue} />
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
               <p className={styles.lastUpdate}>마지막 업데이트 시간: {searchResult.updateTime}</p>

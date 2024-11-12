@@ -14,7 +14,7 @@ export default function Search({ onSearch }) {
         onSearch(null, data.error);
       }
     } catch (error) {
-      console.error('Search error:', error);
+      // console.error('Search error:', error);
       onSearch(null, "데이터를 가져오는 중 오류가 발생했습니다.");
     }
   };
