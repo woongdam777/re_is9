@@ -25,9 +25,20 @@
   flex: 2;
 }
 
-.jobRank{
+.preNote{
   flex: 1;
 }
+
+.jobRankTitle{
+  display: none;
+}
+
+.jobRankChart{
+  text-align: center;
+  width: 100%;
+  height: 500px;
+}
+
 
 @media (max-width: 1024px) {
   .homeContainer{

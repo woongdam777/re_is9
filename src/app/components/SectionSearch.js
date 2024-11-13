@@ -2,7 +2,7 @@
 
 import { useRef, useState, useMemo } from 'react';
 import Search from '../utils/Search';
-import ChartComponent from '../components/Chart';
+import ChartComponent from '../components/SearchChart';
 import { captureAndCopy, captureAndDownload } from '../utils/ImageCapture';
 import styles from '../style/SearchResult.module.css';
 

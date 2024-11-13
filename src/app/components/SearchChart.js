@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels'; // 플러그인 임포트
+import ChartDataLabels from 'chartjs-plugin-datalabels'; 
 
 Chart.register(...registerables);
-Chart.register(ChartDataLabels); // 플러그인 등록
+Chart.register(ChartDataLabels); 
 
 export default function ChartComponent({ fnChart }) {
   const chartRef = useRef(null);
