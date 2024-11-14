@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from '../style/Home.module.css';
 import JobChart from '../components/JobChart';
 
-const versions = ['v18.8'];
+const versions = ['A18.8'];
 
 export default function VersionAndJobRank() {
   const [selectedVersion, setSelectedVersion] = useState(versions[0]);
@@ -56,7 +56,7 @@ export default function VersionAndJobRank() {
       {versionData && (
         <div className={styles.jobRankChart}>
           <h4>{versionData.version} 직업별 인원 분포</h4>
-          <h6>{versionData.date} 기준, 수련장사용인원</h6>
+          <h6>수련장초기화 후 | {versionData.date} 기준</h6>
           <h6>총인원 : {versionData.total} 명</h6>
           <JobChart ranks={versionData.ranks} />
           {/* <ul>

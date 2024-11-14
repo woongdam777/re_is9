@@ -19,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
 
-  width: 20rem;
+  width: 23rem;
 }
 
 .mainTitle {
@@ -55,13 +55,30 @@
    }
 }
 
+.btnContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 80px;
+}
+
 .darkBtn{
   font-size: 1.8rem;
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: dotted 3px white;
-  /* background-color: black; */
+  border: dotted 2px white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colorBtn{
+  font-size: 1.8rem;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: solid 1px white;
 
   display: flex;
   justify-content: center;

@@ -4,19 +4,31 @@ import { useState, useEffect } from 'react';
 import styles from '../style/Header.module.css';
 
 export default function Header({ onNavClick }) {
-  const [darkMode, setDarkMode] = useState('light');
+  const [colorMode, setColorMode] = useState('light');
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
-    setDarkMode(savedTheme);
-    document.body.setAttribute('data-theme', savedTheme); // data-theme 속성 설정
+    setColorMode(savedTheme);
+    document.body.setAttribute('data-theme', savedTheme);
   }, []);
 
   const toggleDarkMode = () => {
-    const newMode = darkMode === 'dark' ? 'light' : 'dark';
-    setDarkMode(newMode);
+    const newMode = colorMode === 'dark' ? 'light' : 'dark';
+    setColorMode(newMode);
     localStorage.setItem('theme', newMode);
-    document.body.setAttribute('data-theme', newMode); // data-theme 속성 업데이트
+    document.body.setAttribute('data-theme', newMode);
+  };
+
+  const toggleColorMode = () => {
+    const colorModes = ['light', 'brown', 'blue', 'green'];
+    const currentIndex = colorModes.indexOf(colorMode);
+    
+    const nextIndex = (currentIndex + 1) % colorModes.length;
+    const newColorMode = colorModes[nextIndex];
+
+    setColorMode(newColorMode);
+    localStorage.setItem('theme', newColorMode);
+    document.body.setAttribute('data-theme', newColorMode);
   };
 
   return (
@@ -26,8 +38,26 @@ export default function Header({ onNavClick }) {
           <div className={styles.mainTitle} onClick={() => onNavClick('section-home')}>
             <h1 className={styles.gradientText}>War3 IS9</h1>
           </div>
-          <div className={styles.darkBtn} onClick={toggleDarkMode}>
-            {darkMode === 'dark' ? (<i className="fa-solid fa-sun"></i>) : (<i className="fa-solid fa-moon"></i>)}
+          <div className={styles.btnContainer}>
+            <div className={styles.darkBtn} onClick={toggleDarkMode}>
+              {colorMode === 'dark' ? (<i className="fa-solid fa-sun"></i>) : (<i className="fa-solid fa-moon"></i>)}
+            </div>
+            <div className={styles.colorBtn} onClick={toggleColorMode}>
+              {(() => {
+                switch(colorMode) {
+                  case 'light':
+                    return <i className="fa-solid fa-palette"></i>;
+                  case 'brown':
+                    return <i className="fa-solid fa-tree"></i>;
+                  case 'blue':
+                    return <i className="fa-solid fa-water"></i>;
+                  case 'green':
+                    return <i className="fa-solid fa-leaf"></i>;
+                  default:
+                    return <i className="fa-solid fa-palette"></i>;
+                }
+              })()}
+            </div>
           </div>
         </div>
         <nav>

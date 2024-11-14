@@ -17,10 +17,10 @@ export async function GET(request) {
     const csvData = await response.text();
     const parsedData = parseCSV(csvData);
 
-    const date = parsedData[1][12].replace(/^"|"$/g, '');
-    const rankString = parsedData[2][12].replace(/^"|"$/g, '');
+    const date = parsedData[1][13].replace(/^"|"$/g, '');
+    const rankString = parsedData[2][13].replace(/^"|"$/g, '');
     const ranks = parseRankData(rankString);
-    const total = parsedData[3][12].replace(/^"|"$/g, '');
+    const total = parsedData[3][13].replace(/^"|"$/g, '');
     
     const jobData = {version, date, total, ranks};
 

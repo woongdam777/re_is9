@@ -61,7 +61,7 @@ const JobRankPieChart = ({ ranks }) => {
           anchor: 'center', // Position between middle and end of slices
           align: 'end',
           offset: 15, // Space between label and slice (adjusted for better visibility)
-          formatter: (value, context) => {
+          formatter: (value) => {
             return `${value}`; // Show only value (you can add job name if needed)
           },
           font: {
