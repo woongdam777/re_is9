@@ -56,10 +56,17 @@ export default function SectionSearch() {
   return (
     <section className="section-search">
       <div className="input-container">
-        <div className={styles.awakenDetail}>
-          <p>포스스톤 랭킹 300위까지만 검색가능</p>
-          <p>저장시간과 업데이트시간은 다릅니다</p>
-          <p>1시간 단위 업데이트[매시정각 5분내외 최신화]</p>
+        <div className={styles.detail}>
+          <div className={styles.awakenDetail}>
+            <p>포스스톤 랭킹 300위까지만 검색가능</p>
+            <p>저장시간과 업데이트시간은 다릅니다</p>
+            <p>1시간 단위 업데이트[매시정각 5분내외 최신화]</p>
+          </div>
+          <div className={styles.warnigDetail}>
+            <p>검색하는 것은 자유입니다!</p>
+            <p>카페/오픈채팅방 등 공유, 기타목적 사용불가</p>
+            <p>확인하는 용도로만 사용해주세요!</p>
+          </div>
         </div>
         <Search onSearch={handleSearchResult} />
         <div ref={captureRef} id="searchResult">
