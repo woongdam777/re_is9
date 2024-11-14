@@ -91,7 +91,7 @@ const JobRankPieChart = ({ ranks }) => {
   }, [ranks]);
 
   return (
-    <div style={{width:'100%', height:'95%' }}>
+    <div style={{width:'100%', height:'85%' }}>
       <canvas ref={canvasRef} />
     </div>
   );

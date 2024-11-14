@@ -24,7 +24,8 @@ export default function ChartComponent({ fnChart }) {
           datasets: [{
             label: '시간별 데이터',
             data: dataArray,
-            borderColor: 'rgb(245,118,178)',
+            borderColor: 'rgba(102, 102, 102, 0.4)',
+            backgroundColor : 'var(--bb-color)',
             borderWidth: 1,
           }]
         },

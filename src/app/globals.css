@@ -19,7 +19,7 @@
 
 [data-theme='dark'] {
   --header-color: rgb(60, 60, 60); 
-  --bb-color: rgba(0, 0, 0, 0.3); 
+  --bb-color: rgba(0, 0, 0, 0.5); 
   --c-color: #da6a98;
   --hover-color: rgba(255, 105, 180, .5); 
   --footer-color: #a7a7a7; 
@@ -32,7 +32,7 @@
 
   --font-color : #fff;
   --refont-color : #333;
-  --content-color : #666;
+  --content-color : #555;
 }
 
 

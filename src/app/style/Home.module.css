@@ -22,11 +22,11 @@
 }
 
 .homeLeft{
-  flex: 2;
+  flex: 3;
 }
 
 .homeRight{
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
