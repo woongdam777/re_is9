@@ -5,10 +5,17 @@ import itemsData from '../data/items.json';  // JSON 데이터 가져오기
 import styles from '../style/SectionInfo.module.css'; // CSS 모듈 가져오기
 
 export default function SectionInfo() {
-  const categories = ['무기', '갑옷', '악세', '신발', '유물', '각인', '보석', '아바타', '기타'];
+  const categories = ['무기', '갑옷', '악세', '신발', '유물', '각인', '보석', '아바타', "전용템", '기타'];
   const [selectedCategory, setSelectedCategory] = useState('무기');
   const [selectedItem, setSelectedItem] = useState(null);
   const selectedItems = itemsData[selectedCategory] || [];
+  const [isReversed, setIsReversed] = useState(false);
+
+  const handleToggleOrder = () => {
+    setIsReversed((prev) => !prev); // 현재 상태를 반전
+  };
+
+  const displayedItems = isReversed ? selectedItems.slice().reverse() : selectedItems;
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -42,11 +49,16 @@ export default function SectionInfo() {
             </button>
           ))}
         </div>
-        <h2>{selectedCategory} 아이템</h2>
+        <div className={styles.semiTitle}>
+          {selectedCategory} 아이템
+          <button onClick={handleToggleOrder}>
+            {isReversed ? '반전' : '반전'}
+          </button>
+        </div>
         <div className={styles.content}>
           <div className={styles.itemList}>
             <ul>
-              {selectedItems.map((item) => (
+              {displayedItems.map((item) => (
                 <li
                   key={item.name}
                   onClick={() => handleItemClick(item)}
@@ -61,22 +73,31 @@ export default function SectionInfo() {
             {selectedItem ? (
               <div>
                 <h2>{selectedItem.name}</h2>
-                <p><strong>효과:</strong></p>
-                {selectedItem.effect.split('\\n').map((line, index) => (
-                  <p key={index}>{line}</p>
-                ))}
-                <p><strong>재료:</strong></p>
-                <ul>
-                  {selectedItem.combination.map((ingredient) => (
-                    <li
-                      key={ingredient.item}
-                      onClick={() => handleIngredientClick(ingredient.item)}
-                      className={styles.ingredientItem}
-                    >
-                      {ingredient.item}{ingredient.quantity &&` (${ingredient.quantity}개)`}
-                    </li>
-                  ))}
-                </ul>
+                {selectedItem.effect &&
+                  <>
+                    <p><strong>효과:</strong></p>
+                    {selectedItem.effect.split('\\n').map((line, index) => (
+                      <p key={index}>{line}</p>
+                    ))}
+                  </>
+                }
+                {selectedItem.combination && (
+                  <>
+                    <p><strong>재료:</strong></p>
+                    <ul>
+                      {selectedItem.combination.map((ingredient) => (
+                        <li
+                          key={ingredient.item}
+                          onClick={() => handleIngredientClick(ingredient.item)}
+                          className={styles.ingredientItem}
+                        >
+                          {ingredient.item}
+                          {ingredient.quantity && ` (${ingredient.quantity}개)`}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
             ) : (
               <p>아이템을 선택해주세요.</p>

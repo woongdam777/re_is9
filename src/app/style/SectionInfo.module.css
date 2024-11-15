@@ -33,6 +33,30 @@
   color: var(--c-color);
 }
 
+.semiTitle{
+  font-size: 2.3rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.semiTitle>button{
+  margin-left: 20px;
+  border: none;
+  height: 30px;
+  width: 50px;
+  background-color: var(--header-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.semiTitle>button:active{
+  background-color:white;
+  border: solid 1px var(--c-color);
+  color: var(--c-color);
+}
+
 .content {
   display: flex;
   height: 500px;
@@ -49,7 +73,7 @@
 
 /* WebKit 기반 브라우저 (Chrome, Safari 등) */
 .itemList::-webkit-scrollbar {
-  width: 12px; /* 스크롤바의 너비 */
+  width: 5px; /* 스크롤바의 너비 */
 }
 
 .itemList::-webkit-scrollbar-track {
@@ -65,10 +89,6 @@
   background: var(--bb-color); /* 핸들에 마우스를 올렸을 때 색상 */
 }
 
-/* Firefox 전용 스크롤바 색상 설정 */
-.itemList {
-  scrollbar-color: var(--c-color) #f1f1f1; /* 첫 번째 색은 핸들, 두 번째 색은 트랙 */
-}
 
 .itemListItem {
   cursor: pointer;

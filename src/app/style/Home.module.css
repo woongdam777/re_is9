@@ -17,9 +17,30 @@
   width: 100%;
 }
 
-.homeDiv pre{
+.homeDivpre{
   max-height: 300px;
   overflow: auto;
+}
+
+/* 스크롤바 전체 */
+.homeDivpre::-webkit-scrollbar {
+  width: 10px; /* 스크롤바의 너비 */
+}
+
+/* 스크롤바 배경 */
+.homeDivpre::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 스크롤바 트랙 색상 */
+}
+
+/* 스크롤바 핸들 */
+.homeDivpre::-webkit-scrollbar-thumb {
+  background: var(--c-color); /* 핸들 색상 */
+  border-radius: 10px; /* 핸들의 둥근 모서리 */
+}
+
+/* 핸들에 마우스를 올렸을 때의 색상 */
+.homeDivpre::-webkit-scrollbar-thumb:hover {
+  background: darken(var(--c-color), 10%); /* 핸들 색상의 어두운 버전 */
 }
 
 .homeContainer pre{

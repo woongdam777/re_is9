@@ -3,6 +3,7 @@
 import React, { useEffect, useCallback } from 'react';
 
 const denominations = [
+    { value: 75000000, name: "진리의서" },
     { value: 1500000, name: "신화" },
     { value: 300000, name: "고대" },
     { value: 100000, name: "에픽" },
@@ -13,7 +14,7 @@ const denominations = [
     { value: 1, name: "노말" }
 ];
 
-const forceLevels = [1, 100, 250, 625, 1600, 6400, 16000, 38000, 83600, 334400, 800000, 1600000, 2400000, 3200000, 5000000];
+const forceLevels = [1, 100, 250, 625, 1600, 6400, 16000, 38000, 83600, 334400, 800000, 1600000, 2400000, 3200000, 5000000, 75000000];
 
 const ForceCalculator = ({ selectedForce }) => {
     

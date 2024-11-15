@@ -15,7 +15,7 @@ export default function SectionHome() {
         <div className={styles.homeLeft}>
           <div className={styles.homeDiv}>
             <h1>패치노트 19</h1>
-            <pre>
+            <pre className={styles.homeDivpre}>
 빙결의 무녀<br />
 수련장 보정이 70% → 100%로 상향 조정됩니다.<br />
 R:동화<br />

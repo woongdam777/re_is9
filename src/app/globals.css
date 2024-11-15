@@ -333,6 +333,7 @@ input:focus {
   font-weight: bold;
   color: white; 
   border: none;
+  cursor: pointer;
 }
 
 .lowerSection {
@@ -393,7 +394,8 @@ pre {
 }
 
 .formula > pre {
-  margin-right: 3rem;
+  max-width: 60%;
+  margin-right: 1rem;
 }
 
 /* Footer Styles */
