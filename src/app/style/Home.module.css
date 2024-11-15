@@ -17,6 +17,11 @@
   width: 100%;
 }
 
+.homeDiv pre{
+  max-height: 300px;
+  overflow: auto;
+}
+
 .homeContainer pre{
   font-size: 1.2rem;
 }
