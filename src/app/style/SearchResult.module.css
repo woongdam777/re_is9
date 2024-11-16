@@ -42,6 +42,10 @@
   overflow: auto;
 }
 
+.searchHistory::-webkit-scrollbar {
+  display: none; /* 스크롤바 숨기기 */
+}
+
 .searchHistory>li{
   background-color: var(--c-color);
   color: white;
