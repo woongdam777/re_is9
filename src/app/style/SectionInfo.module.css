@@ -104,9 +104,22 @@
   flex: 2;
 }
 
+.itemInfoBlock{
+  background-color: var(--bb-color);
+  opacity: 0.8;
+  padding: 20px;
+  border: solid 1px var(--c-color);
+  border-radius: 10px;
+}
+
+.itemInfoBlock *{
+  margin-bottom: 4px;
+}
+
 .ingredientItem {
   cursor: pointer;
   color: var(--footer-color); 
+  font-weight: bold;
 }
 
 .ingredientItem:hover {

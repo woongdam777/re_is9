@@ -127,10 +127,10 @@ export default function SectionSearch() {
                       </tr>
                     </>
                   )}
-                  <tr style={{ display: 'none' }}>
+                  <tr>
+                  {/* <tr style={{ display: 'none' }}> */}
                     <td colSpan="2">
                       <span>티켓 보유량 변동</span>
-                      <span>공사중</span>
                       <div className={styles.chartContainer}>
                         <ChartComponent fnChart={searchResult.flowValue} />
                       </div>

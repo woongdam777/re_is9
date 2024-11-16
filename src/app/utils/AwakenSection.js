@@ -7,7 +7,7 @@ export default function AwakenSection() {
   const [awakenValue, setAwakenValue] = useState('');
   const [nowAwaken, setNowAwaken] = useState('');
   const [needAwaken, setNeedAwaken] = useState('');
-  const [hellValue, setHellValue] = useState(5);
+  const [hellValue, setHellValue] = useState(2);
   const [clearNeeded, setClearNeeded] = useState(0);
 
   // calculateAwaken 메모이제이션

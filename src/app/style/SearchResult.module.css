@@ -12,6 +12,9 @@
 }
 
 .warnigDetail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-weight: bold;
   font-size: 1.4rem;
   color: red;
@@ -31,6 +34,22 @@
   cursor: pointer;
   text-align: center;
 }
+
+.searchHistory{
+  width: 300px;
+  display: flex;
+  overflow: auto;
+}
+
+.searchHistory>li{
+  background-color: var(--c-color);
+  color: white;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 0 3px;
+  cursor: pointer;
+}
+
 
 .resultCard {
   background-color: #4b4b4b; 

@@ -71,11 +71,11 @@ export default function SectionInfo() {
           </div>
           <div className={styles.itemInfo}>
             {selectedItem ? (
-              <div>
+              <div className={styles.itemInfoBlock}>
                 <h2>{selectedItem.name}</h2>
                 {selectedItem.effect &&
                   <>
-                    <p><strong>효과:</strong></p>
+                    <p><strong>[효과]</strong></p>
                     {selectedItem.effect.split('\\n').map((line, index) => (
                       <p key={index}>{line}</p>
                     ))}
@@ -83,7 +83,7 @@ export default function SectionInfo() {
                 }
                 {selectedItem.combination && (
                   <>
-                    <p><strong>재료:</strong></p>
+                    <p><strong>[재료]</strong></p>
                     <ul>
                       {selectedItem.combination.map((ingredient) => (
                         <li

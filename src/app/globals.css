@@ -20,7 +20,7 @@
 [data-theme='dark'] {
   --header-color: rgb(60, 60, 60); 
   --bb-color: rgba(0, 0, 0, 0.5); 
-  --c-color: #da6a98;
+  --c-color: #423f6d;
   --hover-color: rgba(255, 105, 180, .5); 
   --footer-color: #a7a7a7; 
 
@@ -394,7 +394,7 @@ pre {
 }
 
 .formula > pre {
-  max-width: 60%;
+  min-width: 40%;
   margin-right: 1rem;
 }
 

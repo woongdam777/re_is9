@@ -12,6 +12,28 @@ export default function SectionHome() {
         <h1>홈화면 [임시]</h1>
       </div>
       <div className={styles.homeContainer}>
+        <div className={styles.homeDiv}>
+          <h2>업데이트내역</h2>
+          <pre>
+            1. 검색 - 과거 검색어 저장기능 최대 5개<br />
+            2. 검색 - 수련장 초기화 후 티켓 변동량 경고문구 추가<br />
+            3. 검색 - 전용템 강화수치 추가<br />
+            4. 아이템 가시성 개편 및 전용템 추가<br />
+            5. 계산기 - 포스스톤 진리의서 추가 
+          </pre>          
+        </div>  
+        <div className={styles.homeDiv}>
+          <h2>추가예정</h2>
+          <pre>
+            1. 지옥파티 포인트[구입가능개수] - 귀찮다...<br />
+            2. 아이템 리스트 추가예정<br />
+            3. 홈화면<br />
+            4. 과거 전체&캐릭별 패치노트 - <br />
+            5. 로그인 및 간단한 게시판 추가 - 미정
+          </pre>
+        </div>
+      </div>
+      <div className={styles.homeContainer}>
         <div className={styles.homeLeft}>
           <div className={styles.homeDiv}>
             <h1>패치노트 19</h1>
@@ -52,13 +74,13 @@ R:동화<br />
             </pre>
           </div>
           <div className={styles.homeDiv}>
-            <h1>추가예정</h1>
+            <h1>여기에 뭐 넣을까요?</h1>
             <pre>
-              1. 지옥파티 포인트 - 상자구입가능 개수 파악?<br />
-              2. 아이템 리스트 추가예정<br />
-              3. 홈화면<br />
-              4. 패치노트<br />
-              5. 로그인 및 간단한 게시판 추가 - 미정
+              1. <br />
+              2. <br />
+              3. <br />
+              4. <br />
+              5. 
             </pre>
           </div>
         </div>

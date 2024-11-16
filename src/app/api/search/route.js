@@ -76,7 +76,7 @@ function searchKeyword(data, keyword) {
 function searchKeywordInFlow(rows, keyword) {
   const keywordIndex = rows.findIndex(row => row[1] === keyword);
   if (keywordIndex !== -1 && keywordIndex < rows.length) {
-    return rows[keywordIndex][7]; // H열은 인덱스 7
+    return rows[keywordIndex][10]; // H열은 인덱스 7
   }
   return null;
 }
