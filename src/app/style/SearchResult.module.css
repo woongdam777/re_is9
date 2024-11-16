@@ -36,7 +36,8 @@
 }
 
 .searchHistory{
-  width: 300px;
+  width: 350px;
+  height: 30px;
   display: flex;
   overflow: auto;
 }
@@ -144,4 +145,7 @@
     margin-top: 20px;
   }
 
+  .searchHistory{
+    width: 250px;
+  }
 }
