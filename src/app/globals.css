@@ -90,6 +90,64 @@
   --content-color : #ffffff;
 }
 
+[data-theme='yellow'] {
+  --header-color: #FFB800;
+  --bb-color: #FFD966;
+  --c-color: #B38B4D;
+  --hover-color: rgba(255, 204, 0, 0.5);
+  --footer-color: #b6922f;
+  
+  --grad1-color: #FFCC00;
+  --grad2-color: #FFD966;
+  --grad3-color: #FFEB3B;
+  --grad4-color: #F1C232;
+  --grad5-color: #FF9800;
+
+  --font-color: #333;
+  --refont-color: #fff;
+  --content-color: #fff;
+}
+
+[data-theme='neutral'] {
+  --header-color: #B0A99F; /* 차분한 회색빛 베이지 */
+  --bb-color: #D0D4D3;    /* 밝은 회색 */
+  --c-color: #7D7F6D;     /* 어두운 올리브 그레이 */
+  --hover-color: rgba(180, 180, 180, 0.5); /* 연한 회색 */
+  --footer-color: #A0A39D; /* 회색 톤의 부드러운 베이지 */
+
+  --grad1-color: #D0D4D3;  /* 밝은 회색 */
+  --grad2-color: #B0A99F;  /* 차분한 회색빛 베이지 */
+  --grad3-color: #7D7F6D;  /* 어두운 올리브 그레이 */
+  --grad4-color: #A0A39D;  /* 회색 톤의 부드러운 베이지 */
+  --grad5-color: #C3C8C1;  /* 중간 톤의 회색 */
+
+  --font-color: #333;      /* 짙은 글자색 */
+  --refont-color: #fff;    /* 밝은 글자색 */
+  --content-color: #fff;   /* 배경색 */
+}
+  
+
+
+[data-theme='earthy'] {
+  --header-color: #8E9A7D; 
+  --bb-color: #A3B18C;     
+  --c-color: #6D7C4E;      
+  --hover-color: rgba(145, 154, 125, 0.5); 
+  --footer-color: #5E6A47; 
+
+  --grad1-color: #A3B18C;  
+  --grad2-color: #8E9A7D;  
+  --grad3-color: #6D7C4E;  
+  --grad4-color: #5E6A47;  
+  --grad5-color: #A3B18C;  
+
+  --font-color: #333;      
+  --refont-color: #fff;    
+  --content-color: #fff;   
+}
+
+
+
 * {
   margin: 0;
   padding: 0;

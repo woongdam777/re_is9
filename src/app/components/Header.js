@@ -20,7 +20,7 @@ export default function Header({ onNavClick }) {
   };
 
   const toggleColorMode = () => {
-    const colorModes = ['light', 'brown', 'blue', 'green'];
+    const colorModes = ['light', 'brown', 'blue', 'green', 'yellow','neutral','earthy'];
     const currentIndex = colorModes.indexOf(colorMode);
     
     const nextIndex = (currentIndex + 1) % colorModes.length;
@@ -53,6 +53,12 @@ export default function Header({ onNavClick }) {
                     return <i className="fa-solid fa-water"></i>;
                   case 'green':
                     return <i className="fa-solid fa-leaf"></i>;
+                  case 'yellow':
+                    return <i className="fa-solid fa-bolt"></i>;
+                  case 'neutral':
+                    return <i className="fa-solid fa-star-of-life"></i>;
+                  case 'earthy':
+                    return <i className="fa-solid fa-clover"></i>;
                   default:
                     return <i className="fa-solid fa-palette"></i>;
                 }
