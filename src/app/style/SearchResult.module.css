@@ -39,7 +39,8 @@
   width: 350px;
   height: 30px;
   display: flex;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .searchHistory::-webkit-scrollbar {
@@ -109,6 +110,12 @@
 .textLeft {
   padding-left: 20px;
   text-align: left;
+}
+
+.reFNtd{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .resultFN tr{

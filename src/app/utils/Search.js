@@ -24,7 +24,7 @@ export default function Search({ onSearch }) {
       if (response.ok) {
         onSearch(data, null);
         // 성공적인 검색 후 검색어를 기록에 추가합니다.
-        const newHistory = [searchKeyword, ...searchHistory.filter(item => item !== searchKeyword)].slice(0, 5);
+        const newHistory = [searchKeyword, ...searchHistory.filter(item => item !== searchKeyword)].slice(0, 4);
         setSearchHistory(newHistory);
         saveSearchHistory(newHistory);
       } else {

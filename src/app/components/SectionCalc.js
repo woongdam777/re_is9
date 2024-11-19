@@ -5,6 +5,7 @@ import ForceCalculator from '../utils/ForceCalculator';
 import { PreBlock1, PreBlock2, PreBlock3, PreBlock4_1, PreBlock4_2, PreBlock5, PreBlock6, PreBlock7, PreBlock8, PreBlock9, PreBlock10_1, PreBlock10_2 } from './PreBlocks';
 import AwakenSection from '../utils/AwakenSection';
 import AbilityResetSection from '../utils/AbilityResetSection';
+import FatBoxCalc from '../utils/FatBoxCalculator';
 
 export default function SectionCalc() {
   const [selectedInfo, setSelectedInfo] = useState('infoSectionForce');
@@ -88,9 +89,12 @@ export default function SectionCalc() {
 
       {/* 지옥파티 섹션 */}
       {selectedInfo === 'infoSectionHell' && (
-        <div className="formula">
-          <PreBlock5 />
-        </div>
+        <>
+          <FatBoxCalc />
+          <div className="formula">
+            <PreBlock5 />
+          </div>
+        </>
       )}
 
       {/* 성장 섹션 */}

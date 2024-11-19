@@ -129,7 +129,7 @@ export default function SectionSearch() {
                   )}
                   <tr>
                   {/* <tr style={{ display: 'none' }}> */}
-                    <td colSpan="2">
+                    <td colSpan="2" className={styles.reFNtd}>
                       <span>티켓 보유량 변동</span>
                       <div className={styles.chartContainer}>
                         <ChartComponent fnChart={searchResult.flowValue} />
