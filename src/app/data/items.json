@@ -129,7 +129,7 @@
         {"item": "어둠의 열쇠", "quantity": 1},
         {"item": "시간의 파편", "quantity": 1},
         {"item": "백만 은화 주화", "quantity": 17},
-        {"item": "유니크 소울", "quantity": 20}
+        {"item": "유니크 소울", "quantity": 7}
       ]
     },
     {
@@ -141,7 +141,7 @@
         {"item": "빛의 열쇠", "quantity": 1},
         {"item": "시간의 파편", "quantity": 1},
         {"item": "백만 은화 주화", "quantity": 17},
-        {"item": "유니크 소울", "quantity": 20}
+        {"item": "유니크 소울", "quantity": 7}
       ]
     },
     {
@@ -153,7 +153,7 @@
         {"item": "균형의 열쇠", "quantity": 1},
         {"item": "시간의 파편", "quantity": 1},
         {"item": "백만 은화 주화", "quantity": 17},
-        {"item": "유니크 소울", "quantity": 20}
+        {"item": "유니크 소울", "quantity": 7}
       ]
     },
     {
@@ -164,8 +164,8 @@
         {"item": "어둠의 결정", "quantity": 2},
         {"item": "차원의 손", "quantity": 1},
         {"item": "천만 은화 주화", "quantity": 10},
-        {"item": "에픽 소울", "quantity": 8},
-        {"item": "레어 소울", "quantity": 200}
+        {"item": "에픽 소울", "quantity": 4},
+        {"item": "레어 소울", "quantity": 100}
       ]
     },
     {
@@ -176,8 +176,8 @@
         {"item": "어둠의 결정", "quantity": 2},
         {"item": "차원의 손", "quantity": 1},
         {"item": "천만 은화 주화", "quantity": 10},
-        {"item": "에픽 소울", "quantity": 8},
-        {"item": "레어 소울", "quantity": 200}
+        {"item": "에픽 소울", "quantity": 4},
+        {"item": "레어 소울", "quantity": 100}
       ]
     },
     {
@@ -188,8 +188,8 @@
         {"item": "어둠의 결정", "quantity": 2},
         {"item": "차원의 손", "quantity": 1},
         {"item": "천만 은화 주화", "quantity": 10},
-        {"item": "에픽 소울", "quantity": 8},
-        {"item": "레어 소울", "quantity": 200}
+        {"item": "에픽 소울", "quantity": 4},
+        {"item": "레어 소울", "quantity": 100}
       ]
     },
     {
@@ -197,9 +197,9 @@
       "effect": "공격력 +2800\\n치명타 확률 +15%\\n치명타 피해 +110%\\n공격 시 10% 확률로 공격력*15~20의 추가피해를 입힙니다.",
       "combination": [
         {"item": "공허의 검", "quantity": 1},
-        {"item": "인공 영혼", "quantity": 300},
-        {"item": "꿈의 돌", "quantity": 3},
-        {"item": "꿈의 정수", "quantity": 2},
+        {"item": "인공 영혼", "quantity": 150},
+        {"item": "꿈의 돌", "quantity": 1},
+        {"item": "꿈의 정수", "quantity": 1},
         {"item": "류트의 영혼", "quantity": 1}
       ]
     },
@@ -208,9 +208,9 @@
       "effect": "공격력 +2800\\n추가피해 +35%\\n장착 시 4초 마다 자신의 체력 4500만큼 회복하며,\\n4초간 공격속도가 70%만큼 증폭됩니다.",
       "combination": [
         {"item": "이클립스", "quantity": 1},
-        {"item": "인공 영혼", "quantity": 300},
-        {"item": "꿈의 돌", "quantity": 3},
-        {"item": "꿈의 정수", "quantity": 2},
+        {"item": "인공 영혼", "quantity": 150},
+        {"item": "꿈의 돌", "quantity": 1},
+        {"item": "꿈의 정수", "quantity": 1},
         {"item": "류트의 영혼", "quantity": 1}
       ]
     },
@@ -219,9 +219,9 @@
       "effect": "공격력 +2800\\n치명타 확률 +8%\\n공격력 +27%\\n추가피해 +30%\\n피해량의 6%가 고정피해로 변환됩니다.",
       "combination": [
         {"item": "블루 크림슨", "quantity": 1},
-        {"item": "인공 영혼", "quantity": 300},
-        {"item": "꿈의 돌", "quantity": 3},
-        {"item": "꿈의 정수", "quantity": 2},
+        {"item": "인공 영혼", "quantity": 150},
+        {"item": "꿈의 돌", "quantity": 1},
+        {"item": "꿈의 정수", "quantity": 1},
         {"item": "류트의 영혼", "quantity": 1}
       ]
     },
@@ -443,8 +443,7 @@
         {"item": "금단의 지혜", "quantity": 1},
         {"item": "시간의 조각", "quantity": 1},
         {"item": "힘의 옷감", "quantity": 1},
-        {"item": "백만 은화 주화", "quantity": 12},
-        {"item": "유니크 소울", "quantity": 10}
+        {"item": "백만 은화 주화", "quantity": 12}
       ]
     },
     {
@@ -454,8 +453,7 @@
         {"item": "승리의 영광", "quantity": 1},
         {"item": "시간의 조각", "quantity": 1},
         {"item": "생명의 옷감", "quantity": 1},
-        {"item": "백만 은화 주화", "quantity": 12},
-        {"item": "유니크 소울", "quantity": 10}
+        {"item": "백만 은화 주화", "quantity": 12}
       ]
     },
     {
@@ -466,8 +464,8 @@
         {"item": "차원의 조각", "quantity": 2},
         {"item": "차원의 눈", "quantity": 1},
         {"item": "천만 은화 주화", "quantity": 7},
-        {"item": "에픽 소울", "quantity": 4},
-        {"item": "레어 소울", "quantity": 200}
+        {"item": "에픽 소울", "quantity": 2},
+        {"item": "레어 소울", "quantity": 100}
       ]
     },
     {
@@ -478,8 +476,8 @@
         {"item": "차원의 조각", "quantity": 2},
         {"item": "차원의 눈", "quantity": 1},
         {"item": "천만 은화 주화", "quantity": 7},
-        {"item": "에픽 소울", "quantity": 4},
-        {"item": "레어 소울", "quantity": 200}
+        {"item": "에픽 소울", "quantity": 2},
+        {"item": "레어 소울", "quantity": 100}
       ]
     },
     {
@@ -487,9 +485,9 @@
       "effect": "체력 +32000\\n방어력 +98,\\n공격력 +33%\\n공격속도 +70%",
       "combination": [
         {"item": "변질된 네트아크", "quantity": 1},
-        {"item": "인공 영혼", "quantity": 300},
+        {"item": "인공 영혼", "quantity": 100},
         {"item": "류트의 영혼", "quantity": 1},
-        {"item": "태고의 물", "quantity": 5}
+        {"item": "태고의 물", "quantity": 2}
       ]
     },
     {
@@ -497,9 +495,9 @@
       "effect": "체력 +50000\\n방어력 +150\\n사용 시 전체 체력 72% 회복 [쿨타임 25초]",
       "combination": [
         {"item": "자애의 케세드", "quantity": 1},
-        {"item": "인공 영혼", "quantity": 300},
+        {"item": "인공 영혼", "quantity": 100},
         {"item": "류트의 영혼", "quantity": 1},
-        {"item": "태고의 물", "quantity": 5}
+        {"item": "태고의 물", "quantity": 2}
       ]
     },
     {
@@ -637,8 +635,7 @@
         {"item": "하트 시커", "quantity": 1},
         {"item": "시간의 조각", "quantity": 1},
         {"item": "힘의 옷감", "quantity": 1},
-        {"item": "백만 은화 주화", "quantity": 20},
-        {"item": "유니크 소울", "quantity": 10}
+        {"item": "백만 은화 주화", "quantity": 20}
       ]
     },
     {
@@ -648,8 +645,7 @@
         {"item": "흑염의 보옥", "quantity": 1},
         {"item": "시간의 조각", "quantity": 1},
         {"item": "생명의 옷감", "quantity": 1},
-        {"item": "백만 은화 주화", "quantity": 20},
-        {"item": "유니크 소울", "quantity": 10}
+        {"item": "백만 은화 주화", "quantity": 20}
       ]
     },
     {
@@ -660,8 +656,8 @@
         {"item": "차원의 눈", "quantity": 1},
         {"item": "차원의 손", "quantity": 1},
         {"item": "천만 은화 주화", "quantity": 7},
-        {"item": "에픽 소울", "quantity": 6},
-        {"item": "레어 소울", "quantity": 200}
+        {"item": "에픽 소울", "quantity": 3},
+        {"item": "레어 소울", "quantity": 100}
       ]
     },
     {
@@ -672,8 +668,8 @@
         {"item": "차원의 눈", "quantity": 1},
         {"item": "차원의 손", "quantity": 1},
         {"item": "천만 은화 주화", "quantity": 7},
-        {"item": "에픽 소울", "quantity": 6},
-        {"item": "레어 소울", "quantity": 200}
+        {"item": "에픽 소울", "quantity": 3},
+        {"item": "레어 소울", "quantity": 100}
       ]
     },
     {
@@ -682,7 +678,7 @@
       "combination": [
         {"item": "이퀄리브리엄", "quantity": 1},
         {"item": "꿈의 가루", "quantity": 1},
-        {"item": "에픽 소울", "quantity": 22}
+        {"item": "에픽 소울", "quantity": 10}
       ]
     },
     {
@@ -691,7 +687,7 @@
       "combination": [
         {"item": "폭풍의 결집", "quantity": 1},
         {"item": "정체불명의 주사위", "quantity": 1},
-        {"item": "에픽 소울", "quantity": 22}
+        {"item": "에픽 소울", "quantity": 10}
       ]
     },
     {
@@ -711,7 +707,7 @@
         {"item": "폭풍의 결집", "quantity": 1},
         {"item": "빛나는 오색빛 광석", "quantity": 1},
         {"item": "악몽의 씨앗", "quantity": 1},
-        {"item": "천만 은화 주화", "quantity": 70}
+        {"item": "천만 은화 주화", "quantity": 35}
       ]
     },
     {
@@ -949,10 +945,10 @@
       "effect": "사용 시 10초간 공격력이 42% 증가합니다.\\n[쿨타임 35초]",
       "combination": [
         {"item": "파괴의 보석", "quantity": 1},
-        {"item": "에픽 소울", "quantity": 20},
+        {"item": "에픽 소울", "quantity": 10},
         {"item": "천만 은화 주화", "quantity": 20},
-        {"item": "어둠의 결정", "quantity": 40},
-        {"item": "차원의 조각", "quantity": 40}
+        {"item": "어둠의 결정", "quantity": 20},
+        {"item": "차원의 조각", "quantity": 20}
       ]
     },
     {
@@ -960,10 +956,10 @@
       "effect": "사용 시 10초간 치명타 확률이 18% 증가합니다.\\n[쿨타임 35초]",
       "combination": [
         {"item": "치명의 보석", "quantity": 1},
-        {"item": "에픽 소울", "quantity": 20},
+        {"item": "에픽 소울", "quantity": 10},
         {"item": "천만 은화 주화", "quantity": 20},
-        {"item": "어둠의 결정", "quantity": 40},
-        {"item": "차원의 조각", "quantity": 40}
+        {"item": "어둠의 결정", "quantity": 20},
+        {"item": "차원의 조각", "quantity": 20}
       ]
     },
     {
@@ -971,10 +967,10 @@
       "effect": "사용 시 10초간 공격속도가 50% 증가합니다.\\n[쿨타임 35초]",
       "combination": [
         {"item": "속도의 보석", "quantity": 1},
-        {"item": "에픽 소울", "quantity": 20},
+        {"item": "에픽 소울", "quantity": 10},
         {"item": "천만 은화 주화", "quantity": 20},
-        {"item": "어둠의 결정", "quantity": 40},
-        {"item": "차원의 조각", "quantity": 40}
+        {"item": "어둠의 결정", "quantity": 20},
+        {"item": "차원의 조각", "quantity": 20}
       ]
     }
   ],
