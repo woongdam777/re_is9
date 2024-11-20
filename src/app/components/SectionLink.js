@@ -6,7 +6,7 @@ export default function SectionLink() {
   return (
     <section id="section-link" className="section-link">
       <div className="input-container">
-        <h1>링크 모음</h1>
+        <h1>이즈나인 링크 모음</h1>
         <ul className="icon-frame">
           <IconLink href="https://open.kakao.com/o/gLJTviYf" iconClass="icon-talk" text="오픈톡방" />
           <IconLink href="https://cafe.naver.com/dfgad" iconClass="icon-cafe" text="공식카페" />

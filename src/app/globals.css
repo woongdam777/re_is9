@@ -147,7 +147,6 @@
 }
 
 
-
 * {
   margin: 0;
   padding: 0;
@@ -167,12 +166,25 @@ body {
   font-size: 1.4rem;
 }
 
-main {
-  max-width: 800px;
+.content-wrapper {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1000px;
   margin: 0 auto;
-  height: 100vh;
 }
 
+main {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.loginBox {
+  flex-shrink: 0;
+  width: 200px;
+}
 ul {
   list-style-type: none;
 }
@@ -180,6 +192,31 @@ ul {
 canvas {
   display: block;
 }
+
+
+/* 스크롤바 전체 */
+::-webkit-scrollbar {
+  width: 5px; /* 스크롤바의 너비 */
+  height: 5px;
+}
+
+/* 스크롤바 배경 */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 스크롤바 트랙 색상 */
+}
+
+/* 스크롤바 핸들 */
+::-webkit-scrollbar-thumb {
+  background: var(--c-color); /* 핸들 색상 */
+  border-radius: 10px; /* 핸들의 둥근 모서리 */
+}
+
+/* 핸들에 마우스를 올렸을 때의 색상 */
+::-webkit-scrollbar-thumb:hover {
+  background: darken(var(--c-color), 10%); /* 핸들 색상의 어두운 버전 */
+}
+
+
 
 /* Input Styles */
 input {
@@ -452,7 +489,7 @@ pre {
 }
 
 .formula > pre {
-  min-width: 40%;
+  min-width: 45%;
   margin-right: 1rem;
 }
 
@@ -475,6 +512,17 @@ footer i {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+
+  .content-wrapper {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  main {
+    width: 100%;
+    min-height: auto;
+  }
+
   .component-input { 
     flex-direction: column;
     align-items: flex-start; 

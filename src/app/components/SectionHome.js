@@ -16,9 +16,9 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 계산기 - 지옥파티 포인트[구입가능개수]<br />
-            2. 사이트 색 추가[노랑,회색,국방색?]<br />
-            3. 검색 - 전용템 강화수치 추가<br />
+            1. 직업별 분포 - 버전 추가<br />
+            2. 로그인 구역 추가 - 구현중<br />
+            3. 버튼최소화<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
