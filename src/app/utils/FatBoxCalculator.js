@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import styles from "../style/FatBoxCalc.module.css";
 
 const fatBox = [
@@ -40,20 +40,19 @@ const FatBoxCalc = () => {
   const [currentPoints, setCurrentPoints] = useState(0);
   const [clearedStage, setClearedStage] = useState(1);
   const [clearBonus, setClearBonus] = useState(0);
-  const [result, setResult] = useState(null);
-  const [totalPoints, setTotalPoints] = useState(0);
 
-  useEffect(() => {
+  const totalPoints = useMemo(() => {
     const stagePoints = hellGrade[clearedStage - 1] || 0;
-    const calculatedTotalPoints = currentPoints + stagePoints * clearBonus;
-    setTotalPoints(calculatedTotalPoints);
-    const calculationResult = calculatePetBoxes(totalPoints);
-    setResult(calculationResult);
+    return currentPoints + stagePoints * clearBonus;
   }, [currentPoints, clearedStage, clearBonus]);
+
+  const result = useMemo(() => {
+    return calculatePetBoxes(totalPoints);
+  }, [totalPoints]);
 
   return (
     <div className="input-container">
-     <div className="component-input">
+      <div className="component-input">
         <label htmlFor="currentPoints">현재 보유 포인트:</label>
         <input
           type="number"

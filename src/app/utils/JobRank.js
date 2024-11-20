@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from '../style/Home.module.css';
 import JobChart from '../components/JobChart';
 
-const versions = ['A18.8'];
+const versions = ['A19.2', 'A18.8', 'A17.91', 'A17.5'];
 
 export default function VersionAndJobRank() {
   const [selectedVersion, setSelectedVersion] = useState(versions[0]);
@@ -11,7 +11,7 @@ export default function VersionAndJobRank() {
 
   const handleVersionChange = async (version) => {
     setSelectedVersion(version);
-    await fetchData(version); // Fetch data for the selected version
+    await fetchData(version); 
   };
 
   const fetchData = async (version) => {
@@ -37,15 +37,14 @@ export default function VersionAndJobRank() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.jobComponent}>
       <div className={styles.jobRankTitle}>
-        <h2>버전 선택</h2>
-        <div className="button-group">
+        <div className={styles.buttonGroup}>
           {versions.map((version) => (
             <button
               key={version}
               onClick={() => handleVersionChange(version)}
-              className={selectedVersion === version ? 'active' : ''}
+              className={selectedVersion === version ? styles.active : ''}
             >
               {version}
             </button>
@@ -59,14 +58,6 @@ export default function VersionAndJobRank() {
           <h6>수련장초기화 후 | {versionData.date} 기준</h6>
           <h6>총인원 : {versionData.total} 명</h6>
           <JobChart ranks={versionData.ranks} />
-          {/* <ul>
-            {Object.entries(versionData.ranks).map(([job, { score, count }]) => (
-              <li key={job}>
-                {job}: 점수 {score}, 인원 {count}
-              </li>
-            ))}
-          </ul> */}
-
         </div>
       )}
       

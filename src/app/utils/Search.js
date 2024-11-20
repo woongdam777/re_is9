@@ -23,7 +23,6 @@ export default function Search({ onSearch }) {
       
       if (response.ok) {
         onSearch(data, null);
-        // 성공적인 검색 후 검색어를 기록에 추가합니다.
         const newHistory = [searchKeyword, ...searchHistory.filter(item => item !== searchKeyword)].slice(0, 4);
         setSearchHistory(newHistory);
         saveSearchHistory(newHistory);
@@ -49,7 +48,7 @@ export default function Search({ onSearch }) {
 
   return (
     <div className="component-input">
-      <label htmlFor="inputSearch">워크 아이디:</label>
+      <label htmlFor="inputSearch">워크아이디:</label>
       {searchHistory.length > 0 && (
         <div>
           <ul className={styles.searchHistory}>
