@@ -1,6 +1,6 @@
 'use client';
 
-import IconLink from './IconLink';
+import IconLink from '../IconLink';
 
 export default function SectionLink() {
   return (

@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import itemsData from '../data/items.json';  // JSON 데이터 가져오기
-import styles from '../style/SectionInfo.module.css'; // CSS 모듈 가져오기
+import itemsData from '../../data/items.json';  // JSON 데이터 가져오기
+import styles from '../../style/SectionInfo.module.css'; // CSS 모듈 가져오기
 
 export default function SectionInfo() {
   const categories = ['무기', '갑옷', '악세', '신발', '유물', '각인', '보석', '아바타', "전용템", '기타'];

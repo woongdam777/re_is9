@@ -1,10 +1,10 @@
 'use client';
 
 import { useRef, useState, useMemo } from 'react';
-import Search from '../utils/Search';
-import ChartComponent from '../components/SearchChart';
-import { captureAndCopy, captureAndDownload } from '../utils/ImageCapture';
-import styles from '../style/SearchResult.module.css';
+import Search from '../../utils/Search';
+import ChartComponent from '../SearchChart';
+import { captureAndCopy, captureAndDownload } from '../../utils/ImageCapture';
+import styles from '../../style/SearchResult.module.css';
 
 const calculateTotalForce = (fnString) => {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50];
@@ -127,8 +127,8 @@ export default function SectionSearch() {
                       </tr>
                     </>
                   )}
-                  <tr>
-                  {/* <tr style={{ display: 'none' }}> */}
+                  {/* <tr> */}
+                  <tr style={{ display: 'none' }}>
                     <td colSpan="2" className={styles.reFNtd}>
                       <span>티켓 보유량 변동</span>
                       <div className={styles.chartContainer}>

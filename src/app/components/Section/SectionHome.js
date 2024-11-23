@@ -1,8 +1,8 @@
 'use client';
 
-import styles from '../style/Home.module.css';
-import JobRank from '../utils/JobRank';
-import { PreBlock11 } from './PreBlocks';
+import styles from '../../style/Home.module.css';
+import JobRank from '../../utils/JobRank';
+import { PreBlock11 } from '../PreBlocks';
 
 
 export default function SectionHome() {
@@ -16,17 +16,18 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 직업별 분포 - 버전 추가<br />
-            2. 로그인 구역 추가 - 구현중<br />
-            3. 버튼최소화<br />
+            1. 로그인 구역 추가 - 구현중<br />
+            2. 데이터 미접인원제거<br />
+            3. 티켓변화량 임시중지<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
           <h2>추가예정</h2>
           <pre>
-            1. 과거 전체&캐릭별 패치노트<br />
-            2. 로그인 및 간단한 게시판 추가 - 미정<br />
-            3. 버전별 캐릭별 평점 및 코멘트
+            1. 비회원인경우 - 기존기능유지, 검색 티켓변화량 2시간분량감소<br />
+            2. 로그인시 본인 데이터만 - 10시간? 포스 및 티켓변화량<br />
+            3. 간단한 게시판 추가<br />
+            4. 버전별 캐릭별 평점 및 코멘트
           </pre>
         </div>
       </div>
@@ -36,21 +37,10 @@ export default function SectionHome() {
             <h1>패치노트 19.2 [임시]</h1>
             <PreBlock11 />
           </div>
-          <div className={styles.homeDiv}>
-            <h1>여기에 뭐 넣을까요?</h1>
-            <pre>
-              1. <br />
-              2. <br />
-              3. 
-            </pre>
-          </div>
         </div>
         <div className={styles.homeRight}>
           <JobRank />
         </div>
-      </div>
-      <div className={styles.homeContainer}>
-        
       </div>
     </section>
   );
