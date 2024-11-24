@@ -58,10 +58,11 @@ export default function SectionSearch() {
       <div className="input-container">
         <div className={styles.detail}>
           <div className={styles.awakenDetail}>
-            <p>포스스톤 랭킹 300위까지만 검색가능</p>
+            <p>포스스톤 랭킹 순서, 7일 미접시 검색불가</p>
             <p>저장시간과 업데이트시간은 다릅니다</p>
             <p>실시간 아닙니다 / 최신맵을 이용해주세요</p>
             <p>1시간 단위 업데이트[매시정각 5분내외 최신화]</p>
+            <p>더 자세한 변화량을 알고싶다면 가입해주세요</p>
           </div>
           <div className={styles.warnigDetail}>
             <p>검색하는 것은 자유입니다!</p>
@@ -127,8 +128,8 @@ export default function SectionSearch() {
                       </tr>
                     </>
                   )}
-                  {/* <tr> */}
-                  <tr style={{ display: 'none' }}>
+                  <tr>
+                  {/* <tr style={{ display: 'none' }}> */}
                     <td colSpan="2" className={styles.reFNtd}>
                       <span>티켓 보유량 변동</span>
                       <div className={styles.chartContainer}>

@@ -220,6 +220,7 @@ canvas {
 
 /* Input Styles */
 input {
+  width: 16rem;
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;

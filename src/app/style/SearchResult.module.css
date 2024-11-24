@@ -7,20 +7,27 @@
 
 .awakenDetail{
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: var(--footer-color);
+  border-radius: 10px;
+  padding: 10px;
+  border: solid 2px var(--bb-color);
 }
 
 .warnigDetail{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
   font-weight: bold;
   font-size: 1.4rem;
   color: red;
   background-color: white;
+  border: solid 2px var(--bb-color);
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
+
+  height: 100%;;
 }
 
 #searchBtn{
@@ -36,7 +43,7 @@
 }
 
 .searchHistory{
-  width: 320px;
+  width: 300px;
   height: 30px;
   display: flex;
   overflow-x: auto;

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { auth } from '../utils/firebase';
+import { auth, database, ref, update  } from '../utils/firebase';
 import { 
   signInWithPopup, 
   GoogleAuthProvider, 
@@ -74,24 +74,37 @@ export function AuthProvider({ children }) {
       let userData = await getUserData(userCredential.user.uid);
       
       if (!userData) {
-        await saveUserData(userCredential.user.uid, {
-          email: userCredential.user.email,
-          nickname: '',
-          war3Id: ''
-        });
-        userData = await getUserData(userCredential.user.uid);
+        setError('회원가입 기록이 없습니다. 먼저 회원가입을 해주세요.');
+        return;
       }
       
-      localStorage.setItem('loginTime', new Date().getTime().toString());
+      const now = new Date();
+      const formattedDate = now.toLocaleString();
+      
+      // 마지막 로그인 시간 업데이트
+      const userRef = ref(database, `users/${userCredential.user.uid}`);
+      await update(userRef, {
+        lastLogin: formattedDate
+      });
+      
+      userData.lastLogin = formattedDate;
+      
+      localStorage.setItem('loginTime', now.getTime().toString());
       setUser({ ...userCredential.user, ...userData });
       setError('');
-
+  
       if (!userCredential.user.emailVerified) {
         setError('이메일 인증이 필요합니다. 인증 이메일을 확인해주세요.');
         await sendVerificationEmail();
       }
     } catch (error) {
-      setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+      if (error.code === 'auth/user-not-found') {
+        setError('등록되지 않은 이메일입니다. 회원가입을 해주세요.');
+      } else if (error.code === 'auth/wrong-password') {
+        setError('비밀번호가 올바르지 않습니다. 다시 확인해주세요.');
+      } else {
+        setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+      }
     }
   };
 
@@ -106,7 +119,7 @@ export function AuthProvider({ children }) {
         await saveUserData(userCredential.user.uid, {
           email: userCredential.user.email,
           nickname: userCredential.user.displayName || '',
-          war3Id: '',
+          war3Id: 'war3 ID 없음',
           emailVerified: userCredential.user.emailVerified
         });
       }
@@ -121,11 +134,11 @@ export function AuthProvider({ children }) {
         setError('');
       }
       
-      return true;
+      return true; // 기존 사용자인 경우 true 반환
     } catch (error) {
       console.error('Google 로그인 중 오류 발생:', error);
       setError('Google 로그인에 실패했습니다.');
-      return 'false';
+      throw error; // 오류를 던져서 호출한 곳에서 처리할 수 있게 함
     }
   };
 
@@ -202,8 +215,10 @@ export function AuthProvider({ children }) {
       localStorage.removeItem('loginTime');
       setUser(null);
       setError('');
+      return true;
     } catch (error) {
       setError('로그아웃 중 오류가 발생했습니다.');
+      return false;
     }
   };
 

@@ -3,11 +3,11 @@
   import SignupBox from './SignupBox';
   import styles from '../../style/LoginSignBox.module.css';
 
-  export default function LoginBox() {
+  export default function LoginBox({ setActiveSection }) {
     const [showSignup, setShowSignup] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { user, error, login, googleLogin, logout, sendVerificationEmail, checkEmailVerification } = useAuth();
+    const { user, error, login, googleLogin, logout, sendVerificationEmail} = useAuth();
     const [isNewUser, setIsNewUser] = useState(false);
 
     useEffect(() => {
@@ -26,29 +26,34 @@
       }
     }, [user, logout]);
 
-    useEffect(() => {
-      if (user && !user.emailVerified) {
-        const verificationTimer = setInterval(async () => {
-          await checkEmailVerification();
-        }, 10000); // 10초마다 이메일 인증 상태 확인
-
-        return () => clearInterval(verificationTimer);
-      }
-    }, [user, checkEmailVerification]);
-
     const handleLogin = async (e) => {
       e.preventDefault();
       await login(email, password);
-      setEmail('');
-      setPassword('');
+      if (!error) { 
+        setEmail('');
+        setPassword('');
+        setActiveSection('mypage');
+      }
     };
-    
-
+  
     const handleGoogleLogin = async () => {
       const result = await googleLogin();
-      if (!result) {
+      if (result) {
+        setActiveSection('mypage');
+      } else {
         setIsNewUser(true);
       }
+    };
+
+    const handleLogout = async () => {
+      const success = await logout();
+      if (success) {
+        setActiveSection('section-home');
+      }
+    };
+
+    const changeWar3ID = async() =>{
+      
     };
 
     const handleResendVerification = async () => {
@@ -56,6 +61,10 @@
       if (result) {
         alert('인증 이메일이 재발송되었습니다. 이메일을 확인해주세요.');
       }
+    };
+
+    const handleMyPageClick = () => {
+      setActiveSection('mypage');
     };
 
     return (
@@ -67,8 +76,9 @@
                 <div>
                   {isNewUser ? (
                     <div className={styles.successMessage}>
-                      <h3>회원가입 해주세요.</h3>
-                      <p>Google로 로그인했지만 가입내역 없는 사용자입니다.</p>
+                      <h3>신규가입을 환영합니다.</h3>
+                      <p>Google로 자동가입 완료되었습니다.</p>
+                      <p>닉네임 및 war3 Id를 수정해주세요.</p>
                       <button 
                         className={styles.toggleButton}
                         onClick={() => setShowSignup(true)}
@@ -149,10 +159,12 @@
           <div className={styles.userInfo}>
             <h3>{user.nickname ? `${user.nickname}님 환영합니다!` : '환영합니다!'}</h3>
             <p>{user.email}</p>
-            {!user.emailVerified && (
-              <p className={styles.error}>이메일 인증이 필요합니다. 이메일을 확인해주세요.</p>
+            <p>{user.war3Id = 'war3 ID 없음' && ('war3 ID를 수정해주세요')}</p>
+            {user.war3Id = 'war3 ID 없음'  && (
+              <button onClick={changeWar3ID}>회원정보수정</button>  
             )}
-            <button onClick={logout}>로그아웃</button>
+            <button onClick={handleMyPageClick}>마이페이지</button>
+            <button onClick={handleLogout}>로그아웃</button>
           </div>
         )}
       </aside>

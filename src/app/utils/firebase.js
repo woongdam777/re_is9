@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase } from 'firebase/database';
+import { getDatabase, ref, update } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBAyU9E4iI-qEiM95_NDlWprof6E_EZbuA",
@@ -13,9 +13,8 @@ const firebaseConfig = {
   databaseURL: "https://isnine-1dd6c-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
-export { auth, database };
+export { auth, database, ref, update };

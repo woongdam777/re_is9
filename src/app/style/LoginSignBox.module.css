@@ -72,9 +72,9 @@
 
 @media (max-width:1024px) {
    .loginBox{
-       width:auto; 
-       min-height:auto; 
-       margin-right:auto; 
-       margin-bottom:auto; 
+      width:auto; 
+      min-height:auto; 
+      margin-right:auto; 
+      margin-bottom:auto; 
    }
 }

@@ -37,7 +37,8 @@ export default function ChartComponent({ fnChart }) {
       chartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['업뎃시간', '2시간 전', '4시간 전', '6시간 전', '8시간 전'],
+          // labels: ['업뎃시간', '2시간 전', '4시간 전', '6시간 전', '8시간 전'],
+          labels: ['업뎃시간', '2시간 전', '4시간 전'],
           datasets: [{
             label: '시간별 데이터',
             data: chartData,

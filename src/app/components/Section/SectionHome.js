@@ -17,8 +17,7 @@ export default function SectionHome() {
           <h2>업데이트내역</h2>
           <pre>
             1. 로그인 구역 추가 - 구현중<br />
-            2. 데이터 미접인원제거<br />
-            3. 티켓변화량 임시중지<br />
+            2. 티켓변화량 임시오픈<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
