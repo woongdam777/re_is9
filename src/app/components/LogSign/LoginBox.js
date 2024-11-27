@@ -7,7 +7,7 @@ export default function LoginBox({ setActiveSection }) {
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { user, error, login, googleLogin, logout, sendVerificationEmail } = useAuth();
+  const { user, error, login, googleLogin, logout, sendVerificationEmail,handleRedirectResult } = useAuth();
   const [isNewUser, setIsNewUser] = useState(false);
 
   // 로그인 세션 타임아웃 체크
@@ -25,6 +25,19 @@ export default function LoginBox({ setActiveSection }) {
       return () => clearInterval(timer);
     }
   }, [user, logout]);
+
+  useEffect(() => {
+    const fetchRedirectResult = async () => {
+      if (!user) { // Only check for redirect result if there's no user
+        const result = await handleRedirectResult();
+        if (result) {
+          setActiveSection('mypage'); // Navigate to my page if login is successful
+        }
+      }
+    };
+
+    fetchRedirectResult();
+  }, [user, setActiveSection, handleRedirectResult]);
 
   // 리다이렉트 결과 처리
 
