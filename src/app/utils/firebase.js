@@ -4,7 +4,7 @@ import { getDatabase, ref, update } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBAyU9E4iI-qEiM95_NDlWprof6E_EZbuA",
-  authDomain: "is9.netlify.app",
+  authDomain: "isnine-1dd6c.firebaseapp.com",
   projectId: "isnine-1dd6c",
   storageBucket: "isnine-1dd6c.firebasestorage.app",
   messagingSenderId: "977785714936",
