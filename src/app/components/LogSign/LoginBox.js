@@ -10,6 +10,7 @@ export default function LoginBox({ setActiveSection }) {
   const { user, error, login, googleLogin, logout, sendVerificationEmail } = useAuth();
   const [isNewUser, setIsNewUser] = useState(false);
 
+  // 로그인 세션 타임아웃 체크
   useEffect(() => {
     if (user) {
       const checkLoginTime = () => {
@@ -21,16 +22,11 @@ export default function LoginBox({ setActiveSection }) {
       };
 
       const timer = setInterval(checkLoginTime, 60000); // 1분마다 체크
-
       return () => clearInterval(timer);
     }
   }, [user, logout]);
 
-  useEffect(() => {
-    if (user) {
-      setActiveSection('mypage');
-    }
-  }, [user, setActiveSection]);
+  // 리다이렉트 결과 처리
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,11 +34,20 @@ export default function LoginBox({ setActiveSection }) {
     if (!error) {
       setEmail('');
       setPassword('');
+      setActiveSection('mypage');
     }
   };
 
+
   const handleGoogleLogin = async () => {
-    await googleLogin();
+    try {
+      const result = await googleLogin();
+      if (result) {
+        setActiveSection('mypage');
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+    }
   };
 
   const handleLogout = async () => {

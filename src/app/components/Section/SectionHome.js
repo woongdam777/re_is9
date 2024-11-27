@@ -32,7 +32,7 @@ export default function SectionHome() {
       <div className={styles.homeContainer}>
         <div className={styles.homeLeft}>
           <div className={styles.homeDiv}>
-            <h1>패치노트 19.2 [임시]</h1>
+            <h1>A20 패치노트 [임시]</h1>
             <PreBlock11 />
           </div>
         </div>

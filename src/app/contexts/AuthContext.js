@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth, database, ref, update } from '../utils/firebase';
-import { signInWithRedirect, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, sendEmailVerification, isSignInWithEmailLink, signInWithEmailLink, updateProfile } from 'firebase/auth';
+import { signInWithRedirect, getRedirectResult, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, sendEmailVerification, isSignInWithEmailLink, signInWithEmailLink, updateProfile } from 'firebase/auth';
 import { saveUserData, getUserData } from '../data/users';
 
 const AuthContext = createContext({
@@ -24,37 +24,23 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         try {
-          let userData = await getUserData(currentUser.uid);
-          if (!userData) {
-            // 새로운 Google 로그인 사용자인 경우
-            await saveUserData(currentUser.uid, {
-              email: currentUser.email,
-              nickname: currentUser.displayName || '',
-              war3Id: 'none',
-              emailVerified: currentUser.emailVerified
-            });
-            userData = await getUserData(currentUser.uid);
-          }
-
-          if (!currentUser.emailVerified) {
-            const isVerificationComplete = await completeEmailVerification();
-            if (!isVerificationComplete) {
-              await signOut(auth);
-              setError('이메일 인증이 필요합니다. 이메일을 확인해주세요.');
-              setUser(null);
+          const userData = await getUserData(currentUser.uid);
+          if (userData) {
+            if (!currentUser.emailVerified) {
+              const isVerificationComplete = await completeEmailVerification();
+              if (!isVerificationComplete) {
+                await signOut(auth);
+                setError('이메일 인증이 필요합니다. 이메일을 확인해주세요.');
+                setUser(null);
+              }
+            } else {
+              setUser({ ...currentUser, ...userData });
             }
           } else {
-            setUser({ ...currentUser, ...userData });
+            await signOut(auth);
+            setError('가입된 정보가 없습니다. 회원가입을 해주세요.');
+            setUser(null);
           }
-
-          // 로그인 시간 업데이트
-          const now = new Date();
-          const formattedDate = now.toLocaleString();
-          const userRef = ref(database, `users/${currentUser.uid}`);
-          await update(userRef, { lastLogin: formattedDate });
-          localStorage.setItem('loginTime', now.getTime().toString());
-
-          setError('');
         } catch (error) {
           console.error("사용자 데이터 로드 중 오류 발생:", error);
           setError('사용자 정보를 불러오는 중 오류가 발생했습니다.');
@@ -72,6 +58,19 @@ export function AuthProvider({ children }) {
     try {
       await setPersistence(auth, browserSessionPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      let userData = await getUserData(userCredential.user.uid);
+      if (!userData) {
+        setError('회원가입 기록이 없습니다. 먼저 회원가입을 해주세요.');
+        return;
+      }
+      const now = new Date();
+      const formattedDate = now.toLocaleString();
+      const userRef = ref(database, `users/${userCredential.user.uid}`);
+      await update(userRef, { lastLogin: formattedDate });
+      userData.lastLogin = formattedDate;
+      localStorage.setItem('loginTime', now.getTime().toString());
+      setUser({ ...userCredential.user, ...userData });
+      setError('');
       if (!userCredential.user.emailVerified) {
         setError('이메일 인증이 필요합니다. 인증 이메일을 확인해주세요.');
         await sendVerificationEmail();
@@ -95,6 +94,32 @@ export function AuthProvider({ children }) {
     } catch (error) {
       console.error('Google 로그인 중 오류 발생:', error);
       setError('Google 로그인에 실패했습니다.');
+      return false;
+    }
+  };
+
+  const handleRedirectResult = async () => {
+    try {
+      const result = await getRedirectResult(auth);
+      console.log(result);
+      if (result) {
+        const userData = await getUserData(result.user.uid);
+        if (!userData) {
+          await saveUserData(result.user.uid, {
+            email: result.user.email,
+            nickname: result.user.displayName || '',
+            war3Id: 'none',
+            emailVerified: result.user.emailVerified
+          });
+        }
+        setUser({ ...result.user, ...userData });
+        setError('');
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('리다이렉트 결과 처리 중 오류 발생:', error);
+      setError('로그인 처리 중 오류가 발생했습니다.');
       return false;
     }
   };
@@ -200,6 +225,7 @@ export function AuthProvider({ children }) {
       loading,
       login,
       googleLogin,
+      handleRedirectResult,
       logout,
       setError,
       sendVerificationEmail,

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, update } from 'firebase/database';
 
 const firebaseConfig = {
@@ -18,4 +18,4 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
 
-export { auth, database, ref, update, googleProvider, signInWithRedirect, onAuthStateChanged };
+export { auth, database, ref, update, googleProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged };
