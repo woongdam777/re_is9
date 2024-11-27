@@ -16,7 +16,8 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 로그인 - 구현중<br />
+            1. pc 로그인 구현완료 - 지속적 수정예정<br />
+            2. 모바일 로그인 불가 수정중
           </pre>          
         </div>  
         <div className={styles.homeDiv}>

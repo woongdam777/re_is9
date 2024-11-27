@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth, database, ref, update } from '../utils/firebase';
-import { signInWithRedirect, getRedirectResult, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, sendEmailVerification, isSignInWithEmailLink, signInWithEmailLink, updateProfile } from 'firebase/auth';
+import { signInWithPopup, signInWithRedirect, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, sendEmailVerification, isSignInWithEmailLink, signInWithEmailLink, updateProfile } from 'firebase/auth';
 import { saveUserData, getUserData } from '../data/users';
 
 const AuthContext = createContext({
@@ -89,41 +89,25 @@ export function AuthProvider({ children }) {
   const googleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      // 커스텀 도메인으로 리디렉션 설정
-      provider.setCustomParameters({
-        redirect_uri: 'https://is9.netlify.app/__/auth/handler'
-      });
-      await signInWithRedirect(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const userData = await getUserData(result.user.uid);
+      if (!userData) {
+        await saveUserData(result.user.uid, {
+          email: result.user.email,
+          nickname: result.user.displayName || '',
+          war3Id: 'none',
+          emailVerified: result.user.emailVerified
+        });
+        setError('신규등록완료. 재로그인해주세요.');
+        return false;
+      }
+      const updatedUserData = await getUserData(result.user.uid);
+      setUser({ ...result.user, ...updatedUserData });
+      setError('');
       return true;
     } catch (error) {
       console.error('Google 로그인 중 오류 발생:', error);
       setError('Google 로그인에 실패했습니다.');
-      return false;
-    }
-  };
-
-  const handleRedirectResult = async () => {
-    try {
-      const result = await getRedirectResult(auth);
-      console.log(result);
-      if (result) {
-        const userData = await getUserData(result.user.uid);
-        if (!userData) {
-          await saveUserData(result.user.uid, {
-            email: result.user.email,
-            nickname: result.user.displayName || '',
-            war3Id: 'none',
-            emailVerified: result.user.emailVerified
-          });
-        }
-        setUser({ ...result.user, ...userData });
-        setError('');
-        return true;
-      }
-      return false;
-    } catch (error) {
-      console.error('리다이렉트 결과 처리 중 오류 발생:', error);
-      setError('로그인 처리 중 오류가 발생했습니다.');
       return false;
     }
   };
@@ -229,7 +213,6 @@ export function AuthProvider({ children }) {
       loading,
       login,
       googleLogin,
-      handleRedirectResult,
       logout,
       setError,
       sendVerificationEmail,

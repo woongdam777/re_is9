@@ -26,21 +26,6 @@ export default function LoginBox({ setActiveSection }) {
     }
   }, [user, logout]);
 
-  useEffect(() => {
-    const fetchRedirectResult = async () => {
-      if (!user) { // Only check for redirect result if there's no user
-        const result = await handleRedirectResult();
-        if (result) {
-          setActiveSection('mypage'); // Navigate to my page if login is successful
-        }
-      }
-    };
-
-    fetchRedirectResult();
-  }, [user, setActiveSection, handleRedirectResult]);
-
-  // 리다이렉트 결과 처리
-
   const handleLogin = async (e) => {
     e.preventDefault();
     await login(email, password);
@@ -50,7 +35,6 @@ export default function LoginBox({ setActiveSection }) {
       setActiveSection('mypage');
     }
   };
-
 
   const handleGoogleLogin = async () => {
     try {

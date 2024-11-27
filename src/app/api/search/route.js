@@ -49,7 +49,7 @@ export async function GET(request) {
       if (result) {
         return NextResponse.json({ result, flowValue, updateTime: formattedDate });
       } else {
-        return NextResponse.json({ error: "워크 아이디를 정확하게 입력해주세요" }, { status: 404 });
+        return NextResponse.json({ error: "워크 아이디(소문자)를 정확하게 입력해주세요" }, { status: 404 });
       }
     } else {
       return NextResponse.json({ error: "현재 데이터 업데이트 중입니다. 잠시 후 다시 시도해 주세요." }, { status: 503 });
