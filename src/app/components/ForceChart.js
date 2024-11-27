@@ -19,7 +19,7 @@ export default function ChartComponent({ fnChart }) {
         if (dataArray.some(isNaN)) {
           throw new Error("유효하지 않은 데이터가 포함되어 있습니다.");
         }
-        setChartData(dataArray.reverse());
+        setChartData(dataArray);
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -34,11 +34,23 @@ export default function ChartComponent({ fnChart }) {
     if (chartRef.current && chartData) {
       const ctx = chartRef.current.getContext('2d');
 
+      // chartData의 길이에 따라 동적으로 레이블 생성
+      const labels = [];
+      const dataLength = chartData.length; 
+
+      for (let i = 0; i < dataLength; i++) {
+        if(i === 0){
+          labels.push(`업뎃시간`);
+          continue;
+        } else {
+          labels.push(`${i}시간 전`); 
+        }
+      }
+
       chartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
-          // labels: ['업뎃시간', '2시간 전', '4시간 전', '6시간 전', '8시간 전'],
-          labels: ['업뎃시간', '2시간 전', '4시간 전'],
+          labels: labels,
           datasets: [{
             label: '시간별 데이터',
             data: chartData,
@@ -109,9 +121,7 @@ export default function ChartComponent({ fnChart }) {
         fontWeight: 'bold',
         fontSize: '2rem'
       }}>
-        수련장 초기화 후<br />
-        최신맵 사용한 시점부터<br />
-        8시간뒤 정상작동합니다.
+        오류발생
       </div>
     );
   }

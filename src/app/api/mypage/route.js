@@ -44,10 +44,11 @@ export async function GET(request) {
       const formattedDate = formatDate(updateTime);
 
       const result = searchKeyword(jsonData, keyword);
-      const flowValue = searchKeywordInFlow(flowRows, keyword);
+      const flowTicket = searchKeywordInTicket(flowRows, keyword);
+      const flowForce = searchKeywordInForce(flowRows, keyword);
 
       if (result) {
-        return NextResponse.json({ result, flowValue, updateTime: formattedDate });
+        return NextResponse.json({ result, flowTicket, flowForce, updateTime: formattedDate });
       } else {
         return NextResponse.json({ error: "워크 아이디를 정확하게 입력해주세요" }, { status: 404 });
       }
@@ -73,13 +74,18 @@ function searchKeyword(data, keyword) {
   return data.find(row => row.Name === keyword) || null;
 }
 
-function searchKeywordInFlow(rows, keyword) {
-  const keywordIndex = rows.findIndex(row => row[1] === keyword);
+function searchKeywordInTicket(rows, keyword) {
+  const keywordIndex = rows.findIndex(row => row[0] === keyword);
   if (keywordIndex !== -1 && keywordIndex < rows.length) {
-    return {
-      tk: rows[keywordIndex][11], // First value
-      fs: rows[keywordIndex][12]  // Second value
-    };
+    return rows[keywordIndex][14];
+  }
+  return null;
+}
+
+function searchKeywordInForce(rows, keyword) {
+  const keywordIndex = rows.findIndex(row => row[0] === keyword);
+  if (keywordIndex !== -1 && keywordIndex < rows.length) {
+    return rows[keywordIndex][15];
   }
   return null;
 }

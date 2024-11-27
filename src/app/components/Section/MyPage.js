@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "../../style/MyPage.module.css";
+import ChartComponent from '../TicketChart';
+import ForceChart from '../ForceChart';
 
 const CACHE_KEY = 'myPageData';
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_DURATION = 1 * 60 * 1000; // 5 minutes in milliseconds
 
 export default function MyPage() {
   const { user } = useAuth();
@@ -20,6 +22,7 @@ export default function MyPage() {
           const { data, timestamp } = JSON.parse(cachedData);
           if (Date.now() - timestamp < CACHE_DURATION) {
             setSearchResult(data);
+            // console.log(data);
             return;
           }
         }
@@ -27,10 +30,8 @@ export default function MyPage() {
       };
 
       fetchData();
-
       // Set up interval for periodic updates
       const intervalId = setInterval(() => fetchData(), CACHE_DURATION);
-
       // Clean up interval on component unmount
       return () => clearInterval(intervalId);
     }
@@ -95,30 +96,29 @@ export default function MyPage() {
                 <p>전용템 강화: {searchResult.result["Class Item"]}</p>
                 <p>골드: {searchResult.result["Money"].split("|")[0]}</p>
                 <p>실버: {searchResult.result["Money"].split("|")[1]}</p>
+                <p>포스스톤: {searchResult.result.Forcestone}</p>
+                <p>남은 티켓 수: {searchResult.result["Ticket Count"]} 개</p>
+                <p>수련장 점수: {searchResult.result["Train Score"]} 점</p>
               </div>
               <div className={styles.statsContainer}>
                 <div className={styles.statCard}>
-                  <h5>포스스톤</h5>
-                  <p>{searchResult.result.Forcestone}</p>
-                </div>
-                <div className={styles.statCard}>
-                  <h5>남은 티켓 수</h5>
-                  <p>{searchResult.result["Ticket Count"]} 개</p>
-                </div>
-                <div className={styles.statCard}>
-                  <h5>수련장 점수</h5>
-                  <p>{searchResult.result["Train Score"]} 점</p>
+                  <span>인벤토리 포스보유량</span>
+                  <ForceTable fnString={searchResult.result['FN']} />
                 </div>
               </div>
             </div>
-            <div className={styles.forceInfo}>
+            <div className={styles.chartInfo}>
               <div>
-                <span>인벤토리 포스보유량</span>
-                <ForceTable fnString={searchResult.result['FN']} />
+                <span>티켓변동</span>
+                <div className={styles.chartContainer}>
+                  <ChartComponent fnChart={searchResult.flowTicket} />
+                </div>
               </div>
               <div>
-                <span>포스변동</span>
-                
+                <span>인벤토리 포스변동</span>
+                <div className={styles.chartContainer}>
+                  <ForceChart fnChart={searchResult.flowForce} />
+                </div>
               </div>
             </div>
 
