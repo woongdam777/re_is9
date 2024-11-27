@@ -16,17 +16,16 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 로그인 구역 추가 - 구현중<br />
-            2. 티켓변화량 임시오픈<br />
+            1. 로그인 - 구현중<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
           <h2>추가예정</h2>
           <pre>
             1. 비회원인경우 - 기존기능유지, 검색 티켓변화량 2시간분량감소<br />
-            2. 로그인시 본인 데이터만 - 10시간? 포스 및 티켓변화량<br />
-            3. 간단한 게시판 추가<br />
-            4. 버전별 캐릭별 평점 및 코멘트
+            2. 간단한 게시판 추가<br />
+            3. 버전별 캐릭별 평점 및 코멘트<br />
+            4. 과거 패치노트
           </pre>
         </div>
       </div>

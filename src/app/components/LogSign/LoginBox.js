@@ -7,7 +7,7 @@ export default function LoginBox({ setActiveSection }) {
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { user, error, login, googleLogin, logout, sendVerificationEmail } = useAuth();
+  const { user, error, login, googleLogin, logout, sendVerificationEmail, handleRedirectResult } = useAuth();
   const [isNewUser, setIsNewUser] = useState(false);
 
   useEffect(() => {
@@ -37,13 +37,20 @@ export default function LoginBox({ setActiveSection }) {
   };
 
   const handleGoogleLogin = async () => {
-    const result = await googleLogin();
-    if (result) {
-      setActiveSection('mypage');
-    } else {
-      setIsNewUser(true);
-    }
+    await googleLogin();
+    // 리다이렉트 후 페이지가 다시 로드되므로, 여기서는 추가 작업을 하지 않습니다.
   };
+  
+  // 컴포넌트 마운트 시 리다이렉트 결과 확인
+  useEffect(() => {
+    const checkRedirectResult = async () => {
+      const result = await handleRedirectResult();
+      if (result) {
+        setActiveSection('mypage');
+      }
+    };
+    checkRedirectResult();
+  }, [handleRedirectResult, setActiveSection]);
 
   const handleLogout = async () => {
     const success = await logout();
