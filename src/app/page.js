@@ -5,6 +5,7 @@ import { useAuth } from './contexts/AuthContext';
 import Header from '../app/components/Header';
 import LoginBox from './components/LogSign/LoginBox';
 import MyPage from './components/Section/MyPage';
+import Profile from './components/Section/Profile';
 import SectionHome from './components/Section/SectionHome';
 import SectionLink from './components/Section/SectionLink';
 import SectionInfo from './components/Section/SectionInfo';
@@ -19,7 +20,7 @@ function MainContent() {
 
   useEffect(() => {
     if (user) {
-      setActiveSection('section-home');
+      setActiveSection('mypage');
     } else {
       setActiveSection('section-home');
     }
@@ -36,6 +37,7 @@ function MainContent() {
         <LoginBox setActiveSection={setActiveSection} />
         <main>
           {activeSection === 'mypage' && user && <MyPage />}
+          {activeSection === 'profile' && user && <Profile />}
           {activeSection === 'section-home' && <SectionHome />}
           {activeSection === 'section-link' && <SectionLink />}
           {activeSection === 'section-calc' && <SectionCalc />}

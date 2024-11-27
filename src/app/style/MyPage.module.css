@@ -9,6 +9,104 @@
   display: flex;
 }
 
+
+.resultCard {
+  width: 100%;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cardTitle{
+  display: flex;
+  justify-content: space-between;
+  
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.characterName{
+  font-size: 2.5rem;
+}
+
+.nickname {
+  font-size: 2.5rem;
+  color: #888;
+}
+
+.cardTime {
+  font-size: 1rem;
+  color: #666;
+}
+
+.characterInfo {
+  display: flex;
+  margin: 20px 0;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.levelInfo {
+  min-width: 35%;
+  /* margin: 10px; */
+}
+
+.statsContainer {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.statCard {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 5px;
+  min-width: 30%;
+  border: 1px solid black;
+  margin-right: 10px;
+  text-align: center;
+  height: 70px;
+}
+
+.statCard h5 {
+  font-size: 1.4rem;
+  margin-bottom: 3px;
+  color: #333;
+}
+
+.forceInfo{
+  display: flex;
+}
+.forceInfo>div{
+  width: 50%;
+}
+
+.resultFN {
+  border-collapse: collapse;
+  font-size: 1.2rem;
+}
+
+.resultFN td {
+  padding: 5px;
+  text-align: center; 
+  border: 1px solid #888; 
+}
+
+.resultFN tr:nth-child(even) {
+  background-color: #c0c0c0; 
+}
+
+.resultFN tr{
+  width: 100%;
+}
+.resultFN td{
+ text-align: start;
+ width: 20%;
+}
+
 @media (max-width: 1024px) {
   .myPageContainer{
     flex-direction: column;

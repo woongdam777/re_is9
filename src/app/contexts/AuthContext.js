@@ -112,28 +112,44 @@ export function AuthProvider({ children }) {
     try {
       const provider = new GoogleAuthProvider();
       const userCredential = await signInWithPopup(auth, provider);
-      console.log("Google login successful:", userCredential);
-      const userData = await getUserData(userCredential.user.uid);
+      // console.log("Google login successful:", userCredential);
       
+      // 사용자 UID로 데이터베이스에서 사용자 정보 조회
+      let userData = await getUserData(userCredential.user.uid);
+      
+      // 사용자 데이터가 없으면 새로 저장
       if (!userData) {
-        await saveUserData(userCredential.user.uid, {
-          email: userCredential.user.email,
-          nickname: userCredential.user.displayName || '',
-          war3Id: 'war3 ID 없음',
-          emailVerified: userCredential.user.emailVerified
-        });
+        const email = userCredential.user.email;
+        const nickname = userCredential.user.displayName || '';
+        const emailVerified = userCredential.user.emailVerified;
+  
+        // 이메일이 비어있지 않은지 확인
+        if (email) {
+          await saveUserData(userCredential.user.uid, {
+            email: email,
+            nickname: nickname,
+            war3Id: 'none',
+            emailVerified: emailVerified
+          });
+        } else {
+          console.error('이메일 주소가 비어 있습니다. 사용자 정보를 저장할 수 없습니다.');
+          setError('이메일 주소가 비어 있습니다. 로그인 정보를 확인해주세요.');
+          return false; // 이메일이 비어 있을 경우 로그인 실패 처리
+        }
       }
-      
+  
+      // 사용자 데이터 업데이트
       const updatedUserData = await getUserData(userCredential.user.uid);
       setUser({ ...userCredential.user, ...updatedUserData });
-      
+  
+      // 이메일 인증 상태 확인
       if (!userCredential.user.emailVerified) {
         setError('이메일 인증이 필요합니다. 인증 이메일을 확인해주세요.');
         await sendVerificationEmail();
       } else {
         setError('');
       }
-      
+  
       return true; // 기존 사용자인 경우 true 반환
     } catch (error) {
       console.error('Google 로그인 중 오류 발생:', error);
@@ -209,10 +225,44 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updateUserProfile = async (updatedData) => {
+    if (!auth.currentUser) {
+      setError('사용자가 로그인되어 있지 않습니다.');
+      return false;
+    }
+
+    try {
+      await updateProfile(auth.currentUser, {
+        displayName: updatedData.nickname || auth.currentUser.displayName,
+        // photoURL: updatedData.photoURL || auth.currentUser.photoURL, // 필요한 경우 추가
+      });
+
+      // 데이터베이스의 사용자 정보 업데이트
+      await saveUserData(auth.currentUser.uid, {
+        nickname: updatedData.nickname,
+        war3Id: updatedData.war3Id,
+      });
+
+      // 업데이트된 사용자 정보 가져오기
+      const updatedUserData = await getUserData(auth.currentUser.uid);
+      
+      // 로컬 상태 업데이트
+      setUser({ ...auth.currentUser, ...updatedUserData });
+      
+      setError('');
+      return true;
+    } catch (error) {
+      console.error('프로필 업데이트 중 오류 발생:', error);
+      setError('프로필 업데이트에 실패했습니다.');
+      return false;
+    }
+  };
+
   const logout = async () => {
     try {
       await signOut(auth);
       localStorage.removeItem('loginTime');
+      localStorage.removeItem('myPageData');
       setUser(null);
       setError('');
       return true;
@@ -233,7 +283,8 @@ export function AuthProvider({ children }) {
       setError, 
       sendVerificationEmail,
       completeEmailVerification,
-      checkEmailVerification 
+      checkEmailVerification,
+      updateUserProfile 
     }}>
       {children}
     </AuthContext.Provider>

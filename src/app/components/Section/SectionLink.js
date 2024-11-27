@@ -15,9 +15,9 @@ export default function SectionLink() {
         </ul>
         <h1>매크로 및 툴 모음</h1>
         <ul className="icon-frame">
-          <IconLink href="/public/file/Cirnix.exe" iconClass="icon-cirnix" text="치르닉스" />
-          <IconLink href="/public/file/IMax.zip" iconClass="icon-imax" text="IMax매크로" />
-          <IconLink href="/public/file/inActive_G_macro.zip" iconClass="icon-g" text="비활G매크로" />
+          <IconLink href="/file/Cirnix.exe" iconClass="icon-cirnix" text="치르닉스" />
+          <IconLink href="/file/IMax.zip" iconClass="icon-imax" text="IMax매크로" />
+          <IconLink href="/file/inActive_G_macro.zip" iconClass="icon-g" text="비활G매크로" />
           <IconLink href="https://blog.naver.com/pg365/223008100384" iconClass="icon-key" text="key매크로" />
         </ul>
       </div>
