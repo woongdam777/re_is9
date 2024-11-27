@@ -64,7 +64,7 @@ export default function MyPage() {
   return (
     <section id="my-page" className="my-page">
       <div className={styles.myPageContainer}>
-        <h1>마이페이지[임시]</h1>
+        <h1>마이페이지[수정중]</h1>
       </div>
       <div className={styles.myPageContainer}>
         {/* {error && <p className={styles.error}>{error}</p>} */}
@@ -125,7 +125,7 @@ export default function MyPage() {
           </div>
         ) : (
           <>
-            {!user.war3Id ? (
+            {user.war3Id==='none' ? (
               <div>
                 <p>war3 ID가 없습니다.</p>
                 <p>회원정보 (war3 ID)를 수정해주세요</p>

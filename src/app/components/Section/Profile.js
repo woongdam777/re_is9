@@ -42,6 +42,11 @@ export default function Profile() {
     <section id="my-page" className="my-page">
       <div className={styles.myPageContainer}>
         <h2>회원정보 수정</h2>
+        <br />
+        <h4>워크아이디는 최초 1회만 수정가능하니 주의해주세요</h4>
+        <h4>워크아이디는 모두 소문자로 입력해주셔야 됩니다.</h4>
+        <h4>잘못 수정했으면 아래 오픈톡방으로 문의주세요</h4>
+        <br />
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="nickname">닉네임</label>
@@ -53,16 +58,18 @@ export default function Profile() {
               onChange={handleChange}
             />
           </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="war3Id">War3 ID</label>
-            <input
-              type="text"
-              id="war3Id"
-              name="war3Id"
-              value={formData.war3Id}
-              onChange={handleChange}
-            />
-          </div>
+          {user.war3Id === 'none' &&(
+            <div className={styles.formGroup}>
+              <label htmlFor="war3Id">War3 ID</label>
+              <input
+                type="text"
+                id="war3Id"
+                name="war3Id"
+                value={formData.war3Id}
+                onChange={handleChange}
+              />
+            </div>
+          )}
           <button type="submit" className={styles.submitButton}>
             정보 수정
           </button>
