@@ -89,6 +89,10 @@ export function AuthProvider({ children }) {
   const googleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
+      // 커스텀 도메인으로 리디렉션 설정
+      provider.setCustomParameters({
+        redirect_uri: 'https://is9.netlify.app/__/auth/handler'
+      });
       await signInWithRedirect(auth, provider);
       return true;
     } catch (error) {
