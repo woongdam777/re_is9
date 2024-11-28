@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth, database, ref, update } from '../utils/firebase';
-import { signInWithPopup, signInWithRedirect, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, sendEmailVerification, isSignInWithEmailLink, signInWithEmailLink, updateProfile } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, sendEmailVerification, isSignInWithEmailLink, signInWithEmailLink, updateProfile, signInWithCredential } from 'firebase/auth';
 import { saveUserData, getUserData } from '../data/users';
 
 const AuthContext = createContext({
@@ -54,6 +54,70 @@ export function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  };
+
+  const loadGoogleSDK = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://apis.google.com/js/platform.js';
+      script.onload = resolve;
+      document.body.appendChild(script);
+    });
+  };
+
+  const signInWithGoogleSDK = () => {
+    return new Promise((resolve, reject) => {
+      window.gapi.load('auth2', () => {
+        window.gapi.auth2.init({
+          client_id: '977785714936-s3ekn039hbevbh3dnkvguvm7qirq3r79.apps.googleusercontent.comYOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com' // 실제 Google 클라이언트 ID로 교체하세요
+        }).then(() => {
+          const auth2 = window.gapi.auth2.getAuthInstance();
+          auth2.signIn().then(resolve, reject);
+        }, reject);
+      });
+    });
+  };
+
+  const handleGoogleLoginResult = async (result) => {
+    const userData = await getUserData(result.user.uid);
+    if (!userData) {
+      await saveUserData(result.user.uid, {
+        email: result.user.email,
+        nickname: result.user.displayName || '',
+        war3Id: 'none',
+        emailVerified: result.user.emailVerified
+      });
+      setError('신규등록완료. 재로그인해주세요.');
+      return false;
+    }
+    const updatedUserData = await getUserData(result.user.uid);
+    setUser({ ...result.user, ...updatedUserData });
+    setError('');
+    return true;
+  };
+
+  const googleLogin = async () => {
+    try {
+      if (isMobile()) {
+        await loadGoogleSDK();
+        const googleUser = await signInWithGoogleSDK();
+        const credential = GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
+        const result = await signInWithCredential(auth, credential);
+        return handleGoogleLoginResult(result);
+      } else {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        return handleGoogleLoginResult(result);
+      }
+    } catch (error) {
+      console.error('Google 로그인 중 오류 발생:', error);
+      setError('Google 로그인에 실패했습니다.');
+      return false;
+    }
+  };
+
   const login = async (email, password) => {
     try {
       await setPersistence(auth, browserSessionPersistence);
@@ -83,32 +147,6 @@ export function AuthProvider({ children }) {
       } else {
         setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
       }
-    }
-  };
-
-  const googleLogin = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const userData = await getUserData(result.user.uid);
-      if (!userData) {
-        await saveUserData(result.user.uid, {
-          email: result.user.email,
-          nickname: result.user.displayName || '',
-          war3Id: 'none',
-          emailVerified: result.user.emailVerified
-        });
-        setError('신규등록완료. 재로그인해주세요.');
-        return false;
-      }
-      const updatedUserData = await getUserData(result.user.uid);
-      setUser({ ...result.user, ...updatedUserData });
-      setError('');
-      return true;
-    } catch (error) {
-      console.error('Google 로그인 중 오류 발생:', error);
-      setError('Google 로그인에 실패했습니다.');
-      return false;
     }
   };
 
