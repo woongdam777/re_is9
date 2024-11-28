@@ -89,16 +89,27 @@ export default function MyPage() {
             <div className={styles.characterInfo}>
               <div className={styles.levelInfo}>
                 <h2>캐릭터 정보</h2>
+                <div className={styles.JobImg}>이미지</div>
                 <p>{searchResult.result.Job}</p>
                 <p>레벨: {searchResult.result.Level}</p>
                 <p>포스 레벨: {searchResult.result["Force Level"]}</p>
                 <p>각성 레벨: {searchResult.result["Hell Level"]}</p>
                 <p>전용템 강화: {searchResult.result["Class Item"]}</p>
-                <p>골드: {searchResult.result["Money"].split("|")[0]}</p>
-                <p>실버: {searchResult.result["Money"].split("|")[1]}</p>
+              </div>
+              <div>
                 <p>포스스톤: {searchResult.result.Forcestone}</p>
                 <p>남은 티켓 수: {searchResult.result["Ticket Count"]} 개</p>
                 <p>수련장 점수: {searchResult.result["Train Score"]} 점</p>
+                <p>골드: {Number(searchResult.result["Money"].split("|")[0]).toLocaleString()}</p>
+                <p>실버: {Number(searchResult.result["Money"].split("|")[1]).toLocaleString()}</p>
+                <div className={styles.statCard}>
+                  <span>실버 단위 환산</span>
+                  {formatNumber(Number(searchResult.result["Money"].split("|")[1])).map((value, index) => (
+                    <div key={index} className={styles.unitConversion}>
+                      {value}
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className={styles.statsContainer}>
                 <div className={styles.statCard}>
@@ -109,13 +120,13 @@ export default function MyPage() {
             </div>
             <div className={styles.chartInfo}>
               <div>
-                <span>티켓변동</span>
+                <h3>⁅ 티켓변동 ⁆</h3>
                 <div className={styles.chartContainer}>
                   <ChartComponent fnChart={searchResult.flowTicket} />
                 </div>
               </div>
               <div>
-                <span>인벤토리 포스변동</span>
+                <h3>⁅ 인벤포스변동 ⁆</h3>
                 <div className={styles.chartContainer}>
                   <ForceChart fnChart={searchResult.flowForce} />
                 </div>
@@ -145,24 +156,55 @@ export default function MyPage() {
 
 function ForceTable({ fnString }) {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50];
-  const charges = fnString.split('|');
+  const charges = fnString.split('|').map(Number);
+  const totalSum = charges.reduce((sum, charge) => sum + charge, 0);
 
   return (
-    <table className={styles.resultFN}>
-      <tbody>
-        {[0, 1, 2, 3].map(rowIndex => (
-          <tr key={rowIndex}>
-            {charges.slice(rowIndex * 4, rowIndex * 4 + 4).map((charge, index) => {
-              const number = numbers[rowIndex * 4 + index];
-              return (
-                <td key={index}>
-                  [{number}] {charge}
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <table className={styles.resultFN}>
+        <tbody>
+          {chunk(charges, 3).map((rowCharges, rowIndex) => (
+            <tr key={rowIndex}>
+              {rowCharges.map((charge, index) => {
+                const numberIndex = rowIndex * 3 + index;
+                const number = numbers[numberIndex] || numberIndex + 1;
+                return (
+                  <td key={index}>
+                    [{number}] {charge}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className={styles.totalSum}>총합: {totalSum}</div>
+    </div>
   );
+}
+
+function chunk(array, size) {
+  return Array.from({ length: Math.ceil(array.length / size) }, (_, index) =>
+    array.slice(index * size, index * size + size)
+  );
+}
+
+function formatNumber(num) {
+  const trillion = 1_000_000_000_000;
+  const billion = 1_000_000_000;
+  const million = 1_000_000;
+
+  let results = [];
+  
+  if (num >= million) {
+    results.push(Math.floor(num / million).toLocaleString() + ' M (백만)');
+  }
+  if (num >= billion) {
+    results.push(Math.floor(num / billion).toLocaleString() + ' B (십억)');
+  }
+  if (num >= trillion) {
+    results.push(Math.floor(num / trillion).toLocaleString() + ' T (조)');
+  }
+
+  return results;
 }

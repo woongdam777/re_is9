@@ -43,6 +43,7 @@
 
 .characterInfo {
   display: flex;
+  justify-content: space-between;
   margin: 20px 0;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 10px;
@@ -50,12 +51,22 @@
 
 .levelInfo {
   min-width: 35%;
+  /* border: 1px solid black; */
+}
+
+.JobImg{
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 5px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .statsContainer {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
+  /* flex: 1; */
 }
 
 .statCard {
@@ -78,6 +89,7 @@
 .resultFN {
   border-collapse: collapse;
   font-size: 1.2rem;
+  margin: 10px 0;
 }
 
 .resultFN td {
@@ -95,7 +107,7 @@
 }
 .resultFN td{
  text-align: start;
- width: 20%;
+ /* width: 20%; */
 }
 
 .chartContainer{
@@ -109,6 +121,10 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.chartInfo>div{
+  text-align: center;
 }
 
 

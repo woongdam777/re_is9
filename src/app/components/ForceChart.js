@@ -19,7 +19,7 @@ export default function ChartComponent({ fnChart }) {
         if (dataArray.some(isNaN)) {
           throw new Error("유효하지 않은 데이터가 포함되어 있습니다.");
         }
-        setChartData(dataArray);
+        setChartData(dataArray.reverse());
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -54,7 +54,7 @@ export default function ChartComponent({ fnChart }) {
           datasets: [{
             label: '시간별 데이터',
             data: chartData,
-            borderColor: 'rgba(102, 102, 102, 0.4)',
+            borderColor: 'rgba(102, 102, 102, 0.6)',
             backgroundColor : 'var(--bb-color)',
             borderWidth: 1,
           }]
