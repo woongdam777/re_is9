@@ -32,6 +32,7 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-R3XLXYPZZM');
           `}
         </Script>
+        <Script src="https://accounts.google.com/gsi/client" async defer></Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}

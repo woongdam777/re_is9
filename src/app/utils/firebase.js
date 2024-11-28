@@ -17,5 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
+googleProvider.addScope('https://www.googleapis.com/auth/userinfo.email');
+googleProvider.addScope('https://www.googleapis.com/auth/userinfo.profile');
 
 export { auth, database, ref, update, googleProvider, signInWithPopup, onAuthStateChanged };

@@ -61,49 +61,60 @@ export function AuthProvider({ children }) {
   const loadGoogleSDK = () => {
     return new Promise((resolve) => {
       const script = document.createElement('script');
-      script.src = 'https://apis.google.com/js/platform.js';
+      script.src = 'https://accounts.google.com/gsi/client';
       script.onload = resolve;
       document.body.appendChild(script);
     });
   };
-
+  
   const signInWithGoogleSDK = () => {
     return new Promise((resolve, reject) => {
-      window.gapi.load('auth2', () => {
-        window.gapi.auth2.init({
-          client_id: '977785714936-s3ekn039hbevbh3dnkvguvm7qirq3r79.apps.googleusercontent.comYOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com' // 실제 Google 클라이언트 ID로 교체하세요
-        }).then(() => {
-          const auth2 = window.gapi.auth2.getAuthInstance();
-          auth2.signIn().then(resolve, reject);
-        }, reject);
+      const client = google.accounts.oauth2.initTokenClient({
+        client_id: '977785714936-s3ekn039hbevbh3dnkvguvm7qirq3r79.apps.googleusercontent.com',
+        scope: 'email profile',
+        callback: (response) => {
+          if (response.error) {
+            console.error('Error:', response.error);
+            reject(response);
+          } else {
+            resolve(response);
+          }
+        },
       });
+      client.requestAccessToken();
     });
   };
-
+  
   const handleGoogleLoginResult = async (result) => {
-    const userData = await getUserData(result.user.uid);
-    if (!userData) {
-      await saveUserData(result.user.uid, {
-        email: result.user.email,
-        nickname: result.user.displayName || '',
-        war3Id: 'none',
-        emailVerified: result.user.emailVerified
-      });
-      setError('신규등록완료. 재로그인해주세요.');
+    try {
+      const userData = await getUserData(result.user.uid);
+      if (!userData) {
+        await saveUserData(result.user.uid, {
+          email: result.user.email,
+          nickname: result.user.displayName || '',
+          war3Id: 'none',
+          emailVerified: result.user.emailVerified
+        });
+        setError('신규등록완료. 재로그인해주세요.');
+        return false;
+      }
+      const updatedUserData = await getUserData(result.user.uid);
+      setUser({ ...result.user, ...updatedUserData });
+      setError('');
+      return true;
+    } catch (error) {
+      console.error('사용자 데이터 처리 중 오류 발생:', error);
+      setError('사용자 정보 처리에 실패했습니다.');
       return false;
     }
-    const updatedUserData = await getUserData(result.user.uid);
-    setUser({ ...result.user, ...updatedUserData });
-    setError('');
-    return true;
   };
-
+  
   const googleLogin = async () => {
     try {
       if (isMobile()) {
         await loadGoogleSDK();
-        const googleUser = await signInWithGoogleSDK();
-        const credential = GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
+        const response = await signInWithGoogleSDK();
+        const credential = GoogleAuthProvider.credential(null, response.access_token);
         const result = await signInWithCredential(auth, credential);
         return handleGoogleLoginResult(result);
       } else {
@@ -117,7 +128,7 @@ export function AuthProvider({ children }) {
       return false;
     }
   };
-
+  
   const login = async (email, password) => {
     try {
       await setPersistence(auth, browserSessionPersistence);
