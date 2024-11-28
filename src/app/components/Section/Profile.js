@@ -24,7 +24,7 @@ export default function Profile() {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: name === 'war3Id' ? value.toLowerCase() : value
     }));
   };
 
@@ -58,8 +58,8 @@ export default function Profile() {
               onChange={handleChange}
             />
           </div>
-          {user.war3Id === 'none' &&(
-            <div className={styles.formGroup}>
+          {user.war3Id === 'none' && (
+            <div>
               <label htmlFor="war3Id">War3 ID</label>
               <input
                 type="text"
@@ -67,6 +67,7 @@ export default function Profile() {
                 name="war3Id"
                 value={formData.war3Id}
                 onChange={handleChange}
+                placeholder="소문자로 입력해주세요"
               />
             </div>
           )}

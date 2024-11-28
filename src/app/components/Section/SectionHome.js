@@ -10,23 +10,22 @@ export default function SectionHome() {
   return (
     <section id="section-home" className="section-home">
       <div className={styles.homeContainer}>
-        <h1>홈화면 [임시]</h1>
+        <h1>홈화면</h1>
       </div>
       <div className={styles.homeContainer}>
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. pc 로그인 구현완료 - 지속적 수정예정<br />
-            2. 모바일 로그인 불가 수정중
+            1. 로그인 구현완<br />
+            2. 프로필 포스변동 역순수정<br />
+            3. 강제 소문자 입력기능 추가<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
           <h2>추가예정</h2>
           <pre>
-            1. 비회원인경우 - 기존기능유지, 검색 티켓변화량 2시간분량감소<br />
-            2. 간단한 게시판 추가<br />
-            3. 버전별 캐릭별 평점 및 코멘트<br />
-            4. 과거 패치노트
+            1. 패치노트<br />
+            2. 버전별 캐릭별 평점 및 코멘트<br />
           </pre>
         </div>
       </div>

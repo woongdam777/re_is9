@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import styles from '../style/SearchResult.module.css';
 
@@ -17,13 +19,14 @@ export default function Search({ onSearch }) {
   };
 
   const handleSearch = async (searchKeyword) => {
+    const lowerCaseKeyword = searchKeyword.toLowerCase();
     try {
-      const response = await fetch(`/api/search?keyword=${encodeURIComponent(searchKeyword)}`);
+      const response = await fetch(`/api/search?keyword=${encodeURIComponent(lowerCaseKeyword)}`);
       const data = await response.json();
       
       if (response.ok) {
         onSearch(data, null);
-        const newHistory = [searchKeyword, ...searchHistory.filter(item => item !== searchKeyword)].slice(0, 4);
+        const newHistory = [lowerCaseKeyword, ...searchHistory.filter(item => item !== lowerCaseKeyword)].slice(0, 4);
         setSearchHistory(newHistory);
         saveSearchHistory(newHistory);
       } else {
@@ -66,8 +69,8 @@ export default function Search({ onSearch }) {
             type="text"
             id="inputSearch"
             value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder="값 입력"
+            onChange={(e) => setKeyword(e.target.value.toLowerCase())}
+            placeholder="소문자로 입력해주세요"
           />
           <button type="submit" id='searchBtn'>검색</button>
         </div>
