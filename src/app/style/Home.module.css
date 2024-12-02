@@ -17,12 +17,7 @@
   width: 100%;
 }
 .homeDiv>pre{
-  max-height: 300px;
-  overflow: auto;
-}
-
-.homeDivpre{
-  max-height: 300px;
+  max-height: 400px;
   overflow: auto;
 }
 
@@ -92,7 +87,6 @@
   background-color:white;
   color: var(--c-color);
 }
-
 
 .jobRankChart{
   text-align: center;

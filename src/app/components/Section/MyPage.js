@@ -7,7 +7,7 @@ import ChartComponent from '../TicketChart';
 import ForceChart from '../ForceChart';
 
 const CACHE_KEY = 'myPageData';
-const CACHE_DURATION = 1 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_DURATION = 10 * 60 * 1000; // 5 minutes in milliseconds
 
 export default function MyPage() {
   const { user } = useAuth();
@@ -152,16 +152,15 @@ export default function MyPage() {
                   <p>각성 : {searchResult.result["Hell Level"]}</p>
                   <p>강화 : {searchResult.result["Class Item"]}</p>
                   <p>스톤 : {searchResult.result.Forcestone}</p>
+                  <p>티켓: {searchResult.result["Ticket Count"]} 개</p>
+                  <p>수련장: {searchResult.result["Train Score"]} 점</p>
                 </div>
               </div>
               <div className={styles.goodsInfo}>
                 <div className={styles.statCard}>
-                  <p>남은 티켓 수: {searchResult.result["Ticket Count"]} 개</p>
-                  <p>수련장 점수: {searchResult.result["Train Score"]} 점</p>
-                </div>
-                <div className={styles.statCard}>
-                  <p>골드: {Number(searchResult.result["Money"].split("|")[0]).toLocaleString()}</p>
-                  <p>실버: {Number(searchResult.result["Money"].split("|")[1]).toLocaleString()}</p>
+                  <p>금: {Number(searchResult.result["Money"].split("|")[0]).toLocaleString()}</p>
+                  <p>은: {Number(searchResult.result["Money"].split("|")[1]).toLocaleString()}</p>
+                  <br />
                   <span>실버 단위 환산</span>
                   {formatNumber(Number(searchResult.result["Money"].split("|")[1])).map((value, index) => (
                     <div key={index}>

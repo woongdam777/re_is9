@@ -4,7 +4,7 @@
   --bb-color: #FFB6C1; 
   --c-color: #DB7093;
   --hover-color: rgba(253,46,139,.5);
-  --footer-color: #3498db;
+  --footer-color: #e75a84;
 
   --grad1-color : #FF69B4;
   --grad2-color : #FF1493;
@@ -155,6 +155,7 @@
 
 html {
   font-size: 62.5%;
+  scrollbar-gutter: stable;
 }
 
 body {

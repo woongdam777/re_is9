@@ -10,15 +10,13 @@ export default function SectionHome() {
   return (
     <section id="section-home" className="section-home">
       <div className={styles.homeContainer}>
-        <h1>홈화면</h1>
-      </div>
-      <div className={styles.homeContainer}>
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 로그인 구현완<br />
-            2. 프로필 포스변동 역순수정<br />
-            3. 강제 소문자 입력기능 추가<br />
+            1. 모바일 로그인 안내문구 추가<br />
+            2. 워크아이디 숫자0일시 미인식 수정<br />
+            3. 프레임 최적화<br />
+            4. 다크모드 마이페이지 글자색 수정<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
@@ -30,14 +28,14 @@ export default function SectionHome() {
         </div>
       </div>
       <div className={styles.homeContainer}>
+        <div className={styles.homeRight}>
+          <JobRank />
+        </div>
         <div className={styles.homeLeft}>
           <div className={styles.homeDiv}>
             <h1>A20 패치노트 [임시]</h1>
             <PreBlock11 />
           </div>
-        </div>
-        <div className={styles.homeRight}>
-          <JobRank />
         </div>
       </div>
     </section>

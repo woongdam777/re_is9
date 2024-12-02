@@ -1,16 +1,35 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import SignupBox from './SignupBox';
 import styles from '../../style/LoginSignBox.module.css';
 
+// 모바일 감지 커스텀 훅
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+}
+
 export default function LoginBox({ setActiveSection }) {
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { user, error, login, googleLogin, logout, sendVerificationEmail,handleRedirectResult } = useAuth();
+  const { user, error, login, googleLogin, logout, sendVerificationEmail } = useAuth();
   const [isNewUser, setIsNewUser] = useState(false);
+  const isMobile = useIsMobile();
 
-  // 로그인 세션 타임아웃 체크
   useEffect(() => {
     if (user) {
       const checkLoginTime = () => {
@@ -21,7 +40,7 @@ export default function LoginBox({ setActiveSection }) {
         }
       };
 
-      const timer = setInterval(checkLoginTime, 60000); // 1분마다 체크
+      const timer = setInterval(checkLoginTime, 60000);
       return () => clearInterval(timer);
     }
   }, [user, logout]);
@@ -91,7 +110,6 @@ export default function LoginBox({ setActiveSection }) {
                 ) : (
                   <form className={styles.loginForm} onSubmit={handleLogin}>
                     <h3>로그인</h3>
-                    {/* 로그인 폼을 임시로 숨김 */}
                     <div style={{ display: 'none' }}>
                       <input
                         type="email"
@@ -127,6 +145,12 @@ export default function LoginBox({ setActiveSection }) {
                       </button>
                     )}
                   </form>
+                )}
+                {isMobile && (
+                  <div className={styles.warningMoblie}>
+                    <h3>카카오톡 웹뷰에서는 로그인 안됩니다.</h3>
+                    <h3>기본인터넷 앱 및 크롬앱을 이용해주세요.</h3>
+                  </div>
                 )}
                 <div className={styles.buttonBox}>
                   {!isNewUser && (
@@ -165,18 +189,34 @@ export default function LoginBox({ setActiveSection }) {
         </>
       ) : (
         <div className={styles.userInfo}>
-          <h3>{user.nickname ? `${user.nickname}님 환영합니다!` : '환영합니다!'}</h3>
-          <p>{user.email}</p>
-          {user.war3Id === 'none' ? (
-            <>
+          <div>
+            <h3>{user.nickname ? `${user.nickname}님 환영합니다!` : '환영합니다!'}</h3>
+            <p>{user.email}</p>
+            {user.war3Id === 'none' ? (
               <p>war3 ID를 수정해주세요</p>
-            </>
+            ) : (
+              <p>War3 ID : {user.war3Id}</p>
+            )}
+          </div>
+          {isMobile ? (
+            <div className={styles.mobileButtons}>
+              <button onClick={changeWar3ID} aria-label="회원정보수정">
+                <i className="fa-solid fa-screwdriver-wrench"></i>
+              </button>
+              <button onClick={handleMyPageClick} aria-label="마이페이지">
+                <i className="fa-solid fa-gear"></i>
+              </button>
+              <button onClick={handleLogout} aria-label="로그아웃">
+                <i className="fa-solid fa-share-from-square"></i>
+              </button>
+            </div>
           ) : (
-            <p>워크아이디 : {user.war3Id}</p>
+            <>
+              <button onClick={changeWar3ID}>회원정보수정</button>
+              <button onClick={handleMyPageClick}>마이페이지</button>
+              <button onClick={handleLogout}>로그아웃</button>
+            </>
           )}
-          <button onClick={changeWar3ID}>회원정보수정</button>
-          <button onClick={handleMyPageClick}>마이페이지</button>
-          <button onClick={handleLogout}>로그아웃</button>
         </div>
       )}
     </aside>

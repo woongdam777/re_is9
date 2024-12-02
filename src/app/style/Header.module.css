@@ -108,16 +108,18 @@
 }
 
 .navList i {
-  width: 30px;
+  width: 35px;
+  text-align: center;
 }
 
 .navList span {
+  width: 70px;
   opacity: 0;
   transition: opacity 0.7s ease;
 }
 
 /* 호버 효과는 큰 화면에서만 적용 */
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
   .navList li:hover {
     background-color: white;
     color: var(--c-color);

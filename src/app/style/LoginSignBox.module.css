@@ -70,13 +70,39 @@
    margin:5px; 
 }
 
-@media (max-width:1024px) {
-   .loginBox{
-      width:auto; 
-      min-height:auto; 
-      margin-right:auto; 
-      margin-bottom:auto; 
-   }
+.mobileButtons {
+  display: flex;
+  justify-content: space-around;
+}
 
+.mobileButtons button {
+  margin: 0 5px;
+  font-size: 1.7rem;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.warningMoblie{
+  background-color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 5px;
+  color: #db3737;
+}
+
+@media (max-width:1024px) {
+  .loginBox{
+    width: 100%; 
+    min-height:auto; 
+    margin-right:auto; 
+    margin-bottom:auto; 
+  }
+
+  .userInfo{
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
 }

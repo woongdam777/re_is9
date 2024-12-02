@@ -21,15 +21,11 @@
   transition: transform 0.2s ease;
 }
 
-.resultCard:hover {
-  transform: translateY(-2px);
-}
-
 .cardTitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid rgba(224, 224, 224, 0.5);
+  border-bottom: 2px solid var(--footer-color);
   padding-bottom: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -54,18 +50,21 @@
 
 .characterInfo {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 1rem;
-  border-bottom: 2px solid rgba(224, 224, 224, 0.5);
+  border-bottom: 2px solid var(--footer-color);
   padding-bottom: 1.5rem;
 }
 
+.levelInfo{
+  min-width: 30%;
+}
+
 .jobCard {
-  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  background: var(--bb-color);
   border-radius: 12px;
   padding: 1rem;
   margin-top: 10px;
-  min-width: 40%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 
@@ -75,7 +74,7 @@
 }
 
 .JobImg{
-  background-color: var(--bb-color);
+  background-color: white;
   width: 60px;
   height: 60px;
   border-radius: 5px;
@@ -86,7 +85,9 @@
 }
 
 .statCard {
-  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: var(--bb-color);
   border-radius: 12px;
   padding: 1rem;
   margin-top: 10px;
@@ -97,7 +98,7 @@
 
 .forceCard {
   width: auto;
-  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  background: var(--bb-color);
   border-radius: 12px;
   margin-top: 10px;
   padding: 1rem;
