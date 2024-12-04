@@ -3,24 +3,39 @@ import styles from '../style/Home.module.css';
 import JobChart from '../components/JobChart';
 
 const versions = ['A19.2', 'A18.8', 'A17.91', 'A17.5'];
+const CACHE_KEY = 'jobRankData';
+const CACHE_DURATION = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
 
 export default function VersionAndJobRank() {
   const [selectedVersion, setSelectedVersion] = useState(versions[0]);
   const [versionData, setVersionData] = useState(null);
   const [error, setError] = useState(null);
 
-  const handleVersionChange = async (version) => {
+  const handleVersionChange = (version) => {
     setSelectedVersion(version);
-    await fetchData(version); 
+    fetchData(version);
   };
 
   const fetchData = async (version) => {
+    const cachedData = localStorage.getItem(`${CACHE_KEY}_${version}`);
+    if (cachedData) {
+      const { data, timestamp } = JSON.parse(cachedData);
+      if (Date.now() - timestamp < CACHE_DURATION) {
+        setVersionData(data);
+        return;
+      }
+    }
+
     try {
       const response = await fetch(`/api/rank?version=${version}`);
       const data = await response.json();
       
       if (response.ok) {
         setVersionData(data);
+        localStorage.setItem(`${CACHE_KEY}_${version}`, JSON.stringify({
+          data,
+          timestamp: Date.now()
+        }));
         setError(null);
       } else {
         setVersionData(null);
@@ -34,7 +49,9 @@ export default function VersionAndJobRank() {
 
   useEffect(() => {
     fetchData(selectedVersion);
-  }, []);
+    const intervalId = setInterval(() => fetchData(selectedVersion), CACHE_DURATION);
+    return () => clearInterval(intervalId);
+  }, [selectedVersion]);
 
   return (
     <div className={styles.jobComponent}>

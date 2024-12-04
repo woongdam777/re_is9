@@ -22,17 +22,13 @@ export default function MyPage() {
           const { data, timestamp } = JSON.parse(cachedData);
           if (Date.now() - timestamp < CACHE_DURATION) {
             setSearchResult(data);
-            // console.log(data);
             return;
           }
         }
         await handleSearch(user.war3Id);
       };
-
       fetchData();
-      // Set up interval for periodic updates
       const intervalId = setInterval(() => fetchData(), CACHE_DURATION);
-      // Clean up interval on component unmount
       return () => clearInterval(intervalId);
     }
   }, [user]);
@@ -46,7 +42,6 @@ export default function MyPage() {
 
       if (response.ok) {
         setSearchResult(data);
-        // Cache the data with a timestamp
         localStorage.setItem(CACHE_KEY, JSON.stringify({
           data,
           timestamp: Date.now()
