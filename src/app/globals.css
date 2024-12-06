@@ -20,7 +20,7 @@
 [data-theme='dark'] {
   --header-color: rgb(60, 60, 60); 
   --bb-color: rgba(0, 0, 0, 0.5); 
-  --c-color: #423f6d;
+  --c-color: #77758b;
   --hover-color: rgba(255, 105, 180, .5); 
   --footer-color: #a7a7a7; 
 
@@ -173,7 +173,7 @@ body {
   padding: 20px;
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto 45px;
 }
 
 main {
@@ -241,7 +241,6 @@ input:focus {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
 }
 
 /* Icon Styles */
@@ -468,7 +467,7 @@ input[type="radio"]:checked + div {
 
 /* Section Styles */
 section {
-  padding: 2.5rem;
+  padding: 1.5rem;
 }
 
 /* Formula Styles */
@@ -480,7 +479,7 @@ pre {
 
 .formula {
   display: flex;
-  margin: 0 0 4rem;
+  margin-bottom: 2rem;
   padding: 2rem;
   background-color: #121a25;
   color: #ffff8f;

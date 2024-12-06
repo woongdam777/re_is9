@@ -29,7 +29,7 @@ function MainContent() {
   const handleNavClick = (section) => {
     setActiveSection(section);
   };
-
+ 
   return (
     <div className="body">
       <Header onNavClick={handleNavClick} />
