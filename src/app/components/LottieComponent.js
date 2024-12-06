@@ -17,7 +17,7 @@ const LottieComponent = ({ type, width = 20, height = 20 }) => {
                 return sitAnimation;
             default:
                 console.warn(`Unknown animation type: ${type}`);
-                return catAnimation;
+                return circleAnimation;
         }
     };
 

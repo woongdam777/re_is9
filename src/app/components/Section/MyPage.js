@@ -156,7 +156,7 @@ export default function MyPage() {
                   <div className={styles.levelInfo}>
                     <div className={styles.jobCard}>
                       <div className={styles.JobImg}>
-                          <LottieComponent type="circle" width={100} height={100} />
+                          <LottieComponent type="circle" width={40} height={40} />
                       </div>
                       <div>
                         <p>{searchResult.result.Job}</p>
