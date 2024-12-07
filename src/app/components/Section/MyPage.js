@@ -69,7 +69,7 @@ export default function MyPage() {
   function ForceTable({ fnString }) {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50];
     const charges = fnString.split('|').map(Number);
-    const totalSum = charges.reduce((sum, charge) => sum + charge, 0);
+    const totalSum = charges.reduce((sum, charge, index) => sum + charge * numbers[index], 0);
     const curForce = searchResult.result["Force Level"];
     const extractedNumber = curForce.match(/\((\d+)\)/)?.[1];
     const totalForce = totalSum + (extractedNumber ? parseInt(extractedNumber) : 0);

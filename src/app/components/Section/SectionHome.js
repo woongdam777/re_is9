@@ -13,17 +13,14 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 모바일 로그인 안내문구 추가<br />
-            2. 워크아이디 숫자0일시 미인식 수정<br />
-            3. 프레임 최적화<br />
-            4. 다크모드 마이페이지 글자색 수정<br />
+            1. 마이페이지 포스부분 오류수정<br />
+            2. 과거 패치노트 - 진행중<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
           <h2>추가예정</h2>
           <pre>
-            1. 패치노트<br />
-            2. 버전별 캐릭별 평점 및 코멘트<br />
+            1. 버전별 캐릭별 평점 및 코멘트<br />
           </pre>
         </div>
       </div>
