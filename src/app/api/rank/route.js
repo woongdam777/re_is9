@@ -18,7 +18,7 @@ export async function GET(request) {
     const parsedData = parseCSV(csvData);
 
     const versions = ['A19.2', 'A18.8', 'A17.91', 'A17.5'];
-    const i = versions.length-1-versions.indexOf(version);
+    const i = versions.length-versions.indexOf(version)-1;
 
     const date = parsedData[1][12+i].replace(/^"|"$/g, '');
     const rankString = parsedData[2][12+i].replace(/^"|"$/g, '');

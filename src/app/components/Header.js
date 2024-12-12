@@ -80,6 +80,9 @@ export default function Header({ onNavClick }) {
             <li onClick={() => onNavClick('section-info')}>
               <i className="fa-solid fa-circle-info"></i><span>아이템</span>
             </li>
+            <li onClick={() => onNavClick('section-path')}>
+              <i className="fa-solid fa-sign-hanging"></i><span>패치노트</span>
+            </li>
             <li onClick={() => onNavClick('section-search')}>
               <i className="fa-solid fa-magnifying-glass"></i><span>검색</span>
             </li>

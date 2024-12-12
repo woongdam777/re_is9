@@ -1,0 +1,56 @@
+.semiTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.versionList{
+  width: inherit;
+  border: 2px solid var(--header-color);
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.versionList>ul{
+  display: flex;
+
+  max-width: 600px;
+  overflow-x: auto;
+}
+
+.versionListItem {
+  padding: 10px;
+  border: 1px solid var(--c-color);
+  border-radius: 4px;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.versionListItem:hover:not(.active) {
+  background-color: var(--bb-color);
+  border: solid 1px var(--c-color);
+  color: var(--footer-color);
+}
+
+.active {
+  background-color: var(--bb-color);
+  border: solid 1px var(--c-color);
+  color: var(--footer-color);
+}
+
+.patchInfo {
+  padding: 15px;
+  background-color: var(--refont-color);
+  border: solid 1px var(--c-color);
+  border-radius: 4px;
+}
+
+.patchInfoBlock {
+  margin-bottom: 20px;
+}
+
+.patchContent p {
+  margin: 5px 0;
+}

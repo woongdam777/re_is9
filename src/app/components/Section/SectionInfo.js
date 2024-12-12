@@ -62,7 +62,7 @@ export default function SectionInfo() {
                 <li
                   key={item.name}
                   onClick={() => handleItemClick(item)}
-                  className={styles.itemListItem}
+                  className={`${styles.itemListItem} ${selectedItem?.name === item.name ? styles.iactive : ''}`}
                 >
                   {item.name}
                 </li>
