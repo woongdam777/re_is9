@@ -20,10 +20,10 @@ export async function GET(request) {
     const versions = ['A19.6', 'A19.3', 'A18.8', 'A17.91', 'A17.5'];
     const i = versions.length-versions.indexOf(version)-1;
 
-    const date = parsedData[1][12+i].replace(/^"|"$/g, '');
-    const rankString = parsedData[2][12+i].replace(/^"|"$/g, '');
+    const date = parsedData[1][13+i].replace(/^"|"$/g, '');
+    const rankString = parsedData[2][13+i].replace(/^"|"$/g, '');
     const ranks = parseRankData(rankString);
-    const total = parsedData[3][12+i].replace(/^"|"$/g, '');
+    const total = parsedData[3][13+i].replace(/^"|"$/g, '');
     
     const jobData = {version, date, total, ranks};
 

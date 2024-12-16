@@ -14,13 +14,14 @@ export default function SectionHome() {
           <h2>업데이트내역</h2>
           <pre>
             1. 과거 패치노트 - 진행중<br />
-            2. 회원기능 중 티켓관련 함수오류 수정<br />
+            2. 계산기 - 수련장기본점수추가<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
           <h2>추가예정</h2>
           <pre>
-            1. 버전별 캐릭별 평점 및 코멘트<br />
+            1. 캐릭별 스킬<br />
+            2. 버전별 캐릭별 평점 및 코멘트<br />
           </pre>
         </div>
       </div>

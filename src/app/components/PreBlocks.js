@@ -44,7 +44,7 @@ export function PreBlock2() {
   );
 }
 
-export function PreBlock3() {
+export function PreBlock3_1() {
     const pres =`
 ▣ 포스레벨 필요 경험치
 
@@ -63,6 +63,25 @@ export function PreBlock3() {
 13레벨 : 2400000
 14레벨 : 3200000
 15레벨 : 5000000
+`;
+  return (
+    <pre>{pres}</pre>
+  );
+}
+
+export function PreBlock3_2() {
+    const pres =`
+▣ 수련장 기본점수
+
+노말 : 150
+매직 : 1,950
+레어 : 5,400 + 1*중첩 수
+유니크 : 12,300 + 4*중첩 수
+레전더리 : 24,750 + 20*중첩 수
+에픽 : 42,000 + 60*중첩 수
+고대 : 88,650 + 180*중첩 수
+신화 : 204,150 + 900*중첩 수
+진리의 서 : 393,750 + 45,000*중첩 수
 `;
   return (
     <pre>{pres}</pre>

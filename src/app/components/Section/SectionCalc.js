@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import ForceCalculator from '../../utils/ForceCalculator';
-import { PreBlock1, PreBlock2, PreBlock3, PreBlock4_1, PreBlock4_2, PreBlock5, PreBlock6, PreBlock7, PreBlock8, PreBlock9, PreBlock10_1, PreBlock10_2 } from '../PreBlocks';
+import { PreBlock1, PreBlock2, PreBlock3_1, PreBlock3_2, PreBlock4_1, PreBlock4_2, PreBlock5, PreBlock6, PreBlock7, PreBlock8, PreBlock9, PreBlock10_1, PreBlock10_2 } from '../PreBlocks';
 import AwakenSection from '../../utils/AwakenSection';
 import AbilityResetSection from '../../utils/AbilityResetSection';
 import FatBoxCalc from '../../utils/FatBoxCalculator';
@@ -22,7 +22,8 @@ export default function SectionCalc() {
   ];
   const forceSections = [
       { id: 'forceSectionOne', label: '포스스톤' },
-      { id: 'forceSectionTwo', label: '포스레벨' }
+      { id: 'forceSectionTwo', label: '포스레벨' },
+      { id: 'forceSectionThree', label: '수련장점수' }
   ];
     
   return (
@@ -57,7 +58,6 @@ export default function SectionCalc() {
               {selectedForce === 'forceSectionOne' && (
                   <>
                       <ForceCalculator selectedForce={selectedForce} />
-                      <ul id="resultList"></ul>
                       <div className="formula">
                           <PreBlock1 />
                           <PreBlock2 />
@@ -68,7 +68,15 @@ export default function SectionCalc() {
                   <>
                       <ForceCalculator selectedForce={selectedForce} />
                       <div className="formula">
-                        <PreBlock3 />
+                        <PreBlock3_1 />
+                      </div>
+                  </>
+              )}
+              {selectedForce === 'forceSectionThree' && (
+                  <>
+                      <ForceCalculator selectedForce={selectedForce} />
+                      <div className="formula">
+                        <PreBlock3_2 />
                       </div>
                   </>
               )}

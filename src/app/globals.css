@@ -355,6 +355,13 @@ input:focus {
   padding: 10px;
 }
 
+/* forceScore */
+.input-stone{
+  margin: 0;
+}
+.input-stone>input{
+  width: 60px;
+}
 
 /* hell */
 .component-hell{
