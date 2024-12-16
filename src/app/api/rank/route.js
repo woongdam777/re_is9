@@ -6,7 +6,7 @@ const RANK_SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  const version = searchParams.get('version')?.trim();  // Trim spaces around version
+  const version = searchParams.get('version')?.trim();
 
   if (!version) {
     return NextResponse.json({ error: "버전이 제공되지 않았습니다." }, { status: 400 });
@@ -17,15 +17,11 @@ export async function GET(request) {
     const csvData = await response.text();
     const parsedData = parseCSV(csvData);
 
-    const versions = ['A19.6', 'A19.3', 'A18.8', 'A17.91', 'A17.5'];
-    const i = versions.length-versions.indexOf(version)-1;
+    const jobData = extractJobData(parsedData, version);
 
-    const date = parsedData[1][13+i].replace(/^"|"$/g, '');
-    const rankString = parsedData[2][13+i].replace(/^"|"$/g, '');
-    const ranks = parseRankData(rankString);
-    const total = parsedData[3][13+i].replace(/^"|"$/g, '');
-    
-    const jobData = {version, date, total, ranks};
+    if (!jobData) {
+      return NextResponse.json({ error: "요청한 버전의 데이터를 찾을 수 없습니다." }, { status: 404 });
+    }
 
     return NextResponse.json(jobData);
 
@@ -36,7 +32,31 @@ export async function GET(request) {
 }
 
 function parseCSV(data) {
-  return data.split('\n').map(row => row.split(',').map(cell => cell.trim()));
+  return data.split('\n').map(row => row.split(',').map(cell => cell.trim().replace(/^"|"$/g, '')));
+}
+
+function extractJobData(parsedData, targetVersion) {
+  const headerRow = parsedData[0];
+  const versionIndex = headerRow.findIndex(cell => cell === targetVersion);
+
+  if (versionIndex === -1) {
+    return null;
+  }
+
+  const dateRow = parsedData[1];
+  const rankRow = parsedData[2];
+  const totalRow = parsedData[3];
+
+  if (!dateRow || !rankRow || !totalRow) {
+    return null;
+  }
+
+  return {
+    version: targetVersion,
+    date: dateRow[versionIndex],
+    total: totalRow[versionIndex],
+    ranks: parseRankData(rankRow[versionIndex])
+  };
 }
 
 function parseRankData(rankString) {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from '../style/Home.module.css';
 import JobChart from '../components/JobChart';
 
-const versions = ['A19.6', 'A19.3', 'A18.8', 'A17.91', 'A17.5'];
+const versions = ['A19.6', 'A19.3', 'A18.8', 'A17.91'];
 const CACHE_KEY = 'jobRankData';
 const CACHE_DURATION = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
 
