@@ -71,7 +71,7 @@ function formatDate(isoString) {
 }
 
 function searchKeyword(data, keyword) {
-  return data.find(row => row.Name === keyword) || null;
+  return data.find(row => row.Key === keyword) || null;
 }
 
 function searchKeywordInTicket(rows, keyword) {

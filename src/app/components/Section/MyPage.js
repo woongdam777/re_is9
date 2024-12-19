@@ -8,7 +8,7 @@ import ForceChart from '../ForceChart';
 import dynamic from 'next/dynamic';
 
 const CACHE_KEY = 'myPageData';
-const CACHE_DURATION = 10 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_DURATION = 3 * 60 * 1000; // 5 minutes in milliseconds
 
 const LottieComponent = dynamic(() => import('../LottieComponent'), { ssr: false });
 
@@ -31,7 +31,7 @@ export default function MyPage() {
             return;
           }
         }
-        await handleSearch(user.war3Id);
+        await handleSearch(user.uid);
       };
       fetchData();
       const intervalId = setInterval(() => fetchData(), CACHE_DURATION);
@@ -39,17 +39,15 @@ export default function MyPage() {
     }
   }, [user]);
 
-  const handleSearch = async (war3Id) => {
+  const handleSearch = async (uid) => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        `/api/mypage?keyword=${encodeURIComponent(war3Id)}`
-      );
+      const response = await fetch(`/api/mypage?keyword=${encodeURIComponent(uid)}`);
       const data = await response.json();
 
       if (response.ok) {
         setSearchResult(data);
-        localStorage.setItem(CACHE_KEY, JSON.stringify({
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
           data,
           timestamp: Date.now()
         }));
