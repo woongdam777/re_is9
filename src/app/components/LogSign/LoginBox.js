@@ -203,9 +203,9 @@ export default function LoginBox({ setActiveSection }) {
               <button onClick={changeWar3ID} aria-label="회원정보수정">
                 <i className="fa-solid fa-screwdriver-wrench"></i>
               </button>
-              <button onClick={handleMyPageClick} aria-label="마이페이지">
+              {/* <button onClick={handleMyPageClick} aria-label="마이페이지">
                 <i className="fa-solid fa-gear"></i>
-              </button>
+              </button> */}
               <button onClick={handleLogout} aria-label="로그아웃">
                 <i className="fa-solid fa-share-from-square"></i>
               </button>
@@ -213,7 +213,7 @@ export default function LoginBox({ setActiveSection }) {
           ) : (
             <>
               <button onClick={changeWar3ID}>회원정보수정</button>
-              <button onClick={handleMyPageClick}>마이페이지</button>
+              {/* <button onClick={handleMyPageClick}>마이페이지</button> */}
               <button onClick={handleLogout}>로그아웃</button>
             </>
           )}

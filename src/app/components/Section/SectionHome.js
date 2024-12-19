@@ -13,8 +13,9 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 과거 패치노트 - 진행중<br />
-            2. 계산기 - 수련장기본점수추가<br />
+            1. 검색기능 수정중<br />
+            2. 과거 패치노트 - 진행중<br />
+            3. 계산기 - 수련장기본점수추가<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
