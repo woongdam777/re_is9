@@ -13,7 +13,7 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 검색기능 수정 완료<br />
+            1. 검색기능 수정 중<br />
             2. 과거 패치노트(수작업) - 자동화 진행중<br />
             3. 계산기 - 수련장기본점수추가<br />
           </pre>          
