@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth, database, ref, update } from '../utils/firebase';
-import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, sendEmailVerification, isSignInWithEmailLink, signInWithEmailLink, updateProfile, signInWithCredential } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, updateProfile, signInWithCredential } from 'firebase/auth';
 import { saveUserData, getUserData } from '../data/users';
 
 const AuthContext = createContext({
@@ -10,9 +10,7 @@ const AuthContext = createContext({
   login: async () => {},
   googleLogin: async () => false,
   logout: async () => {},
-  setError: () => {},
-  sendVerificationEmail: async () => false,
-  completeEmailVerification: async () => false
+  setError: () => {}
 });
 
 export function AuthProvider({ children }) {
@@ -26,16 +24,7 @@ export function AuthProvider({ children }) {
         try {
           const userData = await getUserData(currentUser.uid);
           if (userData) {
-            if (!currentUser.emailVerified) {
-              const isVerificationComplete = await completeEmailVerification();
-              if (!isVerificationComplete) {
-                await signOut(auth);
-                setError('이메일 인증이 필요합니다. 이메일을 확인해주세요.');
-                setUser(null);
-              }
-            } else {
-              setUser({ ...currentUser, ...userData });
-            }
+            setUser({ ...currentUser, ...userData });
           } else {
             await signOut(auth);
             setError('가입된 정보가 없습니다. 회원가입을 해주세요.');
@@ -66,7 +55,7 @@ export function AuthProvider({ children }) {
       document.body.appendChild(script);
     });
   };
-  
+
   const signInWithGoogleSDK = () => {
     return new Promise((resolve, reject) => {
       const client = google.accounts.oauth2.initTokenClient({
@@ -84,7 +73,7 @@ export function AuthProvider({ children }) {
       client.requestAccessToken();
     });
   };
-  
+
   const handleGoogleLoginResult = async (result) => {
     try {
       const userData = await getUserData(result.user.uid);
@@ -92,8 +81,7 @@ export function AuthProvider({ children }) {
         await saveUserData(result.user.uid, {
           email: result.user.email,
           nickname: result.user.displayName || '',
-          war3Id: 'none',
-          emailVerified: result.user.emailVerified
+          war3Id: 'none'
         });
         setError('신규등록완료. 재로그인해주세요.');
         return false;
@@ -108,7 +96,7 @@ export function AuthProvider({ children }) {
       return false;
     }
   };
-  
+
   const googleLogin = async () => {
     try {
       if (isMobile()) {
@@ -128,7 +116,7 @@ export function AuthProvider({ children }) {
       return false;
     }
   };
-  
+
   const login = async (email, password) => {
     try {
       await setPersistence(auth, browserSessionPersistence);
@@ -146,10 +134,6 @@ export function AuthProvider({ children }) {
       localStorage.setItem('loginTime', now.getTime().toString());
       setUser({ ...userCredential.user, ...userData });
       setError('');
-      if (!userCredential.user.emailVerified) {
-        setError('이메일 인증이 필요합니다. 인증 이메일을 확인해주세요.');
-        await sendVerificationEmail();
-      }
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
         setError('등록되지 않은 이메일입니다. 회원가입을 해주세요.');
@@ -158,62 +142,6 @@ export function AuthProvider({ children }) {
       } else {
         setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
       }
-    }
-  };
-
-  const checkEmailVerification = async () => {
-    if (auth.currentUser) {
-      await auth.currentUser.reload();
-      const updatedUser = auth.currentUser;
-      if (updatedUser.emailVerified) {
-        await saveUserData(updatedUser.uid, { emailVerified: true });
-        const updatedUserData = await getUserData(updatedUser.uid);
-        setUser({ ...updatedUser, ...updatedUserData });
-        setError('');
-      } else {
-        setError('이메일 인증이 필요합니다. 인증 이메일을 확인해주세요.');
-      }
-    }
-  };
-
-  const completeEmailVerification = async () => {
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-      let email = window.localStorage.getItem('emailForSignIn');
-      if (!email) {
-        email = window.prompt('Please provide your email for confirmation');
-      }
-      try {
-        const result = await signInWithEmailLink(auth, email, window.location.href);
-        window.localStorage.removeItem('emailForSignIn');
-        await updateProfile(auth.currentUser, { emailVerified: true });
-        await saveUserData(result.user.uid, { email: result.user.email, emailVerified: true });
-        const updatedUserData = await getUserData(result.user.uid);
-        setUser({ ...result.user, ...updatedUserData });
-        setError('');
-        return true;
-      } catch (error) {
-        console.error("이메일 인증 완료 중 오류 발생:", error);
-        setError('이메일 인증을 완료하는 데 실패했습니다.');
-        return false;
-      }
-    }
-    return false;
-  };
-
-  const sendVerificationEmail = async () => {
-    if (auth.currentUser) {
-      try {
-        await sendEmailVerification(auth.currentUser);
-        setError('인증 이메일이 발송되었습니다. 이메일을 확인해주세요.');
-        return true;
-      } catch (error) {
-        console.error("인증 이메일 발송 중 오류 발생:", error);
-        setError('인증 이메일 발송에 실패했습니다. 잠시 후 다시 시도해주세요.');
-        return false;
-      }
-    } else {
-      setError('로그인 상태가 아닙니다.');
-      return false;
     }
   };
 
@@ -264,9 +192,6 @@ export function AuthProvider({ children }) {
       googleLogin,
       logout,
       setError,
-      sendVerificationEmail,
-      completeEmailVerification,
-      checkEmailVerification,
       updateUserProfile
     }}>
       {children}

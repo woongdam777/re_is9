@@ -21,8 +21,7 @@ function MainContent() {
 
   useEffect(() => {
     if (user) {
-      // setActiveSection('mypage');
-      setActiveSection('section-home');
+      setActiveSection('mypage');
     } else {
       setActiveSection('section-home');
     }
