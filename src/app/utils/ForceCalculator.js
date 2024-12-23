@@ -125,43 +125,68 @@ const ForceCalculator = ({ selectedForce }) => {
     }
   }, [selectedForce, calculateAndDisplay, calculateAndDisplay2]);
 
-  const [stones, setStones] = useState({
-    normal: 0, magic: 0, rare: 0, unique: 0, legendary: 0, epic: 0,
-    ancient: 0, mythic: 0, truthBook: 0,
-  });
 
-  const stoneNames = {
-    normal: "노말", magic: "매직", rare: "레어", unique: "유니크",
-    legendary: "레전더리", epic: "에픽", ancient: "고대", mythic: "신화",
-    truthBook: "진리의 서",
-  };
-
-  const [totalStoneScore, setTotalStoneScore] = useState(0);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setStones((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
-  };
-
-  useEffect(() => {
-    const calculateTotal = () => {
-        const scores = {
-            'normal': 150 * stones['normal'],
-            'magic': 1950 * stones['magic'],
-            'rare': stones['rare'] > 0 ? 5400 + 1 * stones['rare'] : 0,
-            'unique': stones['unique'] > 0 ? 12300 + 4 * stones['unique'] : 0,
-            'legendary': stones['legendary'] > 0 ? 24750 + 20 * stones['legendary'] : 0,
-            'epic': stones['epic'] > 0 ? 42000 + 60 * stones['epic'] : 0,
-            'ancient': stones['ancient'] > 0 ? 88650 + 180 * stones['ancient'] : 0,
-            'mythic': stones['mythic'] > 0 ? 204150 + 900 * stones['mythic'] : 0,
-            'truthBook': stones['truthBook'] > 0 ? 393750 + 45000 * stones['truthBook'] : 0,
-          };
-
-      return Object.values(scores).reduce((a, b) => a + b, 0);
+    const [stones, setStones] = useState({
+      normal: 0, magic: 0, rare: 0, unique: 0, legendary: 0,
+      epic: 0, ancient: 0, mythic: 0, truthBook: 0,
+    });
+  
+    const stoneNames = {
+      normal: "노말", magic: "매직", rare: "레어", unique: "유니크",
+      legendary: "레전더리", epic: "에픽", ancient: "고대", mythic: "신화", truthBook: "진리의 서",
     };
-
-    setTotalStoneScore(calculateTotal());
-  }, [stones]);
+  
+    const [totalStoneScore, setTotalStoneScore] = useState(0);
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setStones((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
+    };
+  
+    useEffect(() => {
+      const calculateTotal = () => {
+        const stoneOrder = ['normal', 'magic', 'rare', 'unique', 'legendary', 'epic', 'ancient', 'mythic', 'truthBook'];
+        const baseScores = {
+          normal: 150, magic: 1950, rare: 5400, unique: 12300, legendary: 24750, epic: 42000, ancient: 88650, mythic: 204150, truthBook: 393750
+        };
+        const additionalScores = {
+          normal: 0, magic: 0, rare: 1, unique: 4, legendary: 20, epic: 60, ancient: 180, mythic: 900, truthBook: 45000
+        };
+  
+        let totalScore = 0;
+        let highestStoneType = null;
+  
+        // 가장 높은 등급의 돌 찾기
+        for (let i = stoneOrder.length - 1; i >= 0; i--) {
+          if (stones[stoneOrder[i]] > 0) {
+            highestStoneType = stoneOrder[i];
+            break;
+          }
+        }
+  
+        if (highestStoneType) {
+          // 가장 높은 등급의 돌의 기본 점수 적용
+          totalScore += baseScores[highestStoneType];
+  
+          // 모든 돌에 대해 추가 점수 계산
+          stoneOrder.forEach(stoneType => {
+            if (stones[stoneType] > 0) {
+              if (stoneType === highestStoneType) {
+                // 가장 높은 등급의 돌은 개수에서 1을 뺀 만큼 추가 점수 적용
+                totalScore += additionalScores[stoneType] * (stones[stoneType]);
+              } else {
+                // 나머지 돌들은 모든 개수에 대해 추가 점수 적용
+                totalScore += additionalScores[stoneType] * stones[stoneType];
+              }
+            }
+          });
+        }
+  
+        return totalScore;
+      };
+  
+      setTotalStoneScore(calculateTotal());
+    }, [stones]);
 
   return (
     <>
