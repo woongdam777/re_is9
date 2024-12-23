@@ -11,8 +11,6 @@ const nextConfig = {
           { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
           { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
           { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
-          // API 응답에 대한 캐시 설정 추가
-          { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, stale-while-revalidate=300" }
         ]
       },
       {
