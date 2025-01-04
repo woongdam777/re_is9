@@ -1,57 +1,79 @@
-import { useState, useEffect } from 'react';
-import styles from '../style/Home.module.css';
+import { useState, useEffect, useCallback } from 'react';
+import styles from '../style/JobRank.module.css';
 import JobChart from '../components/JobChart';
 
-const versions = ['A19.6', 'A19.3', 'A18.8', 'A17.91'];
-const CACHE_KEY = 'jobRankData';
+const CACHE_KEY = 'allJobRankData';
 const CACHE_DURATION = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
 
 export default function VersionAndJobRank() {
-  const [selectedVersion, setSelectedVersion] = useState(versions[0]);
-  const [versionData, setVersionData] = useState(null);
+  const [allVersionsData, setAllVersionsData] = useState(null);
+  const [selectedVersion, setSelectedVersion] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleVersionChange = (version) => {
-    setSelectedVersion(version);
-    fetchData(version);
-  };
-
-  const fetchData = async (version) => {
-    const cachedData = localStorage.getItem(`${CACHE_KEY}_${version}`);
-    if (cachedData) {
+  const fetchData = useCallback(async (force = false) => {
+    const cachedData = localStorage.getItem(CACHE_KEY);
+    if (!force && cachedData) {
       const { data, timestamp } = JSON.parse(cachedData);
       if (Date.now() - timestamp < CACHE_DURATION) {
-        setVersionData(data);
+        setAllVersionsData(data);
+        setSelectedVersion(Object.keys(data)[0]);
+        setIsLoading(false);
         return;
       }
     }
 
+    setIsLoading(true);
     try {
-      const response = await fetch(`/api/rank?version=${version}`);
+      const response = await fetch('/api/rank');
       const data = await response.json();
       
       if (response.ok) {
-        setVersionData(data);
-        localStorage.setItem(`${CACHE_KEY}_${version}`, JSON.stringify({
+        setAllVersionsData(data);
+        setSelectedVersion(Object.keys(data)[0]);
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
           data,
           timestamp: Date.now()
         }));
         setError(null);
       } else {
-        setVersionData(null);
+        setAllVersionsData(null);
         setError(data.error);
       }
     } catch (error) {
-      setVersionData(null);
+      setAllVersionsData(null);
       setError("데이터를 가져오는 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchData(selectedVersion);
-    const intervalId = setInterval(() => fetchData(selectedVersion), CACHE_DURATION);
+    fetchData();
+  }, [fetchData]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => fetchData(true), CACHE_DURATION);
     return () => clearInterval(intervalId);
-  }, [selectedVersion]);
+  }, [fetchData]);
+
+  const handleVersionChange = (version) => {
+    setSelectedVersion(version);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!allVersionsData) {
+    return <div>No data available</div>;
+  }
+
+  const versions = Object.keys(allVersionsData);
 
   return (
     <div className={styles.jobComponent}>
@@ -69,16 +91,14 @@ export default function VersionAndJobRank() {
         </div>
       </div>
      
-      {versionData && (
+      {selectedVersion && allVersionsData[selectedVersion] && (
         <div className={styles.jobRankChart}>
-          <h4>{versionData.version} 직업별 인원 분포</h4>
-          <h6>수련장초기화 후 | {versionData.date} 기준</h6>
-          <h6>총인원 : {versionData.total} 명</h6>
-          <JobChart ranks={versionData.ranks} />
+          <h4>{allVersionsData[selectedVersion].version} 직업별 인원 분포</h4>
+          <h6>수련장초기화 후 | {allVersionsData[selectedVersion].date} 기준</h6>
+          <h6>총인원 : {allVersionsData[selectedVersion].total} 명</h6>
+          <JobChart ranks={allVersionsData[selectedVersion].ranks} />
         </div>
       )}
-      
-      {error && <p>Error: {error}</p>}
     </div>
   );
 }

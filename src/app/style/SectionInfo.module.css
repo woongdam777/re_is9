@@ -98,12 +98,10 @@
 
 .itemListItem:hover:not(.iactive) {
   background-color: var(--bb-color);
-  color: var(--refont-color);
 }
 
 .iactive {
   background-color: var(--bb-color);
-  color: var(--refont-color);
 }
 
 .itemInfo {

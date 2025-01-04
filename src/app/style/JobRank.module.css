@@ -1,0 +1,72 @@
+.jobComponent{
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.jobRankTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 5px;
+}
+
+.buttonGroup {
+  max-width: 170px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+
+.jobRankTitle button:not(.active) {
+  padding: 3px;
+  border: solid 1px var(--header-color);
+  height: 30px;
+  width: 50px;
+  background-color: var(--header-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.jobRankTitle button:hover:not(.active) {
+  background-color:white;
+  border: solid 1px var(--c-color);
+  color: var(--c-color);
+}
+
+.active {
+  padding: 3px;
+  border: none;
+  height: 30px;
+  width: 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border: solid 1px var(--c-color);
+  background-color:white;
+  color: var(--c-color);
+}
+
+.jobRankChart{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  width: 180px;
+  height: 400px;
+}
+
+
+@media (max-width:1024px) {
+  .jobComponent, .buttonGroup, .jobRankChart{
+    width: 100%;
+  }
+
+}

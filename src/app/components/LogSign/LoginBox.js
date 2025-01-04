@@ -1,22 +1,26 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import SignupBox from './SignupBox';
-import styles from '../../style/LoginSignBox.module.css';
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import SignupBox from "./SignupBox";
+import JobRank from '../../utils/JobRank';
+import styles from "../../style/LoginSignBox.module.css";
 
-// 모바일 감지 커스텀 훅
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+      setIsMobile(
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      );
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return isMobile;
@@ -24,18 +28,22 @@ function useIsMobile() {
 
 export default function LoginBox({ setActiveSection }) {
   const [showSignup, setShowSignup] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { user, error, login, googleLogin, logout, sendVerificationEmail } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { user, error, login, googleLogin, logout, sendVerificationEmail } =
+    useAuth();
   const [isNewUser, setIsNewUser] = useState(false);
   const isMobile = useIsMobile();
 
   useEffect(() => {
     if (user) {
       const checkLoginTime = () => {
-        const loginTime = localStorage.getItem('loginTime');
+        const loginTime = localStorage.getItem("loginTime");
         const currentTime = new Date().getTime();
-        if (loginTime && currentTime - parseInt(loginTime) > 1 * 60 * 60 * 1000) {
+        if (
+          loginTime &&
+          currentTime - parseInt(loginTime) > 1 * 60 * 60 * 1000
+        ) {
           logout();
         }
       };
@@ -49,9 +57,9 @@ export default function LoginBox({ setActiveSection }) {
     e.preventDefault();
     await login(email, password);
     if (!error) {
-      setEmail('');
-      setPassword('');
-      setActiveSection('mypage');
+      setEmail("");
+      setPassword("");
+      setActiveSection("mypage");
     }
   };
 
@@ -59,33 +67,33 @@ export default function LoginBox({ setActiveSection }) {
     try {
       const result = await googleLogin();
       if (result) {
-        setActiveSection('mypage');
+        setActiveSection("mypage");
       }
     } catch (error) {
-      console.error('Google login error:', error);
+      console.error("Google login error:", error);
     }
   };
 
   const handleLogout = async () => {
     const success = await logout();
     if (success) {
-      setActiveSection('section-home');
+      setActiveSection("section-home");
     }
   };
 
   const changeWar3ID = async () => {
-    setActiveSection('profile');
+    setActiveSection("profile");
   };
 
   const handleResendVerification = async () => {
     const result = await sendVerificationEmail();
     if (result) {
-      alert('인증 이메일이 재발송되었습니다. 이메일을 확인해주세요.');
+      alert("인증 이메일이 재발송되었습니다. 이메일을 확인해주세요.");
     }
   };
 
   const handleMyPageClick = () => {
-    setActiveSection('mypage');
+    setActiveSection("mypage");
   };
 
   return (
@@ -110,7 +118,7 @@ export default function LoginBox({ setActiveSection }) {
                 ) : (
                   <form className={styles.loginForm} onSubmit={handleLogin}>
                     <h3>로그인</h3>
-                    <div style={{ display: 'none' }}>
+                    <div style={{ display: "none" }}>
                       <input
                         type="email"
                         placeholder="이메일"
@@ -132,10 +140,10 @@ export default function LoginBox({ setActiveSection }) {
                       onClick={handleGoogleLogin}
                       className={styles.googleButton}
                     >
-                      Google로 로그인
+                      Google 로그인
                     </button>
                     {error && <p className={styles.error}>{error}</p>}
-                    {error && error.includes('이메일 인증') && (
+                    {error && error.includes("이메일 인증") && (
                       <button
                         type="button"
                         onClick={handleResendVerification}
@@ -190,9 +198,11 @@ export default function LoginBox({ setActiveSection }) {
       ) : (
         <div className={styles.userInfo}>
           <div>
-            <h3>{user.nickname ? `${user.nickname}님 환영합니다!` : '환영합니다!'}</h3>
+            <h3>
+              {user.nickname ? `${user.nickname}님 환영합니다!` : "환영합니다!"}
+            </h3>
             <p>{user.email}</p>
-            {user.war3Id === 'none' ? (
+            {user.war3Id === "none" ? (
               <p>war3 ID를 수정해주세요</p>
             ) : (
               <p>War3 ID : {user.war3Id}</p>
@@ -219,6 +229,18 @@ export default function LoginBox({ setActiveSection }) {
           )}
         </div>
       )}
-    </aside>
+
+      <div className={styles.jobRankComponent}>
+        <input type="checkbox" id="jobToggle" className={styles.jobToggle} />
+        <label htmlFor="jobToggle" className={styles.jobToggleLabel}>
+          <p>버전별 직업 분포도</p>
+          <p className={styles.jobToggleIcon}></p>
+        </label>
+        <div className={styles.jobHide}>
+          <JobRank />
+        </div>
+      </div>
+
+    </aside> 
   );
 }

@@ -48,12 +48,12 @@ const JobRankPieChart = ({ ranks }) => {
               weight: 'bold',
             },
             color: '#333',
-            padding: 15,
+            padding: 8,
           },
         },
         tooltip: {
           backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          bodyFont: { size: 14 },
+          bodyFont: { size: 10 },
           padding: 10,
           cornerRadius: 5,
         },
@@ -65,7 +65,7 @@ const JobRankPieChart = ({ ranks }) => {
             return `${value}`; // Show only value (you can add job name if needed)
           },
           font: {
-            size: 12,
+            size: 10,
             weight: 'bold',
           },
           color: '#000', 
@@ -73,8 +73,8 @@ const JobRankPieChart = ({ ranks }) => {
       },
       layout: {
         padding: {
-          top: 30,  
-          bottom: 30, 
+          top: 10,  
+          bottom: 10, 
         },
       },
     };
