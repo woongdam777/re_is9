@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
-import styles from '../style/JobRank.module.css';
-import JobChart from '../components/JobChart';
+import { useState, useEffect, useCallback } from "react";
+import styles from "../style/JobRank.module.css";
+import JobChart from "../components/JobChart";
 
-const CACHE_KEY = 'allJobRankData';
-const CACHE_DURATION = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
+const CACHE_KEY = "allJobRankData";
+const REFRESH_INTERVAL = 3 * 60 * 60 * 1000; // 3시간마다 갱신
+// const REFRESH_INTERVAL = 1000; // 3시간마다 갱신
 
 export default function VersionAndJobRank() {
   const [allVersionsData, setAllVersionsData] = useState(null);
@@ -11,30 +12,22 @@ export default function VersionAndJobRank() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = useCallback(async (force = false) => {
-    const cachedData = localStorage.getItem(CACHE_KEY);
-    if (!force && cachedData) {
-      const { data, timestamp } = JSON.parse(cachedData);
-      if (Date.now() - timestamp < CACHE_DURATION) {
-        setAllVersionsData(data);
-        setSelectedVersion(Object.keys(data)[0]);
-        setIsLoading(false);
-        return;
-      }
-    }
-
+  const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('/api/rank');
+      const response = await fetch("/api/rank");
       const data = await response.json();
-      
+
       if (response.ok) {
         setAllVersionsData(data);
         setSelectedVersion(Object.keys(data)[0]);
-        localStorage.setItem(CACHE_KEY, JSON.stringify({
-          data,
-          timestamp: Date.now()
-        }));
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({
+            data,
+            timestamp: Date.now(),
+          })
+        );
         setError(null);
       } else {
         setAllVersionsData(null);
@@ -49,11 +42,19 @@ export default function VersionAndJobRank() {
   }, []);
 
   useEffect(() => {
+    const cachedData = localStorage.getItem(CACHE_KEY);
+    if (cachedData) {
+      const { data, timestamp } = JSON.parse(cachedData);
+      if (Date.now() - timestamp < REFRESH_INTERVAL) {
+        setAllVersionsData(data);
+        setSelectedVersion(Object.keys(data)[0]);
+        setIsLoading(false);
+        return;
+      }
+    }
     fetchData();
-  }, [fetchData]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => fetchData(true), CACHE_DURATION);
+    const intervalId = setInterval(fetchData, REFRESH_INTERVAL);
     return () => clearInterval(intervalId);
   }, [fetchData]);
 
@@ -83,18 +84,20 @@ export default function VersionAndJobRank() {
             <button
               key={version}
               onClick={() => handleVersionChange(version)}
-              className={selectedVersion === version ? styles.active : ''}
+              className={selectedVersion === version ? styles.active : ""}
             >
               {version}
             </button>
           ))}
         </div>
       </div>
-     
+
       {selectedVersion && allVersionsData[selectedVersion] && (
         <div className={styles.jobRankChart}>
           <h4>{allVersionsData[selectedVersion].version} 직업별 인원 분포</h4>
-          <h6>수련장초기화 후 | {allVersionsData[selectedVersion].date} 기준</h6>
+          <h6>
+            수련장초기화 후 | {allVersionsData[selectedVersion].date} 기준
+          </h6>
           <h6>총인원 : {allVersionsData[selectedVersion].total} 명</h6>
           <JobChart ranks={allVersionsData[selectedVersion].ranks} />
         </div>

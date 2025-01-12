@@ -78,10 +78,7 @@ export default function Header({ onNavClick }) {
               <i className="fa-solid fa-calculator"></i><span>계산기</span>
             </li>
             <li onClick={() => onNavClick('section-info')}>
-              <i className="fa-solid fa-circle-info"></i><span>아이템</span>
-            </li>
-            <li onClick={() => onNavClick('section-path')}>
-              <i className="fa-solid fa-sign-hanging"></i><span>패치노트</span>
+              <i className="fa-solid fa-circle-info"></i><span>정보</span>
             </li>
             <li onClick={() => onNavClick('section-search')}>
               <i className="fa-solid fa-magnifying-glass"></i><span>검색</span>

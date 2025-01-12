@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 const SHEET_ID = '1-3DK85MfB-h1aq2FfAtnvJ2qoIYIj3MSwpkGwHCGJec';
 const RANK_SHEET_NAME = 'rank';
-const RANK_SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${RANK_SHEET_NAME}&range=A1:Z4`;
+const RANK_SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${RANK_SHEET_NAME}&range=A1:C4`;
 
 export async function GET() {
   try {

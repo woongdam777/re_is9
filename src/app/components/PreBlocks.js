@@ -71,6 +71,8 @@ export function PreBlock3_1() {
 
 export function PreBlock3_2() {
     const pres =`
+◉ 장착한 스톤 및 인벤토리 보유 스톤 모두 포함된 점수로 기본점수 적용
+
 ▣ 수련장 기본점수
 
 노말 : 150

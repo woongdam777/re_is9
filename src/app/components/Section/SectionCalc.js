@@ -8,22 +8,22 @@ import AbilityResetSection from '../../utils/AbilityResetSection';
 import FatBoxCalc from '../../utils/FatBoxCalculator';
 
 export default function SectionCalc() {
-  const [selectedInfo, setSelectedInfo] = useState('infoSectionForce');
+  const [selectedCalc, setselectedCalc] = useState('calcSectionForce');
   const [selectedForce, setSelectedForce] = useState('forceSectionOne');
 
   const sections = [
-      { id: 'infoSectionForce', label: '포스' },
-      { id: 'infoSectionAwaken', label: '각성' },
-      { id: 'infoSectionAbility', label: '어빌' },
-      { id: 'infoSectionHell', label: '지옥파티' },
-      { id: 'infoSectionGrow', label: '성장' },
-      { id: 'infoSectionPet', label: '펫스킬' },
-      { id: 'infoSectionGear', label: '전용템' }
+      { id: 'calcSectionForce', label: '포스' },
+      { id: 'calcSectionAwaken', label: '각성' },
+      { id: 'calcSectionAbility', label: '어빌' },
+      { id: 'calcSectionHell', label: '지옥파티' },
+      { id: 'calcSectionGrow', label: '성장' },
+      { id: 'calcSectionPet', label: '펫스킬' },
+      { id: 'calcSectionGear', label: '전용템' }
   ];
   const forceSections = [
       { id: 'forceSectionOne', label: '포스스톤' },
       { id: 'forceSectionTwo', label: '포스레벨' },
-      { id: 'forceSectionThree', label: '수련장점수' }
+      { id: 'forceSectionThree', label: '수련장 기본점수' }
   ];
     
   return (
@@ -32,8 +32,8 @@ export default function SectionCalc() {
           {sections.map(section => (
               <div
                   key={section.id}
-                  className={`lowerSection ${selectedInfo === section.id ? 'active' : ''}`}
-                  onClick={() => setSelectedInfo(section.id)}
+                  className={`lowerSection ${selectedCalc === section.id ? 'active' : ''}`}
+                  onClick={() => setselectedCalc(section.id)}
               >
                   {section.label}
               </div>
@@ -41,7 +41,7 @@ export default function SectionCalc() {
       </div>
 
       {/* 포스 섹션 */}
-      {selectedInfo === 'infoSectionForce' && (
+      {selectedCalc === 'calcSectionForce' && (
         <>
           <div>
             <div className="section-nav">
@@ -85,7 +85,7 @@ export default function SectionCalc() {
       )}
 
       {/* 각성 섹션 */}
-      {selectedInfo === 'infoSectionAwaken' && (
+      {selectedCalc === 'calcSectionAwaken' && (
         <>
           <AwakenSection />
           <div className="formula">
@@ -96,7 +96,7 @@ export default function SectionCalc() {
       )}
 
       {/* 지옥파티 섹션 */}
-      {selectedInfo === 'infoSectionHell' && (
+      {selectedCalc === 'calcSectionHell' && (
         <>
           <FatBoxCalc />
           <div className="formula">
@@ -106,14 +106,14 @@ export default function SectionCalc() {
       )}
 
       {/* 성장 섹션 */}
-      {selectedInfo === 'infoSectionGrow' && (
+      {selectedCalc === 'calcSectionGrow' && (
         <div className="formula">
           <PreBlock6 />
         </div>
       )}
 
       {/* 어빌 섹션 */}
-      {selectedInfo === 'infoSectionAbility' && (
+      {selectedCalc === 'calcSectionAbility' && (
         <>
           <AbilityResetSection />
           <div className="formula">
@@ -124,14 +124,14 @@ export default function SectionCalc() {
       )}
 
       {/* 펫스킬 섹션 */}
-      {selectedInfo === 'infoSectionPet' && (
+      {selectedCalc === 'calcSectionPet' && (
         <div className="formula">
           <PreBlock9 />
         </div>
       )}
 
       {/* 전용템 섹션 */}
-      {selectedInfo === 'infoSectionGear' && (
+      {selectedCalc === 'calcSectionGear' && (
         <div className="formula">
           <PreBlock10_1 />
           <PreBlock10_2 />

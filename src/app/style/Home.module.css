@@ -33,19 +33,6 @@
   flex: 2;
 }
 
-.active {
-  padding: 3px;
-  border: none;
-  height: 30px;
-  width: 60px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  border: solid 1px var(--c-color);
-  background-color:white;
-  color: var(--c-color);
-}
-
 @media (max-width: 1024px) {
   .homeContainer{
     flex-direction: column;

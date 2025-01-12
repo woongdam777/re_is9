@@ -120,6 +120,10 @@
   font-size: 1.1rem;
   width: 100%;
   margin-top: 1rem;
+
+  padding: .5rem 0;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
 }
 
 .resultFN td {

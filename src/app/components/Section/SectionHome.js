@@ -12,16 +12,16 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            1. 과거 패치노트(수작업) - 자동화 진행중<br />
-            2. 몇가지 오류 수정<br />
-            3. 레이아웃 변경<br />
+            1. 아이템 및 패치노트 통합<br />
+            2. 캐릭터 스킬 정보 추가 중<br />
+            3. 직업별 차트 오류 수정<br />
+            4. 과거 패치노트(수작업) - 자동화 진행중<br />
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
           <h2>추가예정</h2>
           <pre>
-            1. 캐릭별 스킬<br />
-            2. 버전별 캐릭별 평점 및 코멘트<br />
+            1. 버전별 캐릭별 평점 및 코멘트<br />
           </pre>
         </div>
       </div>
