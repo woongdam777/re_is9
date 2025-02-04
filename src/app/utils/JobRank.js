@@ -4,7 +4,6 @@ import JobChart from "../components/JobChart";
 
 const CACHE_KEY = "allJobRankData";
 const REFRESH_INTERVAL = 3 * 60 * 60 * 1000; // 3시간마다 갱신
-// const REFRESH_INTERVAL = 1000; // 3시간마다 갱신
 
 export default function VersionAndJobRank() {
   const [allVersionsData, setAllVersionsData] = useState(null);
@@ -19,15 +18,27 @@ export default function VersionAndJobRank() {
       const data = await response.json();
 
       if (response.ok) {
-        setAllVersionsData(data);
-        setSelectedVersion(Object.keys(data)[0]);
-        localStorage.setItem(
-          CACHE_KEY,
-          JSON.stringify({
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        if (cachedData) {
+          const { version: cachedVersion } = JSON.parse(cachedData);
+          if (data.version !== cachedVersion) {
+            setAllVersionsData(data);
+            setSelectedVersion(Object.keys(data)[0]);
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+              data,
+              version: data.version,
+              timestamp: new Date().getTime()
+            }));
+          }
+        } else {
+          setAllVersionsData(data);
+          setSelectedVersion(Object.keys(data)[0]);
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
             data,
-            timestamp: Date.now(),
-          })
-        );
+            version: data.version,
+            timestamp: new Date().getTime()
+          }));
+        }
         setError(null);
       } else {
         setAllVersionsData(null);
@@ -44,8 +55,9 @@ export default function VersionAndJobRank() {
   useEffect(() => {
     const cachedData = localStorage.getItem(CACHE_KEY);
     if (cachedData) {
-      const { data, timestamp } = JSON.parse(cachedData);
-      if (Date.now() - timestamp < REFRESH_INTERVAL) {
+      const { data, timestamp, version } = JSON.parse(cachedData);
+      const currentTime = new Date().getTime();
+      if (currentTime - timestamp < REFRESH_INTERVAL) {
         setAllVersionsData(data);
         setSelectedVersion(Object.keys(data)[0]);
         setIsLoading(false);
@@ -80,7 +92,7 @@ export default function VersionAndJobRank() {
     <div className={styles.jobComponent}>
       <div className={styles.jobRankTitle}>
         <div className={styles.buttonGroup}>
-          {versions.map((version) => (
+          {versions.slice().reverse().map((version) => (
             <button
               key={version}
               onClick={() => handleVersionChange(version)}
@@ -102,6 +114,8 @@ export default function VersionAndJobRank() {
           <JobChart ranks={allVersionsData[selectedVersion].ranks} />
         </div>
       )}
+
+      <h6>※ 주의 : 직업변경한 인원도 누적되기 때문에 정확하지 않습니다</h6>
     </div>
   );
 }

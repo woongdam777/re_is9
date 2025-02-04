@@ -6,7 +6,7 @@ const RANK_SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/
 
 export async function GET() {
   try {
-    const response = await fetch(RANK_SHEET_URL);
+    const response = await fetch(RANK_SHEET_URL, { cache: 'no-store' });
     const csvData = await response.text();
     const parsedData = parseCSV(csvData);
 
