@@ -27,6 +27,7 @@
 
 .homeLeft{
   flex: 3;
+  margin-left: 10px;
 }
 
 .homeRight{

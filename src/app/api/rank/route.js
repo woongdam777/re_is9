@@ -1,16 +1,22 @@
+import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
+import { auth } from '../../utils/googleAuth';
 
 const SHEET_ID = '1-3DK85MfB-h1aq2FfAtnvJ2qoIYIj3MSwpkGwHCGJec';
 const RANK_SHEET_NAME = 'rank';
-const RANK_SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${RANK_SHEET_NAME}&range=A1:C4`;
+
+const sheets = google.sheets({ version: 'v4', auth });
 
 export async function GET() {
   try {
-    const response = await fetch(RANK_SHEET_URL, { cache: 'no-store' });
-    const csvData = await response.text();
-    const parsedData = parseCSV(csvData);
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SHEET_ID,
+      range: `${RANK_SHEET_NAME}!A1:C4`,
+      majorDimension: 'COLUMNS',
+    });
 
-    const allVersionsData = extractAllVersionsData(parsedData);
+    const sheetData = response.data.values;
+    const allVersionsData = extractAllVersionsData(sheetData);
 
     return NextResponse.json(allVersionsData);
 
@@ -20,29 +26,20 @@ export async function GET() {
   }
 }
 
-function parseCSV(data) {
-  return data.split('\n').map(row => row.split(',').map(cell => cell.trim().replace(/^"|"$/g, '')));
-}
-
-function extractAllVersionsData(parsedData) {
-  const headerRow = parsedData[0];
-  const dateRow = parsedData[1];
-  const rankRow = parsedData[2];
-  const totalRow = parsedData[3];
-
+function extractAllVersionsData(sheetData) {
   const versionsData = {};
 
-  for (let i = 0; i < headerRow.length; i++) {
-    const version = headerRow[i];
+  sheetData.forEach(column => {
+    const version = column[0];
     if (version && version !== '') {
       versionsData[version] = {
         version: version,
-        date: dateRow[i],
-        total: totalRow[i],
-        ranks: parseRankData(rankRow[i])
+        date: column[1],
+        total: column[3],
+        ranks: parseRankData(column[2])
       };
     }
-  }
+  });
 
   return versionsData;
 }

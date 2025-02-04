@@ -1,7 +1,7 @@
 'use client';
 
 import styles from '../../style/Home.module.css';
-import { PreBlock11 } from '../PreBlocks';
+import { PreBlock11, PreBlock12 } from '../PreBlocks';
 
 
 export default function SectionHome() {
@@ -27,7 +27,10 @@ export default function SectionHome() {
       </div>
       <div className={styles.homeContainer}>
         <div className={styles.homeRight}>
-
+          <div className={styles.homeDiv}>
+            <h1>A21 패치노트</h1>
+            <PreBlock12 />
+          </div>
         </div>
         <div className={styles.homeLeft}>
           <div className={styles.homeDiv}>
