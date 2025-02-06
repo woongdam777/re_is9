@@ -25,19 +25,24 @@ export default function MyPage() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/mypage?keyword=${encodeURIComponent(uid)}`);
+      const response = await fetch(`/api/mypage?keyword=${encodeURIComponent(uid)}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
       
-      if (response.ok) {
-        if (data.result) {
-          setSearchResult(data);
-        } else {
-          setSearchResult(null);
-          setError("일치하는 데이터를 찾을 수 없습니다.");
-        }
+      if (data.result) {
+        setSearchResult(data);
       } else {
         setSearchResult(null);
-        setError(data.error || "데이터를 가져오는데 실패했습니다.");
+        setError("일치하는 데이터를 찾을 수 없습니다.");
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -47,6 +52,7 @@ export default function MyPage() {
       setIsLoading(false);
     }
   };
+  
   
   function ForceTable({ fnString }) {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50];
