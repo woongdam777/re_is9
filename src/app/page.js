@@ -34,7 +34,7 @@ function MainContent() {
     <div className="body">
       <Header onNavClick={handleNavClick} />
       <div className="content-wrapper">
-        {/* <LoginBox setActiveSection={setActiveSection} /> */}
+        <LoginBox setActiveSection={setActiveSection} />
         <main>
           {activeSection === 'mypage' && user && <MyPage />}
           {activeSection === 'profile' && user && <Profile />}
