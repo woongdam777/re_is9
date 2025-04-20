@@ -57,7 +57,7 @@ export default function VersionAndJobRank() {
 
   return (
     <div className={styles.jobComponent}>
-      <div className={styles.jobRankTitle}>
+      {/* <div className={styles.jobRankTitle}>
         <div className={styles.buttonGroup}>
           {versions.map((version) => (
             <button
@@ -69,15 +69,15 @@ export default function VersionAndJobRank() {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {selectedVersion && allVersionsData[selectedVersion] && (
         <div className={styles.jobRankChart}>
           <h4>{allVersionsData[selectedVersion].version} 직업별 인원 분포</h4>
           <h6>
-            수련장초기화 후 | {allVersionsData[selectedVersion].date} 기준
+            {allVersionsData[selectedVersion].date} 기준 | 총인원 : {allVersionsData[selectedVersion].total} 명
           </h6>
-          <h6>총인원 : {allVersionsData[selectedVersion].total} 명</h6>
+          <h6>주의! 실시간아님 | 직변포함 누적인원통계</h6>
           <JobChart ranks={allVersionsData[selectedVersion].ranks} />
         </div>
       )}

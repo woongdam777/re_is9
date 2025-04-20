@@ -12,7 +12,7 @@ export default function SectionHome() {
         <div className={styles.homeDiv}>
           <h2>업데이트내역</h2>
           <pre>
-            검색기능 및 마이페이지 기능 재오픈
+            1. 최신 패치노트 내용 적용
           </pre>          
         </div>  
         <div className={styles.homeDiv}>
@@ -22,20 +22,18 @@ export default function SectionHome() {
           </pre>
         </div>
       </div>
-      <div className={styles.homeContainer}>
+      {/* <div className={styles.homeContainer}>
         <div className={styles.homeRight}>
           <div className={styles.homeDiv}>
-            <h1>A21.2 패치노트</h1>
             <PreBlock12 />
           </div>
         </div>
         <div className={styles.homeLeft}>
           <div className={styles.homeDiv}>
-            <h1>8레 패턴</h1>
             <PreBlock11 />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

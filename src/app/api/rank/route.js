@@ -11,7 +11,7 @@ export async function GET() {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SHEET_ID,
-      range: `${RANK_SHEET_NAME}!A1:C4`,
+      range: `${RANK_SHEET_NAME}!C1:C4`,
       majorDimension: 'COLUMNS',
     });
 
