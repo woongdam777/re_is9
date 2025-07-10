@@ -55,7 +55,7 @@ export default function MyPage() {
   
   
   function ForceTable({ fnString }) {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50, 100];
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50, 100, 150];
     const charges = fnString.split('|').map(Number);
     const totalSum = charges.reduce((sum, charge, index) => sum + charge * numbers[index], 0);
     const curForce = searchResult.result["Force Level"];
