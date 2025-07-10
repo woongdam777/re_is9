@@ -155,7 +155,7 @@ function ForceTable({ fnString }) {
   return (
     <table className={styles.resultFN}>
       <tbody>
-        {[0, 1, 2, 3].map(rowIndex => (
+        {[0, 1, 2, 3, 4].map(rowIndex => (
           <tr key={rowIndex}>
             {charges.slice(rowIndex * 4, rowIndex * 4 + 4).map((charge, index) => {
               const number = numbers[rowIndex * 4 + index];
