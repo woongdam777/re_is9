@@ -56,8 +56,9 @@ export default function MyPage() {
   
   function ForceTable({ fnString }) {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50, 60, 80, 100, 150, 200, 220, 250 ];
-    const charges = fnString.split('|').map(Number);
+    const charges = fnString ? fnString.split('|').map(Number) : [];
     const totalSum = charges.reduce((sum, charge, index) => sum + charge * numbers[index], 0);
+    const totalTk = charges .map((charge, index) => charge ? `${charge} * ${numbers[index]}` : null)  .filter(Boolean)  .join(' + ');
     const curForce = searchResult.result["Force Level"];
     const extractedNumber = curForce.match(/\((\d+)\)/)?.[1];
     const totalForce = totalSum + (extractedNumber ? parseInt(extractedNumber) : 0);
@@ -82,7 +83,7 @@ export default function MyPage() {
             ))}
           </tbody>
         </table>
-        <div className={styles.totalSum}>총합: {totalSum}</div>
+        <div className={styles.totalSum}>총합: {totalTk}</div>
         <div className={styles.totalSum}>총포스: {totalForce}</div>
       </div>
     );
