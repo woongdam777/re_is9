@@ -21,6 +21,32 @@ const extractForceLevel = (forceLevelString) => {
   return match ? parseInt(match[1], 10) : 0;
 };
 
+ function ColoredText({ data }) {
+    const regex = /\|C([0-9A-Fa-f]{8})([^|]*)/g;
+    let lastIndex = 0;
+    const result = [];
+    let match;
+    while ((match = regex.exec(data)) !== null) {
+      if (match.index > lastIndex) {
+        result.push(
+          <span key={lastIndex}>{data.slice(lastIndex, match.index)}</span>
+        );
+      }
+      const colorCode = match[1];
+      const text = match[2];
+      result.push(
+        <span key={match.index} style={{ color: `#${colorCode}` }}>
+          {text}
+        </span>
+      );
+      lastIndex = regex.lastIndex;
+    }
+    if (lastIndex < data.length) {
+      result.push(<span key={lastIndex}>{data.slice(lastIndex)}</span>);
+    }
+    return <div>{result}</div>;
+  }
+
 export default function SectionSearch() {
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState(null);
@@ -86,7 +112,7 @@ export default function SectionSearch() {
                 <tbody>
                   <tr>
                     <td colSpan="2">
-                      {searchResult.result.Name} {searchResult.result.Nickname && <span>| {searchResult.result.Nickname}</span>}
+                      <p>{searchResult.result.Name} </p> {searchResult.result.Nickname && <p><ColoredText data={searchResult.result.Nickname} /></p>}
                     </td>
                   </tr>
                   <tr>
@@ -148,23 +174,26 @@ export default function SectionSearch() {
   );
 }
 
-function ForceTable({ fnString }) {
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50, 100, 150];
+function ForceTable({ fnString, col = 4 }) {
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 33, 40, 50, 60, 80, 100, 150, 200, 220, 250];
   const charges = fnString.split('|');
+  const numRows = Math.ceil(charges.length / col);
 
   return (
     <table className={styles.resultFN}>
       <tbody>
-        {[0, 1, 2, 3, 4].map(rowIndex => (
+        {Array.from({ length: numRows }).map((_, rowIndex) => (
           <tr key={rowIndex}>
-            {charges.slice(rowIndex * 4, rowIndex * 4 + 4).map((charge, index) => {
-              const number = numbers[rowIndex * 4 + index];
-              return (
-                <td key={index}>
-                  [{number}] {charge}
-                </td>
-              );
-            })}
+            {charges
+              .slice(rowIndex * col, rowIndex * col + col)
+              .map((charge, index) => {
+                const number = numbers[rowIndex * col + index];
+                return (
+                  <td key={index}>
+                    [{number}] {charge}
+                  </td>
+                );
+              })}
           </tr>
         ))}
       </tbody>
