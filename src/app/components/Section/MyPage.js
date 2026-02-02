@@ -93,10 +93,10 @@ export default function MyPage() {
         <span>인벤토리 포스보유량</span>
         <table className={styles.resultFN}>
           <tbody>
-            {chunk(charges, 3).map((rowCharges, rowIndex) => (
+            {chunk(charges, 6).map((rowCharges, rowIndex) => (
               <tr key={rowIndex}>
                 {rowCharges.map((charge, index) => {
-                  const numberIndex = rowIndex * 3 + index;
+                  const numberIndex = rowIndex * 6 + index;
                   const number = numbers[numberIndex] || numberIndex + 1;
                   return (
                     <td key={index}>
@@ -165,7 +165,6 @@ export default function MyPage() {
                   </div>
                 </div>
                 <div className={styles.characterInfo}>
-                  <div className={styles.levelInfo}>
                     <div className={styles.jobCard}>
                       <div className={styles.JobImg}>
                           <LottieComponent type="circle" width={40} height={40} />
@@ -183,23 +182,22 @@ export default function MyPage() {
                       <p>티켓: {searchResult.result["Ticket Count"]} 개</p>
                       <p>수련장: {searchResult.result["Train Score"]} 점</p>
                     </div>
-                  </div>
-                  <div className={styles.goodsInfo}>
-                    <div className={styles.statCard}>
-                      <p>금: {Number(searchResult.result["Money"].split("|")[0]).toLocaleString()}</p>
-                      <p>은: {Number(searchResult.result["Money"].split("|")[1]).toLocaleString()}</p>
-                      <br />
-                      <span>실버 단위 환산</span>
-                      {formatNumber(Number(searchResult.result["Money"].split("|")[1])).map((value, index) => (
-                        <div key={index}>
-                          {value}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <ForceTable fnString={searchResult.result['FN']} />
-                  </div>
+                    <div className={styles.goodsInfo}>
+                      <div className={styles.statCard}>
+                        <p>금: {Number(searchResult.result["Money"].split("|")[0]).toLocaleString()}</p>
+                        <p>은: {Number(searchResult.result["Money"].split("|")[1]).toLocaleString()}</p>
+                        <br />
+                        <span>실버 단위 환산</span>
+                        {formatNumber(Number(searchResult.result["Money"].split("|")[1])).map((value, index) => (
+                          <div key={index}>
+                            {value}
+                          </div>
+                        ))}
+                      </div>
+                   </div>
+                </div>
+                <div>
+                  <ForceTable fnString={searchResult.result['FN']} />
                 </div>
                 <div className={styles.chartInfo}>
                   <div>

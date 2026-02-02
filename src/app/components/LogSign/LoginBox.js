@@ -230,7 +230,7 @@ export default function LoginBox({ setActiveSection }) {
         </div>
       )}
 
-      <div className={styles.jobRankComponent}>
+      {/* <div className={styles.jobRankComponent}>
         <input type="checkbox" id="jobToggle" className={styles.jobToggle} />
         <label htmlFor="jobToggle" className={styles.jobToggleLabel}>
           <p>버전별 직업 분포도</p>
@@ -239,7 +239,7 @@ export default function LoginBox({ setActiveSection }) {
         <div className={styles.jobHide}>
           <JobRank />
         </div>
-      </div>
+      </div> */}
 
     </aside> 
   );

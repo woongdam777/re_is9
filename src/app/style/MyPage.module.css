@@ -70,6 +70,7 @@
 }
 
 .characterInfo {
+  width: 100%;
   display: flex;
   justify-content: space-around;
   gap: 1rem;
@@ -77,11 +78,8 @@
   padding-bottom: 1.5rem;
 }
 
-.levelInfo{
-  min-width: 30%;
-}
-
 .jobCard {
+  
   background: var(--bb-color);
   border-radius: 12px;
   padding: 1rem;
@@ -90,8 +88,8 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 }
 
 .JobImg{
@@ -127,6 +125,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+.forceCard > span{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .resultFN {
   border-collapse: separate;
   border-spacing: 2px;
@@ -141,7 +144,7 @@
 
 .resultFN td {
   padding: 0 7px;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   background-color: rgba(var(--content-color), 0.6);
 }
 
