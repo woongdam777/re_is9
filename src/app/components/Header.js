@@ -71,7 +71,7 @@ export default function Header({ onNavClick }) {
             <li onClick={() => onNavClick('section-home')}>
               <i className="fa-solid fa-house"></i><span>홈</span>
             </li>
-            <li onClick={() => onNavClick('section-link')}>
+            {/* <li onClick={() => onNavClick('section-link')}>
               <i className="fa-solid fa-link"></i><span>링크</span>
             </li>
             <li onClick={() => onNavClick('section-calc')}>
@@ -79,7 +79,7 @@ export default function Header({ onNavClick }) {
             </li>
             <li onClick={() => onNavClick('section-info')}>
               <i className="fa-solid fa-circle-info"></i><span>정보</span>
-            </li>
+            </li> */}
             <li onClick={() => onNavClick('section-search')}>
               <i className="fa-solid fa-magnifying-glass"></i><span>검색</span>
             </li>
